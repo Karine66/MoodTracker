@@ -3,26 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_sage"
+    android:background="@color/faded_red"
     tools:context=".activities.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="Bienvenue sur Moodtracker !"
-        tools:ignore="HardcodedText" />
 
     <ImageView
-        android:id="@+id/image_view_happy"
+        android:id="@+id/image_view_sad"
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="170dp"
         android:adjustViewBounds="false"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/smiley_happy" />
+        android:src="@drawable/smiley_sad" />
 
 
 </RelativeLayout>
