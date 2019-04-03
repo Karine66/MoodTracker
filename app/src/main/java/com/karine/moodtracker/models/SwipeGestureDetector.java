@@ -1,8 +1,12 @@
-package com.karine.moodtracker.activities;
+package com.karine.moodtracker.models;
 
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+
+import com.karine.moodtracker.controllers.MainActivity;
+
+
 
 /**
  * Created by <Karine> on <DATE-DU-JOUR>.
@@ -40,7 +44,6 @@ public class SwipeGestureDetector extends GestureDetector {
         });
 
     }
-
     //position enum
     public static enum SwipeDirection {
         TOP_TO_BOTTOM, BOTTOM_TO_TOP

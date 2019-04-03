@@ -1,13 +1,12 @@
-package com.karine.moodtracker.activities;
-
+package com.karine.moodtracker.controllers;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.karine.moodtracker.R;
+import com.karine.moodtracker.models.SwipeGestureDetector;
 
 
 public class MainActivity extends AppCompatActivity {

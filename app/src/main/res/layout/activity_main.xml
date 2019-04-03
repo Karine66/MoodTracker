@@ -4,18 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_sage"
-    tools:context=".activities.MainActivity">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="Bienvenue sur Moodtracker !"
-        tools:ignore="HardcodedText" />
+    tools:context=".controllers.MainActivity">
 
     <ImageView
-        android:id="@+id/image_view_happy"
+        android:id="@+id/activity_main_smiley"
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_centerHorizontal="true"
