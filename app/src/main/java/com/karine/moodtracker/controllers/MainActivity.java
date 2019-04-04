@@ -3,15 +3,49 @@ package com.karine.moodtracker.controllers;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.ImageSwitcher;
+import android.widget.ImageView;
+
 
 import com.karine.moodtracker.R;
+import com.karine.moodtracker.models.Mood;
 import com.karine.moodtracker.models.SwipeGestureDetector;
+
+
 
 
 public class MainActivity extends AppCompatActivity {
 
     private SwipeGestureDetector mGestureDetector;
+    private Mood mMood;
+    private int counter = 1;
+    private ImageSwitcher imagePic;
+    private View mView;
+    private View decorView;
+
+    //Arrays moods
+    public int [] arrayMoods = new int [] {
+
+            R.drawable.smiley_sad,
+            R.drawable.smiley_disappointed,
+            R.drawable.smiley_normal,
+            R.drawable.smiley_happy,
+            R.drawable.smiley_super_happy,
+
+    };
+
+    //Arrays background colors
+
+    public int [] arrayBackgroundColor = new int [] {
+
+            R.color.faded_red,
+            R.color.warm_grey,
+            R.color.cornflower_blue_65,
+            R.color.light_sage,
+            R.color.banana_yellow,
+    };
+
 
 
     @Override
@@ -22,25 +56,63 @@ public class MainActivity extends AppCompatActivity {
         //Instatiation SwipeGestureDetector
         mGestureDetector = new SwipeGestureDetector(this);
 
+        //Declaraion
+        mMood = new Mood(counter);
+        mView = this.getWindow().getDecorView();
+        ImageView imagePic;
+        imagePic = findViewById(R.id.activity_main_smiley);
     }
 
     //interceps all event relative to touch and give to GestureDetector
     @Override
-    public boolean dispatchTouchEvent(MotionEvent event) {
-        return mGestureDetector.onTouchEvent(event);
+    public boolean onTouchEvent(MotionEvent event) {
+        this.mGestureDetector.onTouchEvent(event);
+        return super.onTouchEvent(event);
     }
 
     public void onSwipe(SwipeGestureDetector.SwipeDirection direction) {
-        String message = "";
+       ImageView imagePic = (ImageView) findViewById(R.id.activity_main_smiley);
+
         switch (direction) {
             case TOP_TO_BOTTOM:
-                message = "To to bottom swipe";
+
+                mMood.setSelectedMood(counter);
+
+                if (counter > 0) {
+                    counter--;
+                    imagePic.setImageResource(arrayMoods[counter]);
+                    mView.setBackgroundResource(arrayBackgroundColor[counter]);
+                } else {
+                    counter = 4;
+                    imagePic.setImageResource(arrayMoods[counter]);
+                    mView.setBackgroundResource(arrayBackgroundColor[counter]);
+                }
                 break;
+
             case BOTTOM_TO_TOP:
-                message = "Bottom to Top swipe";
+
+                mMood.setSelectedMood(counter);
+
+                if (counter < 4) {
+                    counter++;
+                    imagePic.setImageResource(arrayMoods[counter]);
+                    mView.setBackgroundResource(arrayBackgroundColor[counter]);
+                } else {
+                    counter = 0;
+                    imagePic.setImageResource(arrayMoods[counter]);
+                    mView.setBackgroundResource(arrayBackgroundColor[counter]);
+                }
+                break;
+
+            default:
+                counter = 3;
+                imagePic.setImageResource(arrayMoods[counter]);
+                mView.setBackgroundResource((arrayBackgroundColor[counter]));
+
+
         }
 
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+
     }
 
 
