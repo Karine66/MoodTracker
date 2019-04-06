@@ -1,31 +1,37 @@
 package com.karine.moodtracker.controllers;
 
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
-
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.karine.moodtracker.R;
 import com.karine.moodtracker.models.Mood;
 import com.karine.moodtracker.models.SwipeGestureDetector;
 
 
-
-
 public class MainActivity extends AppCompatActivity {
 
     private SwipeGestureDetector mGestureDetector;
     private Mood mMood;
-    private int counter = 1;
+    private int counter = 0;
     private ImageSwitcher imagePic;
     private View mView;
-    private View decorView;
+    private ImageView mNoteAdd;
+    private ImageView mHistory;
 
-    //Arrays moods
-    public int [] arrayMoods = new int [] {
+
+    //Array moods
+    public int[] arrayMoods = new int[]{
 
             R.drawable.smiley_sad,
             R.drawable.smiley_disappointed,
@@ -35,9 +41,9 @@ public class MainActivity extends AppCompatActivity {
 
     };
 
-    //Arrays background colors
+    //Array background colors
 
-    public int [] arrayBackgroundColor = new int [] {
+    public int[] arrayBackgroundColor = new int[]{
 
             R.color.faded_red,
             R.color.warm_grey,
@@ -47,20 +53,31 @@ public class MainActivity extends AppCompatActivity {
     };
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         //Instatiation SwipeGestureDetector
         mGestureDetector = new SwipeGestureDetector(this);
 
-        //Declaraion
+        //Declaration
         mMood = new Mood(counter);
         mView = this.getWindow().getDecorView();
         ImageView imagePic;
         imagePic = findViewById(R.id.activity_main_smiley);
+        mNoteAdd = (ImageView) findViewById(R.id.note_add_btn);
+        mHistory = (ImageView) findViewById(R.id.history_black_button);
+
+
+        mNoteAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(MainActivity.this, TextActivity.class);
+                startActivity(myIntent);
+            }
+        });
     }
 
     //interceps all event relative to touch and give to GestureDetector
@@ -71,7 +88,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSwipe(SwipeGestureDetector.SwipeDirection direction) {
-       ImageView imagePic = (ImageView) findViewById(R.id.activity_main_smiley);
+        ImageView imagePic = (ImageView) findViewById(R.id.activity_main_smiley);
+
 
         switch (direction) {
             case TOP_TO_BOTTOM:
@@ -82,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
                     counter--;
                     imagePic.setImageResource(arrayMoods[counter]);
                     mView.setBackgroundResource(arrayBackgroundColor[counter]);
+                    break;
                 } else {
                     counter = 4;
                     imagePic.setImageResource(arrayMoods[counter]);
@@ -97,6 +116,8 @@ public class MainActivity extends AppCompatActivity {
                     counter++;
                     imagePic.setImageResource(arrayMoods[counter]);
                     mView.setBackgroundResource(arrayBackgroundColor[counter]);
+                    break;
+
                 } else {
                     counter = 0;
                     imagePic.setImageResource(arrayMoods[counter]);
@@ -104,14 +125,10 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
 
-            default:
-                counter = 3;
-                imagePic.setImageResource(arrayMoods[counter]);
-                mView.setBackgroundResource((arrayBackgroundColor[counter]));
+
 
 
         }
-
 
     }
 
