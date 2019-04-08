@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="controllers.MainActivity"
-    android:id="@+id/layout_activity_main">
+    tools:context="controllers.MainActivity">
 
     <ImageView
         android:id="@+id/activity_main_smiley"
@@ -14,24 +14,24 @@
         android:layout_marginTop="170dp"
         android:adjustViewBounds="false"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/smiley_happy"/>
+        android:src="@drawable/smiley_happy" />
 
 
     <ImageView
         android:id="@+id/note_add_btn"
-        android:layout_marginVertical="600dp"
         android:layout_width="45dp"
         android:layout_height="45dp"
+        android:layout_marginVertical="600dp"
         android:layout_marginLeft="60dp"
-        android:src="@drawable/ic_note_add_black"/>
+        android:src="@drawable/ic_note_add_black" />
 
     <ImageView
         android:id="@+id/history_black_button"
-        android:layout_marginLeft="300dp"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginVertical="600dp"
-        android:src="@drawable/ic_history_black"/>
+        android:layout_marginLeft="300dp"
+        android:src="@drawable/ic_history_black" />
 
 
 </RelativeLayout>

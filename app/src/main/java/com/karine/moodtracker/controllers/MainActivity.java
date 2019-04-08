@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+
 import com.karine.moodtracker.R;
 import com.karine.moodtracker.models.Mood;
 import com.karine.moodtracker.models.SwipeGestureDetector;
@@ -119,8 +120,6 @@ public class MainActivity extends AppCompatActivity {
                     mView.setBackgroundResource(arrayBackgroundColor[counter]);
                 }
                 break;
-
-
 
 
         }
