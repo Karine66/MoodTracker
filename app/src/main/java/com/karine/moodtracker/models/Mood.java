@@ -9,16 +9,19 @@ public class Mood {
 
     //constructor
     public Mood(int selectedMood) {
+
         this.selectedMood = selectedMood;
     }
 
     // create getter et setter
 
     public int getSelectedMood() {
+
         return selectedMood;
     }
 
     public void setSelectedMood(int selectedMood) {
+
         this.selectedMood = selectedMood;
     }
 }

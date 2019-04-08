@@ -13,24 +13,24 @@ import com.karine.moodtracker.R;
 
 public class TextActivity extends AppCompatActivity {
 
+    CalendarView mcalendarView;
+    TextView mtextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_text);
 
 
-        CalendarView calendarView = findViewById(R.id.activity_calendar);
+        mcalendarView = (CalendarView) findViewById(R.id.activity_calendar);
+        mtextView = (TextView) findViewById(R.id.date_view);
 
-        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+        mcalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
-            public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int dayOfMonth) {
+            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
 
 
-                String date = dayOfMonth + "/" + month + "/" + year +":";
-                Intent intent = new Intent(TextActivity.this, MainActivity.class);
-                intent.putExtra("date", date);
-
-                startActivity(intent);
+               mtextView.setText("Le  : " + dayOfMonth + " / " + (month+1) + " / " + year);
 
             }
         });
