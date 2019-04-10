@@ -7,6 +7,8 @@ public class Mood {
 
     private int selectedMood;
 
+
+
     //constructor
     public Mood(int selectedMood) {
 

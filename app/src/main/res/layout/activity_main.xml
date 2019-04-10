@@ -17,15 +17,16 @@
         android:src="@drawable/smiley_happy" />
 
 
-    <ImageView
+    <ImageButton
         android:id="@+id/note_add_btn"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginVertical="600dp"
         android:layout_marginLeft="60dp"
-        android:src="@drawable/ic_note_add_black" />
+        android:src="@drawable/ic_note_add_black"
+        android:contentDescription="TODO" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/history_black_button"
         android:layout_width="45dp"
         android:layout_height="45dp"
