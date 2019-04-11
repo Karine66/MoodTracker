@@ -1,16 +1,12 @@
 package com.karine.moodtracker.controllers;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageSwitcher;
@@ -80,49 +76,43 @@ public class MainActivity extends AppCompatActivity {
         mNoteAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               //Build AlertDialog
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                //Instantiation layout in View
+                LayoutInflater factory = (LayoutInflater) LayoutInflater.from(MainActivity.this);
+                final View commentView = factory.inflate(R.layout.activity_comment, null);
 
-                LayoutInflater inflater = getLayoutInflater();
-                View dialogView = inflater.inflate(R.layout.activity_comment, null);
+                //create AlertDialog
+                AlertDialog.Builder adb = new AlertDialog.Builder(MainActivity.this);
 
-                //Set the custom layout as alert dialog view
-                builder.setView(dialogView);
+                //View to AlertDialog
+                adb.setView(commentView);
 
-                //Get the custom alert dialog view widgets reference
-                @SuppressLint("WrongViewCast") ImageButton save_btn = (ImageButton) dialogView.findViewById(R.id.save_btn);
-                @SuppressLint("WrongViewCast") ImageButton cancel_btn = (ImageButton) dialogView.findViewById(R.id.cancel_btn);
-                final EditText mood_dialog = (EditText) dialogView.findViewById(R.id.mood_dialog);
+                //AlertDialog title
+                adb.setTitle("What is your Mood today ?");
 
-                //Create the alert dialog
-                final AlertDialog dialog = builder.create();
-
-                //Set save button click listener
-                save_btn.setOnClickListener(new View.OnClickListener() {
+                //Button "Save"
+                adb.setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Click on for validate Edittext
+                        EditText et = (EditText) commentView.findViewById(R.id.mood_dialog);
+                    }
+                });
 
-                        
-                        //Dismiss the alert dialog
-                        dialog.cancel();
-                        String name = mood_dialog.getText().toString();
+                //Create "Cancel"Button
+                adb.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
                     }
                 });
 
-                //Set cancel button click listener
-                cancel_btn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //Dismiss/cancel the alert dialog
-                        //dialog.cancel();
-                        dialog.dismiss();
-                    }
-                });
+                adb.show();
 
-                }
+            }
         });
+
     }
+
 
     //interceps all event relative to touch and give to GestureDetector
     @Override

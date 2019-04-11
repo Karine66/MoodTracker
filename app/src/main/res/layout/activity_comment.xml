@@ -2,44 +2,25 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".controllers.CommentActivity"
     android:id="@+id/comment_rl">
 
     <TextView
         android:id="@+id/comment_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enter your Mood"
         android:padding="5dp"
-        android:background="#3227B0A0"
-        android:textSize="15dp"/>
+        android:textSize="25dp"
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/mood_dialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="What is your Mood today ?"
+        android:background="#3227B0A0"
+        android:hint="Enter your Mood"
         android:maxLines="10"
         android:layout_below="@id/comment_title"/>
 
-    <Button
-        android:id="@+id/save_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/mood_dialog"
-        android:text="Save" />
-
-    <Button
-        android:id="@+id/cancel_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/save_btn"
-        android:layout_below="@id/mood_dialog"
-        android:layout_alignBaseline="@id/save_btn"
-        android:text="Cancel"
-        android:layout_toStartOf="@id/save_btn" />
 
 
 
