@@ -4,20 +4,26 @@
     android:id="@+id/layout_activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="controllers.MainActivity">
+    tools:context="controllers.MainActivity"
+    >
+
+
 
     <ImageView
-        android:id="@+id/activity_main_smiley"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:id="@+id/view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="170dp"
-        android:adjustViewBounds="false"
+        android:layout_gravity="center_horizontal"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/smiley_happy" />
+       android:src="@drawable/smiley_happy"
+       />
 
 
-    <ImageButton
+
+
+    <ImageView
         android:id="@+id/note_add_btn"
         android:layout_width="45dp"
         android:layout_height="45dp"
@@ -26,7 +32,7 @@
         android:src="@drawable/ic_note_add_black"
         android:contentDescription="TODO" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/history_black_button"
         android:layout_width="45dp"
         android:layout_height="45dp"

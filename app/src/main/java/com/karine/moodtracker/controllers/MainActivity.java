@@ -1,31 +1,38 @@
 package com.karine.moodtracker.controllers;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
-
 import com.karine.moodtracker.R;
 import com.karine.moodtracker.models.Mood;
 import com.karine.moodtracker.models.SwipeGestureDetector;
 
 
+
+
 public class MainActivity extends AppCompatActivity {
 
+
     private SwipeGestureDetector mGestureDetector;
+    private SharedPreferences mPreferences;
     private Mood mMood;
+    private View mView;
     private int counter = 0;
     private ImageSwitcher imagePic;
-    private View mView;
-    private ImageView mNoteAdd;
+   private ImageView mNoteAdd;
     private ImageView mHistory;
+
 
 
     //Array moods
@@ -53,24 +60,26 @@ public class MainActivity extends AppCompatActivity {
     };
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
 
+
         //Instatiation SwipeGestureDetector
         mGestureDetector = new SwipeGestureDetector(this);
 
         //Declaration
-        mMood = new Mood(counter);
-        mView = this.getWindow().getDecorView();
-        ImageView imagePic;
-        imagePic = findViewById(R.id.activity_main_smiley);
-        mNoteAdd = (ImageButton) findViewById(R.id.note_add_btn);
-        mHistory = (ImageButton) findViewById(R.id.history_black_button);
 
-        //Get reference of widget
+        mMood = new Mood(counter);
+        mView=this.getWindow().getDecorView();
+        mNoteAdd = (ImageView) findViewById(R.id.note_add_btn);
+        mHistory = (ImageView) findViewById(R.id.history_black_button);
+        mPreferences = getPreferences(MODE_PRIVATE);
+
+
 
         //Box dialog open when click button
         mNoteAdd.setOnClickListener(new View.OnClickListener() {
@@ -111,6 +120,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Connect History Button
+        mHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+                    public void onClick(View v) {
+                Intent myIntent = new Intent(MainActivity.this, HistoryActivity.class);
+                startActivity(myIntent);
+            }
+        });
+
     }
 
 
@@ -122,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSwipe(SwipeGestureDetector.SwipeDirection direction) {
-        ImageView imagePic = (ImageView) findViewById(R.id.activity_main_smiley);
+        ImageView imagePic = (ImageView) findViewById(R.id.view);
 
 
         switch (direction) {
@@ -157,6 +175,11 @@ public class MainActivity extends AppCompatActivity {
                     imagePic.setImageResource(arrayMoods[counter]);
                     mView.setBackgroundResource(arrayBackgroundColor[counter]);
                 }
+                break;
+
+                default:
+                    imagePic.setImageResource(arrayMoods[4]);
+                    mView.setBackgroundResource(arrayBackgroundColor[4]);
                 break;
 
 
