@@ -7,18 +7,26 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
+
 import com.karine.moodtracker.R;
 import com.karine.moodtracker.models.Mood;
 import com.karine.moodtracker.models.SwipeGestureDetector;
 
-
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -26,12 +34,19 @@ public class MainActivity extends AppCompatActivity {
 
     private SwipeGestureDetector mGestureDetector;
     private SharedPreferences mPreferences;
+    private SharedPreferences.Editor mEditor;
     private Mood mMood;
     private View mView;
     private int counter = 0;
     private ImageSwitcher imagePic;
    private ImageView mNoteAdd;
     private ImageView mHistory;
+    private int mCurrentMood; //for stock mood
+    private EditText et;
+    private JSONObject saved = new JSONObject();
+
+
+
 
 
 
@@ -67,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-
         //Instatiation SwipeGestureDetector
         mGestureDetector = new SwipeGestureDetector(this);
 
@@ -77,9 +91,21 @@ public class MainActivity extends AppCompatActivity {
         mView=this.getWindow().getDecorView();
         mNoteAdd = (ImageView) findViewById(R.id.note_add_btn);
         mHistory = (ImageView) findViewById(R.id.history_black_button);
-        mPreferences = getPreferences(MODE_PRIVATE);
 
 
+        init();
+        Intent intent = getIntent();
+        if (intent.getIntExtra("position", -1 ) !=-1) {
+            try {
+                String s = et.getText().toString();
+                if(!mPreferences.getString("saved", "").equals(""))
+                saved = new JSONObject(mPreferences.getString("saved", ""));
+                et.setText(saved.getString("saved"+intent.getIntExtra("position", 0)));
+                s = saved.getString("saved"+intent.getIntExtra("position", 0));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
 
         //Box dialog open when click button
         mNoteAdd.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +130,23 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         //Click on for validate Edittext
                         EditText et = (EditText) commentView.findViewById(R.id.mood_dialog);
+
+                        String s = et.getText().toString();
+                        if(!s.equals("")) {
+                            try {
+                                if (!mPreferences.getString("saved", "").equals(""))
+                                    saved = new JSONObject(mPreferences.getString("saved", ""));
+                                saved.put("saved"+saved.length(), s);
+                            }catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            Log.d("testing", saved+"");
+                            mEditor.putString("saved", saved.toString());
+                            mEditor.apply();
+                            et.setText("");
+                            Intent intent1 = new Intent(MainActivity.this, HistoryActivity.class);
+                            startActivity(intent1);
+                        }
                     }
                 });
 
@@ -126,10 +169,39 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                 Intent myIntent = new Intent(MainActivity.this, HistoryActivity.class);
                 startActivity(myIntent);
+
             }
         });
 
     }
+
+    private void init() {
+        mPreferences = getSharedPreferences("text", Context.MODE_PRIVATE);
+        mEditor = mPreferences.edit();
+        et = findViewById(R.id.mood_dialog);
+        mHistory = findViewById(R.id.history_black_button);
+        }
+
+        @Override
+        public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+        }
+
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if(id == R.id.save) {
+            if(mPreferences.getString("saved", "").equals("")) {
+                Toast.makeText(getApplicationContext(), "Nothing to Save",Toast.LENGTH_SHORT).show();
+            }else {
+                Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
+                startActivity(intent);
+            }
+        }
+        return super.onOptionsItemSelected(item);
+        }
 
 
     //interceps all event relative to touch and give to GestureDetector
