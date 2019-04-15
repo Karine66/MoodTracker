@@ -6,8 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,7 +16,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.karine.moodtracker.R;
@@ -39,15 +36,11 @@ public class MainActivity extends AppCompatActivity {
     private View mView;
     private int counter = 0;
     private ImageSwitcher imagePic;
-   private ImageView mNoteAdd;
+    private ImageView mNoteAdd;
     private ImageView mHistory;
     private int mCurrentMood; //for stock mood
     private EditText et;
     private JSONObject saved = new JSONObject();
-
-
-
-
 
 
     //Array moods
@@ -75,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
     };
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,20 +80,20 @@ public class MainActivity extends AppCompatActivity {
         //Declaration
 
         mMood = new Mood(counter);
-        mView=this.getWindow().getDecorView();
+        mView = this.getWindow().getDecorView();
         mNoteAdd = (ImageView) findViewById(R.id.note_add_btn);
         mHistory = (ImageView) findViewById(R.id.history_black_button);
 
 
         init();
         Intent intent = getIntent();
-        if (intent.getIntExtra("position", -1 ) !=-1) {
+        if (intent.getIntExtra("position", -1) != -1) {
             try {
                 String s = et.getText().toString();
-                if(!mPreferences.getString("saved", "").equals(""))
-                saved = new JSONObject(mPreferences.getString("saved", ""));
-                et.setText(saved.getString("saved"+intent.getIntExtra("position", 0)));
-                s = saved.getString("saved"+intent.getIntExtra("position", 0));
+                if (!mPreferences.getString("saved", "").equals(""))
+                    saved = new JSONObject(mPreferences.getString("saved", ""));
+                et.setText(saved.getString("saved" + intent.getIntExtra("position", 0)));
+                s = saved.getString("saved" + intent.getIntExtra("position", 0));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -132,15 +124,15 @@ public class MainActivity extends AppCompatActivity {
                         EditText et = (EditText) commentView.findViewById(R.id.mood_dialog);
 
                         String s = et.getText().toString();
-                        if(!s.equals("")) {
+                        if (!s.equals("")) {
                             try {
                                 if (!mPreferences.getString("saved", "").equals(""))
                                     saved = new JSONObject(mPreferences.getString("saved", ""));
-                                saved.put("saved"+saved.length(), s);
-                            }catch (JSONException e) {
+                                saved.put("saved" + saved.length(), s);
+                            } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            Log.d("testing", saved+"");
+                            Log.d("testing", saved + "");
                             mEditor.putString("saved", saved.toString());
                             mEditor.apply();
                             et.setText("");
@@ -166,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
         //Connect History Button
         mHistory.setOnClickListener(new View.OnClickListener() {
             @Override
-                    public void onClick(View v) {
+            public void onClick(View v) {
                 Intent myIntent = new Intent(MainActivity.this, HistoryActivity.class);
                 startActivity(myIntent);
 
@@ -180,28 +172,7 @@ public class MainActivity extends AppCompatActivity {
         mEditor = mPreferences.edit();
         et = findViewById(R.id.mood_dialog);
         mHistory = findViewById(R.id.history_black_button);
-        }
-
-        @Override
-        public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-        }
-
-        @Override
-        public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if(id == R.id.save) {
-            if(mPreferences.getString("saved", "").equals("")) {
-                Toast.makeText(getApplicationContext(), "Nothing to Save",Toast.LENGTH_SHORT).show();
-            }else {
-                Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
-                startActivity(intent);
-            }
-        }
-        return super.onOptionsItemSelected(item);
-        }
+    }
 
 
     //interceps all event relative to touch and give to GestureDetector
@@ -249,9 +220,9 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
 
-                default:
-                    imagePic.setImageResource(arrayMoods[4]);
-                    mView.setBackgroundResource(arrayBackgroundColor[4]);
+            default:
+                imagePic.setImageResource(arrayMoods[4]);
+                mView.setBackgroundResource(arrayBackgroundColor[4]);
                 break;
 
 

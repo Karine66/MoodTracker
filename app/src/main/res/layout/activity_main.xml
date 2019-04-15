@@ -20,9 +20,6 @@
        android:src="@drawable/smiley_happy"
        />
 
-
-
-
     <ImageView
         android:id="@+id/note_add_btn"
         android:layout_width="45dp"

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">MoodTracker</string>
     <string name="bienvenue_sur_moodtracker">Bienvenue sur MoodTracker !</string>
+    <string name="saved_file">Saved File</string>
 </resources>
