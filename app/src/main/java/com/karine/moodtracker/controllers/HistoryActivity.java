@@ -14,17 +14,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.karine.moodtracker.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static android.support.v4.os.LocaleListCompat.create;
+
 public class HistoryActivity extends AppCompatActivity {
 
-    RecyclerView mRecyclerView;
-    SharedPreferences mPreferences;
-    JSONObject saved;
+    private RecyclerView mRecyclerView;
+    private SharedPreferences mPreferences;
+    private JSONObject saved;
+
+
+
 
 
     @Override
@@ -33,6 +39,8 @@ public class HistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_history);
 
         mRecyclerView = findViewById(R.id.history_view);
+
+
 
 
         mPreferences = getSharedPreferences("text", Context.MODE_PRIVATE);
@@ -47,8 +55,12 @@ public class HistoryActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(new Adapter());
 
-
     }
+
+
+
+
+
 
     public class Adapter extends RecyclerView.Adapter<Adapter.Holder> {
 

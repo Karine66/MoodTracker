@@ -30,4 +30,7 @@
         android:contentDescription="btn_comment_history" />
 
 
-</RelativeLayout>
+    </RelativeLayout>
+
+
+
