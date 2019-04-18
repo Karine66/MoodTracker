@@ -12,25 +12,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.karine.moodtracker.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import static android.support.v4.os.LocaleListCompat.create;
-
 public class HistoryActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private SharedPreferences mPreferences;
     private JSONObject saved;
-
-
-
 
 
     @Override
@@ -41,13 +34,11 @@ public class HistoryActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.history_view);
 
 
-
-
         mPreferences = getSharedPreferences("text", Context.MODE_PRIVATE);
         Log.d("Testing", mPreferences.getString("saved", ""));
         try {
             saved = new JSONObject(mPreferences.getString("saved", ""));
-        } catch (JSONException e) {
+            } catch (JSONException e) {
             e.printStackTrace();
         }
 
@@ -56,10 +47,6 @@ public class HistoryActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(new Adapter());
 
     }
-
-
-
-
 
 
     public class Adapter extends RecyclerView.Adapter<Adapter.Holder> {

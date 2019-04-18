@@ -1,26 +1,21 @@
 package com.karine.moodtracker.controllers;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.ColorInt;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.karine.moodtracker.R;
 import com.karine.moodtracker.models.Mood;
@@ -45,9 +40,6 @@ public class MainActivity extends AppCompatActivity {
     private int mCurrentMood; //for stock mood
     private EditText et;
     private JSONObject saved = new JSONObject();
-    private RelativeLayout mBackground;
-
-
 
 
 
@@ -82,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getWindow().getDecorView().setBackgroundResource(R.color.light_sage);
 
-       //Instatiation SwipeGestureDetectorm
+        //Instatiation SwipeGestureDetectorm
         mGestureDetector = new SwipeGestureDetector(this);
 
         //Declaration
@@ -175,10 +167,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("CommitPrefEdits")
     private void init() {
         mPreferences = getSharedPreferences("text", Context.MODE_PRIVATE);
-        mPreferences.edit().clear().commit();
         mEditor = mPreferences.edit();
+        mEditor.clear();
+        mEditor.apply();
         et = findViewById(R.id.mood_dialog);
         mHistory = findViewById(R.id.history_black_button);
     }
