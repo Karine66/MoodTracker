@@ -2,4 +2,5 @@
     <string name="app_name">MoodTracker</string>
     <string name="bienvenue_sur_moodtracker">Bienvenue sur MoodTracker !</string>
     <string name="saved_file">Saved File</string>
+    <string name="il_y_a_7_jours">Il y a 7 jours</string>
 </resources>
