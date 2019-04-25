@@ -23,12 +23,16 @@ public class AlertDialog implements View.OnClickListener {
     private SharedPreferences.Editor mEditor;
     private JSONObject mSaved;
 
+    private String retrieveComment;
+
     public AlertDialog(Context context, SharedPreferences preferences, SharedPreferences.Editor editor, JSONObject saved) {
         mContext = context;
         mPreferences = preferences;
         mEditor = editor;
         mSaved = saved;
 
+
+        retrieveComment = "text";
     }
 
     //Box dialog open when click button
@@ -69,10 +73,10 @@ public class AlertDialog implements View.OnClickListener {
                     Log.d("testing", mSaved + "");
                     mEditor.putString("mSaved", mSaved.toString());
                     mEditor.apply();
-                    et.setText("");
+                   retrieveComment = et.getText().toString();
 
                 }
-                Toast.makeText(mContext.getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext.getApplicationContext(),retrieveComment, Toast.LENGTH_SHORT).show();
             }
         });
 

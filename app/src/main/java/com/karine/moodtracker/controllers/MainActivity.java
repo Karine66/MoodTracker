@@ -105,13 +105,13 @@ public class MainActivity extends AppCompatActivity {
         Calendar myCalendarObj = Calendar.getInstance();
         JSONObject mDate = new JSONObject();
         SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/YYYY");
-        String senddate = jsonDateFormat.format(myCalendarObj.getTime());
+        String daydate = jsonDateFormat.format(myCalendarObj.getTime());
         try {
-            mDate.put("a_date_field", senddate);
+            mDate.put("a_date_field", daydate);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        System.out.println(senddate);
+        System.out.println(daydate);
           }
 
     private void init() {
