@@ -4,7 +4,10 @@ package com.karine.moodtracker.controllers;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.icu.util.Calendar;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,6 +20,8 @@ import com.karine.moodtracker.models.Mood;
 import com.karine.moodtracker.models.SwipeGestureDetector;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -33,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
     private ImageView mHistory;
     private EditText et;
     private JSONObject mSaved = new JSONObject();
-    private SwipeGestureDetector.SwipeDirection mTopToBottom;
+
+
 
     public int getCounter() {
         return counter;
@@ -51,11 +57,13 @@ public class MainActivity extends AppCompatActivity {
         counter++;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getWindow().getDecorView().setBackgroundResource(R.color.light_sage);
+
 
 
         //Declaration
@@ -65,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         mNoteAdd = (ImageView) findViewById(R.id.note_add_btn);
         mHistory = (ImageView) findViewById(R.id.history_black_button);
 
-        //Instatiation SwipeGestureDetectorm
+        //Instatiation SwipeGestureDetector
         mGestureDetector = new SwipeGestureDetector(this, mMood, mView);
 
         init();
@@ -94,14 +102,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    }
+        Calendar myCalendarObj = Calendar.getInstance();
+        JSONObject mDate = new JSONObject();
+        SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/YYYY");
+        String senddate = jsonDateFormat.format(myCalendarObj.getTime());
+        try {
+            mDate.put("a_date_field", senddate);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        System.out.println(senddate);
+          }
 
     private void init() {
+
         mPreferences = getSharedPreferences("text", Context.MODE_PRIVATE);
         mEditor = mPreferences.edit();
         mEditor.clear();
         mEditor.apply();
-        et = findViewById(R.id.mood_dialog);
+        et =findViewById(R.id.mood_dialog);
         mHistory = findViewById(R.id.history_black_button);
 
     }

@@ -1,22 +1,224 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="controllers.HistoryActivity"
-    android:background="#F0F1EBEB">
+    tools:context=".controllers.HistoryActivity"
+    android:background="#4A00BCD4"
+    android:orientation="vertical">
 
-    <android.support.v7.widget.RecyclerView
 
-        android:id="@+id/history_view"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginTop="20dp"
-        tools:itemCount="7"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <FrameLayout
+            android:id="@+id/days7_ago"
+            android:layout_width="0dp"
+            android:layout_weight="50"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="7 days ago"
+               android:layout_marginRight="30dp"
+                android:textStyle="bold"/>
+
+            <ImageView
+                android:id="@+id/history_btn_7"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center|end"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/ic_comment_black_48px"
+                android:layout_marginRight="16dp" />
+        </FrameLayout>
 
 
-</RelativeLayout>
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <FrameLayout
+            android:id="@+id/days6_ago"
+            android:layout_width="0dp"
+            android:layout_weight="50"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="6 days ago"
+                android:textStyle="bold"/>
+
+            <ImageView
+                android:id="@+id/history_btn_6"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center|end"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/ic_comment_black_48px"
+                android:layout_marginRight="16dp" />
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <FrameLayout
+            android:id="@+id/days5_ago"
+            android:layout_width="0dp"
+            android:layout_weight="50"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" 5 days ago"
+                android:textStyle="bold"/>
+
+            <ImageView
+                android:id="@+id/history_btn_5"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center|end"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/ic_comment_black_48px"
+                android:layout_marginRight="16dp" />
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <FrameLayout
+            android:id="@+id/days4_ago"
+            android:layout_width="0dp"
+            android:layout_weight="50"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" 4 days ago"
+                android:textStyle="bold"/>
+
+            <ImageView
+                android:id="@+id/history_btn_4"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center|end"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/ic_comment_black_48px"
+                android:layout_marginRight="16dp" />
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <FrameLayout
+            android:id="@+id/days3_ago"
+            android:layout_width="0dp"
+            android:layout_weight="50"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" 3 days ago"
+                android:textStyle="bold"/>
+
+            <ImageView
+                android:id="@+id/history_btn_3"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center|end"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/ic_comment_black_48px"
+                android:layout_marginRight="16dp" />
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <FrameLayout
+            android:id="@+id/days2_ago"
+            android:layout_width="0dp"
+            android:layout_weight="50"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" 2 days ago"
+                android:textStyle="bold"/>
+
+            <ImageView
+                android:id="@+id/history_btn_2"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center|end"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/ic_comment_black_48px"
+                android:layout_marginRight="16dp" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <FrameLayout
+            android:id="@+id/day1_ago"
+            android:layout_width="0dp"
+            android:layout_weight="50"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Yesterday"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/icon1"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center|right"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/ic_comment_black_48px"
+                android:layout_marginRight="16dp" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>
