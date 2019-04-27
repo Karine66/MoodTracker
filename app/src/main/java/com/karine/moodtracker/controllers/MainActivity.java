@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+
+import com.google.gson.Gson;
 import com.karine.moodtracker.R;
 import com.karine.moodtracker.models.AlertDialog;
 import com.karine.moodtracker.models.Mood;
@@ -27,6 +29,7 @@ import java.text.SimpleDateFormat;
 public class MainActivity extends AppCompatActivity {
 
 
+
     private SwipeGestureDetector mGestureDetector;
     private SharedPreferences mPreferences;
     private SharedPreferences.Editor mEditor;
@@ -38,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
     private ImageView mHistory;
     private EditText et;
     private JSONObject mSaved = new JSONObject();
+    private JSONObject dayDate = new JSONObject();
+    private Calendar mCalendar;
+
 
 
 
@@ -57,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
         counter++;
     }
 
+
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         mView = this.getWindow().getDecorView();
         mNoteAdd = (ImageView) findViewById(R.id.note_add_btn);
         mHistory = (ImageView) findViewById(R.id.history_black_button);
+
 
         //Instatiation SwipeGestureDetector
         mGestureDetector = new SwipeGestureDetector(this, mMood, mView);
@@ -102,17 +111,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Calendar myCalendarObj = Calendar.getInstance();
+        Calendar mCalendar = Calendar.getInstance();
         JSONObject mDate = new JSONObject();
         SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/YYYY");
-        String daydate = jsonDateFormat.format(myCalendarObj.getTime());
+        String dayDate = jsonDateFormat.format(mCalendar.getTime());
         try {
-            mDate.put("a_date_field", daydate);
+            mDate.put("a_date_field", dayDate);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        System.out.println(daydate);
+        System.out.println(dayDate);
           }
+
+  public void saveBackground() {
+        SharedPreferences sharedPreferences = getSharedPreferences("save_bg", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(mMood);
+        editor.putString("save_bg", json);
+        editor.apply();
+
+
+
+    }
 
     private void init() {
 

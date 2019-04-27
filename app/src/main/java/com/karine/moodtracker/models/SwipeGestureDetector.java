@@ -1,5 +1,6 @@
 package com.karine.moodtracker.models;
 
+
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -9,6 +10,11 @@ import android.widget.ImageView;
 import com.karine.moodtracker.R;
 import com.karine.moodtracker.controllers.MainActivity;
 
+import org.json.JSONObject;
+
+import java.util.Calendar;
+import java.util.Date;
+
 
 /**
  * Created by <Karine> on <DATE-DU-JOUR>.
@@ -16,6 +22,10 @@ import com.karine.moodtracker.controllers.MainActivity;
 public class SwipeGestureDetector extends GestureDetector {
 
     private final static int DELTA_MIN = 50;
+
+
+
+
 
 
     //Constructor
@@ -42,41 +52,50 @@ public class SwipeGestureDetector extends GestureDetector {
                 return false;
             }
 
+
             public void onSwipe(SwipeGestureDetector.SwipeDirection direction) {
                 ImageView imagePic = (ImageView) context.findViewById(R.id.view);
+
+                context.saveBackground();
+
 
 
                 switch (direction) {
                     case TOP_TO_BOTTOM:
-
+                        context.saveBackground();
                         mood.setSelectedMood(context.getCounter());
 
                         if (context.getCounter() > 0) {
                             context.decreaseCounter();
                             imagePic.setImageResource(Mood.ARRAY_MOODS[context.getCounter()]);
                             view.setBackgroundResource(Mood.ARRAY_BACKGROUND_COLOR[context.getCounter()]);
+
+
+
                             break;
                         } else {
                             context.setCounter(4);
                             imagePic.setImageResource(Mood.ARRAY_MOODS[context.getCounter()]);
                             view.setBackgroundResource(Mood.ARRAY_BACKGROUND_COLOR[context.getCounter()]);
-                        }
+                                                 }
                         break;
 
                     case BOTTOM_TO_TOP:
-
+                        context.saveBackground();
                         mood.setSelectedMood(context.getCounter());
 
                         if (context.getCounter() < 4) {
                             context.increaseCOunter();
                             imagePic.setImageResource(Mood.ARRAY_MOODS[context.getCounter()]);
                             view.setBackgroundResource(Mood.ARRAY_BACKGROUND_COLOR[context.getCounter()]);
+
                             break;
 
                         } else {
                             context.setCounter(0);
                             imagePic.setImageResource(Mood.ARRAY_MOODS[context.getCounter()]);
                             view.setBackgroundResource(Mood.ARRAY_BACKGROUND_COLOR[context.getCounter()]);
+
                         }
                         break;
 
@@ -85,9 +104,13 @@ public class SwipeGestureDetector extends GestureDetector {
 
             }
 
+
         });
 
     }
+
+
+
 
     //position enum
     public static enum SwipeDirection {
