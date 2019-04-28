@@ -12,6 +12,7 @@ import com.karine.moodtracker.controllers.MainActivity;
 
 import org.json.JSONObject;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -57,6 +58,9 @@ public class SwipeGestureDetector extends GestureDetector {
                 ImageView imagePic = (ImageView) context.findViewById(R.id.view);
 
                 context.saveBackground();
+                context.saveDate();
+
+
 
 
 

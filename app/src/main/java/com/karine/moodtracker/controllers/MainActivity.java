@@ -65,13 +65,12 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getWindow().getDecorView().setBackgroundResource(R.color.light_sage);
-
 
 
         //Declaration
@@ -111,17 +110,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Calendar mCalendar = Calendar.getInstance();
-        JSONObject mDate = new JSONObject();
-        SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/YYYY");
-        String dayDate = jsonDateFormat.format(mCalendar.getTime());
-        try {
-            mDate.put("a_date_field", dayDate);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        System.out.println(dayDate);
-          }
+    }
+
+
 
   public void saveBackground() {
         SharedPreferences sharedPreferences = getSharedPreferences("save_bg", MODE_PRIVATE);
@@ -129,8 +120,9 @@ public class MainActivity extends AppCompatActivity {
         Gson gson = new Gson();
         String json = gson.toJson(mMood);
         editor.putString("save_bg", json);
+        editor.remove("save_bg");
         editor.apply();
-
+        System.out.println(mMood);
 
 
     }
@@ -139,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
 
         mPreferences = getSharedPreferences("text", Context.MODE_PRIVATE);
         mEditor = mPreferences.edit();
-        mEditor.clear();
+        mEditor.remove("text");
         mEditor.apply();
         et =findViewById(R.id.mood_dialog);
         mHistory = findViewById(R.id.history_black_button);
@@ -155,8 +147,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void saveDate() {
+            Calendar mCalendar = Calendar.getInstance();
+            JSONObject mDate = new JSONObject();
+            SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/YYYY");
+            String dayDate = jsonDateFormat.format(mCalendar.getTime());
+            try {
+                mDate.put("save_date", dayDate);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            System.out.println(dayDate);
+        }
+        }
 
-}
 
 
 
