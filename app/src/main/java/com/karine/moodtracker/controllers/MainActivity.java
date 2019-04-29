@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -20,6 +21,7 @@ import com.karine.moodtracker.R;
 import com.karine.moodtracker.models.AlertDialog;
 import com.karine.moodtracker.models.Mood;
 import com.karine.moodtracker.models.SwipeGestureDetector;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -27,7 +29,6 @@ import java.text.SimpleDateFormat;
 
 
 public class MainActivity extends AppCompatActivity {
-
 
 
     private SwipeGestureDetector mGestureDetector;
@@ -45,25 +46,23 @@ public class MainActivity extends AppCompatActivity {
     private Calendar mCalendar;
 
 
-
-
     public int getCounter() {
+
         return counter;
     }
 
     public void setCounter(int counter) {
+
         this.counter = counter;
     }
 
-    public void decreaseCounter(){
+    public void decreaseCounter() {
         counter--;
     }
 
-    public void increaseCOunter(){
+    public void increaseCOunter() {
         counter++;
     }
-
-
 
 
     @Override
@@ -71,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getWindow().getDecorView().setBackgroundResource(R.color.light_sage);
-
+      
 
         //Declaration
 
@@ -84,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         //Instatiation SwipeGestureDetector
         mGestureDetector = new SwipeGestureDetector(this, mMood, mView);
 
-        init();
+        saveComment();
         Intent intent = getIntent();
         if (intent.getIntExtra("position", -1) != -1) {
             try {
@@ -112,28 +111,27 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void saveBackground() {
 
-
-  public void saveBackground() {
-        SharedPreferences sharedPreferences = getSharedPreferences("save_bg", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(mMood);
+        SharedPreferences sharedPreferences = getSharedPreferences("save_bg", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("save_bg", json);
         editor.remove("save_bg");
         editor.apply();
-        System.out.println(mMood);
 
+        Log.d("Text", "Mood" + mMood.getSelectedMood(Mood.ARRAY_BACKGROUND_COLOR));
 
     }
 
-    private void init() {
+    private void saveComment() {
 
         mPreferences = getSharedPreferences("text", Context.MODE_PRIVATE);
         mEditor = mPreferences.edit();
         mEditor.remove("text");
         mEditor.apply();
-        et =findViewById(R.id.mood_dialog);
+        et = findViewById(R.id.mood_dialog);
         mHistory = findViewById(R.id.history_black_button);
 
     }
@@ -149,18 +147,18 @@ public class MainActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void saveDate() {
-            Calendar mCalendar = Calendar.getInstance();
-            JSONObject mDate = new JSONObject();
-            SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/YYYY");
-            String dayDate = jsonDateFormat.format(mCalendar.getTime());
-            try {
-                mDate.put("save_date", dayDate);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            System.out.println(dayDate);
+        Calendar mCalendar = Calendar.getInstance();
+        JSONObject mDate = new JSONObject();
+        SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/YYYY");
+        String dayDate = jsonDateFormat.format(mCalendar.getTime());
+        try {
+            mDate.put("save_date", dayDate);
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        }
+        System.out.println(dayDate);
+    }
+}
 
 
 

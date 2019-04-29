@@ -4,10 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
 
 import com.karine.moodtracker.R;
 
@@ -19,12 +17,6 @@ public class HistoryActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private SharedPreferences mPreferences;
     private JSONObject saved;
-    private View mV;
-    private Context context;
-
-
-
-
 
 
     @Override
