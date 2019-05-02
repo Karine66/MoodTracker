@@ -74,6 +74,7 @@ public class AlertDialog implements View.OnClickListener {
                    retrieveComment = et.getText().toString();
 
                 }
+
                 Toast.makeText(mContext.getApplicationContext(),retrieveComment, Toast.LENGTH_SHORT).show();
             }
         });

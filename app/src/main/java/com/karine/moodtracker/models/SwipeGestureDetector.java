@@ -25,7 +25,7 @@ public class SwipeGestureDetector extends GestureDetector {
         super(context, new GestureDetector.SimpleOnGestureListener() {
 
             //Swipe intercepting : e1 start movement and e2 end on movement
-            @RequiresApi(api = Build.VERSION_CODES.N)
+
             @Override
             public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
                 Log.i("Debug", e1 + "-" + e2);
@@ -46,7 +46,7 @@ public class SwipeGestureDetector extends GestureDetector {
             }
 
 
-            @RequiresApi(api = Build.VERSION_CODES.N)
+
             public void onSwipe(SwipeGestureDetector.SwipeDirection direction) {
                 ImageView imagePic = (ImageView) context.findViewById(R.id.view);
 

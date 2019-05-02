@@ -1,14 +1,17 @@
 package com.karine.moodtracker.controllers;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.icu.util.Calendar;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Layout;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -25,7 +28,12 @@ import com.karine.moodtracker.models.SwipeGestureDetector;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -70,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getWindow().getDecorView().setBackgroundResource(R.color.light_sage);
-      
 
         //Declaration
 
@@ -82,6 +89,9 @@ public class MainActivity extends AppCompatActivity {
 
         //Instatiation SwipeGestureDetector
         mGestureDetector = new SwipeGestureDetector(this, mMood, mView);
+
+        saveBackground();
+        saveDate();
 
         saveComment();
         Intent intent = getIntent();
@@ -145,19 +155,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public void saveDate() {
         Calendar mCalendar = Calendar.getInstance();
         JSONObject mDate = new JSONObject();
         SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/YYYY");
         String dayDate = jsonDateFormat.format(mCalendar.getTime());
+
         try {
             mDate.put("save_date", dayDate);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        System.out.println(dayDate);
+
+
+
     }
+
+
 }
 
 
