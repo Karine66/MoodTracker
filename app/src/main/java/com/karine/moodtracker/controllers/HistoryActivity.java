@@ -8,8 +8,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
+
 
 import com.karine.moodtracker.R;
 
@@ -29,11 +30,8 @@ public class HistoryActivity extends AppCompatActivity {
     private JSONObject mSaved;
     private ImageView mHistorybtn1;
     private EditText et;
-    private TextView mYesterday;
+    private LinearLayout mYesterday;
 
-
-    private String retrieveComment;
- ;
 
 
     @Override
@@ -41,20 +39,26 @@ public class HistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
+        setDayDate(dayDate);
+
+
+        mYesterday = (LinearLayout) findViewById(R.id.yesterday);
+
         mHistorybtn1 = (ImageView) findViewById(R.id.history_btn_1);
 
         mHistorybtn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                mPreferences = getSharedPreferences("save", Context.MODE_PRIVATE);
-                Log.d("Testing", mPreferences.getString("save", ""));
+                mPreferences = getSharedPreferences("saved", Context.MODE_PRIVATE);
+                Log.d("Testing", mPreferences.getString("saved", ""));
                 try {
-                    mSaved = new JSONObject(mPreferences.getString("save", ""));
+                    mSaved = new JSONObject(mPreferences.getString("saved", ""));
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
 
 
                 Toast.makeText(HistoryActivity.this, (CharSequence) getSaved(), Toast.LENGTH_SHORT).show();
@@ -64,19 +68,19 @@ public class HistoryActivity extends AppCompatActivity {
 
     }
 
+
+
+
+
+
     public JSONObject getSaved() {
-
-
-       return mSaved;
+        return mSaved;
     }
-
-
-
-
 
     public void setSaved(JSONObject saved) {
         mSaved = saved;
     }
+
 
 
     public JSONObject getDayDate() {
@@ -84,8 +88,11 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     public void setDayDate(JSONObject dayDate) {
+
         this.dayDate = dayDate;
+
     }
+
 }
 
 

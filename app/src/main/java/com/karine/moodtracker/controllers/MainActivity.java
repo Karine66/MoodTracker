@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private JSONObject mSaved = new JSONObject();
     private JSONObject dayDate = new JSONObject();
     private Calendar mCalendar;
+    private Date mDate;
 
 
     public int getCounter() {
@@ -98,10 +99,10 @@ public class MainActivity extends AppCompatActivity {
         if (intent.getIntExtra("position", -1) != -1) {
             try {
                 String s = et.getText().toString();
-                if (!mPreferences.getString("save", "").equals(""))
-                    mSaved = new JSONObject(mPreferences.getString("save", ""));
-                et.setText(mSaved.getString("save" + intent.getIntExtra("position", 0)));
-                s = mSaved.getString("save" + intent.getIntExtra("position", 0));
+                if (!mPreferences.getString("saved", "").equals(""))
+                    mSaved = new JSONObject(mPreferences.getString("saved", ""));
+                et.setText(mSaved.getString("saved" + intent.getIntExtra("position", 0)));
+                s = mSaved.getString("saved" + intent.getIntExtra("position", 0));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -137,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void saveComment() {
 
-        mPreferences = getSharedPreferences("save", Context.MODE_PRIVATE);
+        mPreferences = getSharedPreferences("saved", Context.MODE_PRIVATE);
         mEditor = mPreferences.edit();
         mEditor.remove("text");
         mEditor.apply();
@@ -167,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
+        System.out.println(dayDate);
 
     }
 
