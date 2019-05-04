@@ -98,10 +98,10 @@ public class MainActivity extends AppCompatActivity {
         if (intent.getIntExtra("position", -1) != -1) {
             try {
                 String s = et.getText().toString();
-                if (!mPreferences.getString("mSaved", "").equals(""))
-                    mSaved = new JSONObject(mPreferences.getString("mSaved", ""));
-                et.setText(mSaved.getString("mSaved" + intent.getIntExtra("position", 0)));
-                s = mSaved.getString("mSaved" + intent.getIntExtra("position", 0));
+                if (!mPreferences.getString("save", "").equals(""))
+                    mSaved = new JSONObject(mPreferences.getString("save", ""));
+                et.setText(mSaved.getString("save" + intent.getIntExtra("position", 0)));
+                s = mSaved.getString("save" + intent.getIntExtra("position", 0));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void saveComment() {
 
-        mPreferences = getSharedPreferences("text", Context.MODE_PRIVATE);
+        mPreferences = getSharedPreferences("save", Context.MODE_PRIVATE);
         mEditor = mPreferences.edit();
         mEditor.remove("text");
         mEditor.apply();

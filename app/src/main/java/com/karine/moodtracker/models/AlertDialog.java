@@ -62,14 +62,14 @@ public class AlertDialog implements View.OnClickListener {
                 String s = et.getText().toString();
                 if (!s.equals("")) {
                     try {
-                        if (!mPreferences.getString("mSaved", "").equals(""))
-                            mSaved = new JSONObject(mPreferences.getString("mSaved", ""));
-                        mSaved.put("mSaved" + mSaved.length(), s);
+                        if (!mPreferences.getString("save", "").equals(""))
+                            mSaved = new JSONObject(mPreferences.getString("save", ""));
+                        mSaved.put("save" + mSaved.length(), s);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                     Log.d("testing", mSaved + "");
-                    mEditor.putString("mSaved", mSaved.toString());
+                    mEditor.putString("save", mSaved.toString());
                     mEditor.apply();
                    retrieveComment = et.getText().toString();
 
