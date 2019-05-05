@@ -1,17 +1,11 @@
 package com.karine.moodtracker.controllers;
 
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.ColorInt;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Layout;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -28,10 +22,7 @@ import com.karine.moodtracker.models.SwipeGestureDetector;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -54,6 +45,20 @@ public class MainActivity extends AppCompatActivity {
     private Calendar mCalendar;
     private Date mDate;
 
+    public static void saveDate() {
+        Calendar mCalendar = Calendar.getInstance();
+        JSONObject mDate = new JSONObject();
+        SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/YYYY");
+        String dayDate = jsonDateFormat.format(mCalendar.getTime());
+
+        try {
+            mDate.put("save_date", dayDate);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 
     public int getCounter() {
 
@@ -72,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
     public void increaseCOunter() {
         counter++;
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
         }
 
         mNoteAdd.setOnClickListener(new AlertDialog(MainActivity.this, mPreferences, mEditor, mSaved));
@@ -140,36 +145,18 @@ public class MainActivity extends AppCompatActivity {
 
         mPreferences = getSharedPreferences("saved", Context.MODE_PRIVATE);
         mEditor = mPreferences.edit();
-        mEditor.remove("text");
+        mEditor.remove("saved");
         mEditor.apply();
         et = findViewById(R.id.mood_dialog);
         mHistory = findViewById(R.id.history_black_button);
 
     }
 
-
     //interceps all event relative to touch and give to GestureDetector
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         this.mGestureDetector.onTouchEvent(event);
         return super.onTouchEvent(event);
-    }
-
-
-    public void saveDate() {
-        Calendar mCalendar = Calendar.getInstance();
-        JSONObject mDate = new JSONObject();
-        SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/YYYY");
-        String dayDate = jsonDateFormat.format(mCalendar.getTime());
-
-        try {
-            mDate.put("save_date", dayDate);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println(dayDate);
-
     }
 
 

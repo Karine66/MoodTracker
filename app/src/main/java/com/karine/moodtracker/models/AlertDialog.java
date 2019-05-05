@@ -8,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import com.karine.moodtracker.R;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -71,11 +73,11 @@ public class AlertDialog implements View.OnClickListener {
                     Log.d("testing", mSaved + "");
                     mEditor.putString("saved", mSaved.toString());
                     mEditor.apply();
-                   retrieveComment = et.getText().toString();
+                    retrieveComment = et.getText().toString();
 
                 }
 
-                Toast.makeText(mContext.getApplicationContext(),retrieveComment, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext.getApplicationContext(), retrieveComment, Toast.LENGTH_SHORT).show();
             }
         });
 

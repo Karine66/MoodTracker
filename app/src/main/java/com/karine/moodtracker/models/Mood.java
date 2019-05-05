@@ -51,5 +51,5 @@ public class Mood {
         this.selectedMood = selectedMood;
     }
 
-   }
+}
 

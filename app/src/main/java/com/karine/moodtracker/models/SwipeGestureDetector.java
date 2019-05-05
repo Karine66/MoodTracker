@@ -1,13 +1,12 @@
 package com.karine.moodtracker.models;
 
 
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+
 import com.karine.moodtracker.R;
 import com.karine.moodtracker.controllers.MainActivity;
 
@@ -44,7 +43,6 @@ public class SwipeGestureDetector extends GestureDetector {
                 }
                 return false;
             }
-
 
 
             public void onSwipe(SwipeGestureDetector.SwipeDirection direction) {

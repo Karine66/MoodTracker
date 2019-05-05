@@ -1,5 +1,6 @@
 package com.karine.moodtracker.controllers;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,19 +9,22 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
-
 
 import com.karine.moodtracker.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
+import static com.karine.moodtracker.controllers.MainActivity.saveDate;
 
 
 public class HistoryActivity extends AppCompatActivity {
+
 
     private Context mContext;
     private JSONObject dayDate;
@@ -30,21 +34,21 @@ public class HistoryActivity extends AppCompatActivity {
     private JSONObject mSaved;
     private ImageView mHistorybtn1;
     private EditText et;
-    private LinearLayout mYesterday;
+    private TextView mTvYesterday;
 
 
-
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
-        setDayDate(dayDate);
 
+        mTvYesterday = (TextView) findViewById(R.id.tvYesterday);
 
-        mYesterday = (LinearLayout) findViewById(R.id.yesterday);
 
         mHistorybtn1 = (ImageView) findViewById(R.id.history_btn_1);
+
 
         mHistorybtn1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,40 +64,36 @@ public class HistoryActivity extends AppCompatActivity {
                 }
 
 
+                Toast.makeText(HistoryActivity.this, mPreferences.getString("saved", ""), Toast.LENGTH_SHORT).show();
 
-                Toast.makeText(HistoryActivity.this, (CharSequence) getSaved(), Toast.LENGTH_SHORT).show();
             }
 
         });
 
+        saveDate();
+        Calendar mCalendar = Calendar.getInstance();
+        JSONObject mDate = new JSONObject();
+        SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/YYYY");
+        String dayDate = jsonDateFormat.format(mCalendar.getTime());
+
+        try {
+            mDate.put("save_date", dayDate);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        mTvYesterday.setText(dayDate);
     }
 
-
-
-
-
-
-    public JSONObject getSaved() {
-        return mSaved;
-    }
-
-    public void setSaved(JSONObject saved) {
-        mSaved = saved;
-    }
-
-
-
-    public JSONObject getDayDate() {
-        return dayDate;
-    }
-
-    public void setDayDate(JSONObject dayDate) {
-
-        this.dayDate = dayDate;
-
-    }
 
 }
+
+
+
+
+
+
+
+
 
 
 
