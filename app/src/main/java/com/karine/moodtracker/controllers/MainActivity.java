@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -45,20 +46,6 @@ public class MainActivity extends AppCompatActivity {
     private Calendar mCalendar;
     private Date mDate;
 
-    public static void saveDate() {
-        Calendar mCalendar = Calendar.getInstance();
-        JSONObject mDate = new JSONObject();
-        SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/YYYY");
-        String dayDate = jsonDateFormat.format(mCalendar.getTime());
-
-        try {
-            mDate.put("save_date", dayDate);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-    }
 
     public int getCounter() {
 
@@ -126,6 +113,27 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    public void saveDate() {
+        Calendar mCalendar = Calendar.getInstance();
+        JSONObject mDate = new JSONObject();
+        SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/YYYY");
+        String dayDate = jsonDateFormat.format(mCalendar.getTime());
+        SharedPreferences myPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor mEditor = myPrefs.edit();
+        mEditor.putString(dayDate, String.valueOf(jsonDateFormat));
+        Integer.parseInt(dayDate.getBytes().toString());
+        mEditor.apply();
+
+        try {
+            mDate.put("save_date", dayDate);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
 
     public void saveBackground() {
 

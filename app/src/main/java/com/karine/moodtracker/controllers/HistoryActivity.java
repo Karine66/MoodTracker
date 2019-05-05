@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -17,10 +18,9 @@ import com.karine.moodtracker.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
-import static com.karine.moodtracker.controllers.MainActivity.saveDate;
+import java.util.Calendar;
+import java.util.Set;
 
 
 public class HistoryActivity extends AppCompatActivity {
@@ -35,6 +35,8 @@ public class HistoryActivity extends AppCompatActivity {
     private ImageView mHistorybtn1;
     private EditText et;
     private TextView mTvYesterday;
+    private SharedPreferences myPrefs;
+    private int mDate;
 
 
     @SuppressLint("SetTextI18n")
@@ -70,22 +72,24 @@ public class HistoryActivity extends AppCompatActivity {
 
         });
 
-        saveDate();
-        Calendar mCalendar = Calendar.getInstance();
-        JSONObject mDate = new JSONObject();
-        SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/YYYY");
-        String dayDate = jsonDateFormat.format(mCalendar.getTime());
-
-        try {
-            mDate.put("save_date", dayDate);
+        myPrefs = getSharedPreferences("save_date", Context.MODE_PRIVATE);
+        try{
+            dayDate = new JSONObject(myPrefs.getString("save_date", ""));
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        mEditor = myPrefs.edit();
+        mEditor.apply();
         mTvYesterday.setText(dayDate);
+
     }
-
-
 }
+
+
+
+
+
 
 
 
