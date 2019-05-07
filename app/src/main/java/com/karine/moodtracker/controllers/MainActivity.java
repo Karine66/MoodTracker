@@ -15,6 +15,7 @@ import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonDeserializationContext;
 import com.karine.moodtracker.R;
 import com.karine.moodtracker.models.AlertDialog;
 import com.karine.moodtracker.models.Mood;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private SwipeGestureDetector mGestureDetector;
     private SharedPreferences mPreferences;
     private SharedPreferences.Editor mEditor;
+    private SharedPreferences.Editor mEdit;
     private Mood mMood;
     private View mView;
     private int counter = 0;
@@ -85,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
         saveBackground();
         saveDate();
 
+
         saveComment();
         Intent intent = getIntent();
         if (intent.getIntExtra("position", -1) != -1) {
@@ -120,13 +123,12 @@ public class MainActivity extends AppCompatActivity {
         SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/YYYY");
         String dayDate = jsonDateFormat.format(mCalendar.getTime());
         SharedPreferences myPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor mEditor = myPrefs.edit();
-        mEditor.putString(dayDate, String.valueOf(jsonDateFormat));
-        Integer.parseInt(dayDate.getBytes().toString());
-        mEditor.apply();
+        SharedPreferences.Editor mEdit = myPrefs.edit();
+
+        mEdit.apply();
 
         try {
-            mDate.put("save_date", dayDate);
+            mDate.put("date", dayDate);
         } catch (JSONException e) {
             e.printStackTrace();
         }
