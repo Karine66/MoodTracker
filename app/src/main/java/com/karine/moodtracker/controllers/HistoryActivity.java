@@ -1,5 +1,7 @@
 package com.karine.moodtracker.controllers;
 
+import android.app.AlertDialog;
+import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,12 +14,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.karine.moodtracker.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 
+import java.text.BreakIterator;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 
@@ -31,17 +36,17 @@ public class HistoryActivity extends AppCompatActivity {
     private SharedPreferences.Editor mEditor;
     private JSONObject mSaved;
     private ImageView mHistorybtn1;
-
+    private EditText et;
     private TextView mTvYesterday;
     private SharedPreferences myPrefs;
     private JSONObject mDate;
 
 
-    private String retrieveDate;
+    //Retrieve Date
+
+    private String retrieveDate = "save_date";
     private SharedPreferences.Editor mEdit;
     private String retrieveComment;
-    private EditText et;
-
 
 
     @Override
@@ -49,8 +54,9 @@ public class HistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
+
         retrieveDate = "save_date";
-        retrieveComment = "text";
+        retrieveComment = "saved";
 
         mTvYesterday = (TextView) findViewById(R.id.tvYesterday);
 
@@ -63,6 +69,7 @@ public class HistoryActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 mPreferences = getSharedPreferences("saved", Context.MODE_PRIVATE);
+
                 Log.d("Testing", mPreferences.getString("saved", ""));
 
                 try {
@@ -71,9 +78,11 @@ public class HistoryActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                
 
-                mEdit.apply();
+
+
+
+                mEditor.apply();
 
 
 
@@ -82,38 +91,33 @@ public class HistoryActivity extends AppCompatActivity {
             }
 
         });
-        //Retrieve Date
 
-        retrieveDate = "save_date";
-        myPrefs = getSharedPreferences("date", Context.MODE_PRIVATE);
-        Intent intent = getIntent();
-        if (intent.getIntExtra("date", -1) != -1) {
-            try {
-                String s =mTvYesterday.getText().toString();
-                if (!mPreferences.getString("save_date", "").equals(""))
-                    dayDate = new JSONObject(myPrefs.getString("save_date", ""));
-                mTvYesterday.setText(dayDate.getString("date" + intent.getIntExtra("date", 0)));
-                s = dayDate.getString("date" + intent.getIntExtra("date", 0));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+      //retrieve date
+        myPrefs = getSharedPreferences("save_date", Context.MODE_PRIVATE);
+        String tv = mTvYesterday.getText().toString();
+        Log.d("Test_Date", myPrefs.getString("save_date", ""));
+
+        try {
+            mDate = new JSONObject(myPrefs.getString("save_date", ""));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
 
-            Log.d("TestDate", myPrefs.getString("save_date", ""));
 
 
-            mEdit = myPrefs.edit();
-            mEdit.putString("save_date", dayDate.toString());
+        mEdit.apply();
 
-            mEdit.apply();
-            retrieveDate = mTvYesterday.getText().toString();
+        mTvYesterday.setText(dayDate);
 
-
-            mTvYesterday.setText(retrieveDate);
 
         }
     }
-}
+
+
+
+
 
 
 

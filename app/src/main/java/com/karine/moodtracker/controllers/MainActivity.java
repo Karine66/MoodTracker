@@ -122,13 +122,13 @@ public class MainActivity extends AppCompatActivity {
         JSONObject mDate = new JSONObject();
         SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/YYYY");
         String dayDate = jsonDateFormat.format(mCalendar.getTime());
-        SharedPreferences myPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences myPrefs = getSharedPreferences("save_date", MODE_PRIVATE);
         SharedPreferences.Editor mEdit = myPrefs.edit();
 
         mEdit.apply();
 
         try {
-            mDate.put("date", dayDate);
+            mDate.put("save_date", dayDate);
         } catch (JSONException e) {
             e.printStackTrace();
         }
