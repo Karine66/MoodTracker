@@ -94,7 +94,7 @@ public class HistoryActivity extends AppCompatActivity {
 
       //retrieve date
         myPrefs = getSharedPreferences("save_date", Context.MODE_PRIVATE);
-        String tv = mTvYesterday.getText().toString();
+        String dayDate = mTvYesterday.getText().toString();
         Log.d("Test_Date", myPrefs.getString("save_date", ""));
 
         try {
@@ -104,12 +104,8 @@ public class HistoryActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
-
-
-        mEdit.apply();
-
         mTvYesterday.setText(dayDate);
+ 
 
 
         }
