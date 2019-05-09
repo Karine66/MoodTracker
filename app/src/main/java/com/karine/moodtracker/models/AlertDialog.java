@@ -62,22 +62,15 @@ public class AlertDialog implements View.OnClickListener {
                 EditText et = (EditText) commentView.findViewById(R.id.mood_dialog);
 
                 String s = et.getText().toString();
-                if (!s.equals("")) {
-                    try {
-                        if (!mPreferences.getString("saved", "").equals(""))
-                            mSaved = new JSONObject(mPreferences.getString("saved", ""));
-                        mSaved.put("saved" + mSaved.length(), s);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    Log.d("testing", mSaved + "");
-                    mEditor.putString("saved", mSaved.toString());
+
+                    Log.d("testing", s + "");
+                    mEditor.putString("saved", s);
                     mEditor.apply();
-                    retrieveComment = et.getText().toString();
 
-                }
 
-                Toast.makeText(mContext.getApplicationContext(), retrieveComment, Toast.LENGTH_SHORT).show();
+
+
+                Toast.makeText(mContext.getApplicationContext(), s, Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -91,16 +91,8 @@ public class MainActivity extends AppCompatActivity {
         saveComment();
         Intent intent = getIntent();
         if (intent.getIntExtra("position", -1) != -1) {
-            try {
-                String s = et.getText().toString();
-                if (!mPreferences.getString("saved", "").equals(""))
-                    mSaved = new JSONObject(mPreferences.getString("saved", ""));
-                et.setText(mSaved.getString("saved" + intent.getIntExtra("position", 0)));
-                s = mSaved.getString("saved" + intent.getIntExtra("position", 0));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
 
+                String s = et.getText().toString();
         }
 
         mNoteAdd.setOnClickListener(new AlertDialog(MainActivity.this, mPreferences, mEditor, mSaved));
@@ -119,21 +111,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void saveDate() {
         Calendar mCalendar = Calendar.getInstance();
-        JSONObject mDate = new JSONObject();
         SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/YYYY");
         String dayDate = jsonDateFormat.format(mCalendar.getTime());
         SharedPreferences myPrefs = getSharedPreferences("save_date", MODE_PRIVATE);
         SharedPreferences.Editor mEdit = myPrefs.edit();
-
+        mEdit.putString("save_date", dayDate);
         mEdit.apply();
-
-        try {
-            mDate.put("save_date", dayDate);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
     }
 
 

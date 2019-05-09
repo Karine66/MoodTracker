@@ -1,9 +1,6 @@
 package com.karine.moodtracker.controllers;
 
-import android.app.AlertDialog;
-import android.app.Notification;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,15 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.karine.moodtracker.R;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
-
-import java.text.BreakIterator;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 
@@ -72,44 +64,23 @@ public class HistoryActivity extends AppCompatActivity {
 
                 Log.d("Testing", mPreferences.getString("saved", ""));
 
-                try {
-                    mSaved = new JSONObject(mPreferences.getString("saved", ""));
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-
-
-
-                mEditor.apply();
-
-
-
                 Toast.makeText(HistoryActivity.this, mPreferences.getString("saved", ""), Toast.LENGTH_SHORT).show();
 
             }
 
         });
 
-      //retrieve date
+        //retrieve date
         myPrefs = getSharedPreferences("save_date", Context.MODE_PRIVATE);
-        String dayDate = mTvYesterday.getText().toString();
-        Log.d("Test_Date", myPrefs.getString("save_date", ""));
-
-        try {
-            mDate = new JSONObject(myPrefs.getString("save_date", ""));
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        mTvYesterday.setText(dayDate);
- 
+        String date = myPrefs.getString("save_date", "");
+        Log.d("Test_Date", "onCreate() called with" + date);
 
 
-        }
+        mTvYesterday.setText(date);
+
+
     }
+}
 
 
 
