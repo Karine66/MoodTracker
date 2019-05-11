@@ -54,7 +54,7 @@ public class SwipeGestureDetector extends GestureDetector {
 
                 switch (direction) {
                     case TOP_TO_BOTTOM:
-                        context.saveBackground();
+
                         mood.setSelectedMood(context.getCounter());
 
                         if (context.getCounter() > 0) {
@@ -72,7 +72,7 @@ public class SwipeGestureDetector extends GestureDetector {
                         break;
 
                     case BOTTOM_TO_TOP:
-                        context.saveBackground();
+
                         mood.setSelectedMood(context.getCounter());
 
                         if (context.getCounter() < 4) {

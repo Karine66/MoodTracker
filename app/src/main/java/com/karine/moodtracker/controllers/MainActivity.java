@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -13,17 +12,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
-
 import com.google.gson.Gson;
-import com.google.gson.JsonDeserializationContext;
 import com.karine.moodtracker.R;
 import com.karine.moodtracker.models.AlertDialog;
 import com.karine.moodtracker.models.Mood;
 import com.karine.moodtracker.models.SwipeGestureDetector;
-
-import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -103,10 +97,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent myIntent = new Intent(MainActivity.this, HistoryActivity.class);
                 startActivity(myIntent);
-
             }
         });
-
     }
 
     public void saveDate() {
@@ -118,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
         mEdit.putString("save_date", dayDate);
         mEdit.apply();
     }
-
 
     public void saveBackground() {
 

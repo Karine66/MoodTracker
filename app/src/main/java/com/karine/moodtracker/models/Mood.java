@@ -33,6 +33,7 @@ public class Mood {
     private int selectedMood;
 
 
+
     //constructor
     public Mood(int selectedMood) {
 
@@ -41,7 +42,9 @@ public class Mood {
 
     // create getter et setter
 
-    public int getSelectedMood(int[] arrayBackgroundColor) {
+
+
+    public int getSelectedMood(int[] ARRAY_BACKGROUND_COLOR) {
 
         return selectedMood;
     }
