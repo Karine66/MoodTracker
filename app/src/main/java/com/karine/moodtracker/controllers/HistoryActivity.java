@@ -30,6 +30,8 @@ public class HistoryActivity extends AppCompatActivity {
     private String json;
     private SharedPreferences sharedPreferences;
     private FrameLayout mDay1ago;
+    private int[] mMood;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,9 @@ public class HistoryActivity extends AppCompatActivity {
 
         mHistorybtn1 = (ImageView) findViewById(R.id.history_btn_1);
 
-        mDay1ago = (FrameLayout)findViewById(R.id.day1_ago);
+        mDay1ago = (FrameLayout) findViewById(R.id.day1_ago);
+
+
 
         mHistorybtn1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,18 +57,19 @@ public class HistoryActivity extends AppCompatActivity {
 
         });
 
-        retrieveDate();
         retrieveBackground();
 
-
+        retrieveDate();
     }
 
     private void retrieveBackground() {
         sharedPreferences = getSharedPreferences("save_bg", Context.MODE_PRIVATE);
+        String bg = sharedPreferences.getString("save_bg", "nothing");
         Gson gson = new Gson();
         Mood mood = gson.fromJson(json, Mood.class);
         mood.getSelectedMood(Mood.ARRAY_BACKGROUND_COLOR);
-        Log.d("Test_bg", "color" + mood);
+        Log.d("Test_bg", "color" + bg);
+
     }
 
     public void retrieveDate() {
