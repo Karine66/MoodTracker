@@ -12,10 +12,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.karine.moodtracker.R;
 import com.karine.moodtracker.models.Mood;
 
-
+import org.json.JSONException;
 
 
 public class HistoryActivity extends AppCompatActivity {
@@ -30,7 +31,7 @@ public class HistoryActivity extends AppCompatActivity {
     private String json;
     private SharedPreferences sharedPreferences;
     private FrameLayout mDay1ago;
-    private int[] mMood;
+
 
 
     @Override
@@ -38,11 +39,11 @@ public class HistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
-        mTvYesterday = (TextView) findViewById(R.id.tvYesterday);
+        mTvYesterday = findViewById(R.id.tvYesterday);
 
-        mHistorybtn1 = (ImageView) findViewById(R.id.history_btn_1);
+        mHistorybtn1 = findViewById(R.id.history_btn_1);
 
-        mDay1ago = (FrameLayout) findViewById(R.id.day1_ago);
+        mDay1ago = findViewById(R.id.day1_ago);
 
 
 
@@ -58,21 +59,25 @@ public class HistoryActivity extends AppCompatActivity {
         });
 
         retrieveBackground();
-
         retrieveDate();
     }
 
     private void retrieveBackground() {
-        sharedPreferences = getSharedPreferences("save_bg", Context.MODE_PRIVATE);
-        String bg = sharedPreferences.getString("save_bg", "nothing");
-        Gson gson = new Gson();
-        Mood mood = gson.fromJson(json, Mood.class);
-        mood.getSelectedMood(Mood.ARRAY_BACKGROUND_COLOR);
-        Log.d("Test_bg", "color" + bg);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("save_bg", Context.MODE_PRIVATE);
+        String json = sharedPreferences.getString("save_bg", "nothing");
+
+        Gson gson = new Gson();
+        try {
+            Mood mood = gson.fromJson(json,  Mood.class);
+            mood.getSelectedMood();
+        } catch (IllegalStateException | JsonSyntaxException exception) {
+            Log.d("Test_bg", "color" + json);
+
+        }
     }
 
-    public void retrieveDate() {
+        public void retrieveDate() {
         myPrefs = getSharedPreferences("save_date", Context.MODE_PRIVATE);
         String date = myPrefs.getString("save_date", "");
         Log.d("Test_Date", "onCreate() called with" + date);

@@ -20,7 +20,7 @@ import com.karine.moodtracker.models.SwipeGestureDetector;
 import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
+
 
 
 public class MainActivity extends AppCompatActivity {
@@ -38,9 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView mHistory;
     private EditText et;
     private JSONObject mSaved = new JSONObject();
-    private JSONObject dayDate = new JSONObject();
-    private Calendar mCalendar;
-    private Date mDate;
+
 
 
     public int getCounter() {
@@ -121,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         editor.remove("save_bg");
         editor.apply();
 
-        Log.d("Text", "Mood" + mMood.getSelectedMood(Mood.ARRAY_BACKGROUND_COLOR));
+        Log.d("Text", "Mood" + mMood.getSelectedMood());
 
     }
 

@@ -42,7 +42,7 @@ public class Mood {
 
     // create getter et setter
 
-    public int getSelectedMood(int[] arrayBackgroundColor) {
+    public int getSelectedMood() {
 
 
         return selectedMood;
