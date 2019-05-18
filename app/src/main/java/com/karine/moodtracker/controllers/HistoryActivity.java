@@ -12,11 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
 import com.karine.moodtracker.R;
 import com.karine.moodtracker.models.Mood;
-
-import org.json.JSONException;
 
 
 public class HistoryActivity extends AppCompatActivity {
@@ -33,17 +30,15 @@ public class HistoryActivity extends AppCompatActivity {
     private FrameLayout mDay1ago;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
+
         mTvYesterday = findViewById(R.id.tvYesterday);
-
         mHistorybtn1 = findViewById(R.id.history_btn_1);
-
-        mDay1ago = findViewById(R.id.day1_ago);
+       mDay1ago  = findViewById(R.id.day1_ago);
 
 
 
@@ -62,20 +57,20 @@ public class HistoryActivity extends AppCompatActivity {
         retrieveDate();
     }
 
+
     private void retrieveBackground() {
 
         SharedPreferences sharedPreferences = getSharedPreferences("save_bg", Context.MODE_PRIVATE);
-        String json = sharedPreferences.getString("save_bg", "nothing");
-
+        String json = sharedPreferences.getString("save_bg", "");
         Gson gson = new Gson();
-        try {
-            Mood mood = gson.fromJson(json,  Mood.class);
-            mood.getSelectedMood();
-        } catch (IllegalStateException | JsonSyntaxException exception) {
-            Log.d("Test_bg", "color" + json);
+        Mood mood = gson.fromJson(json,  Mood.class);
 
-        }
+            Log.d("Test_bg", "color" +  mood.getSelectedMood());
+
+           //mDay1ago.setBackgroundResource(mood.getSelectedMood());
+
     }
+
 
         public void retrieveDate() {
         myPrefs = getSharedPreferences("save_date", Context.MODE_PRIVATE);

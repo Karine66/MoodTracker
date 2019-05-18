@@ -65,9 +65,9 @@ public class SwipeGestureDetector extends GestureDetector {
 
                             break;
                         } else {
-                            context.setCounter(4);
-                            imagePic.setImageResource(Mood.ARRAY_MOODS[context.getCounter()]);
-                            view.setBackgroundResource(Mood.ARRAY_BACKGROUND_COLOR[context.getCounter()]);
+                           context.setCounter(4);
+                           imagePic.setImageResource(Mood.ARRAY_MOODS[context.getCounter()]);
+                           view.setBackgroundResource(Mood.ARRAY_BACKGROUND_COLOR[context.getCounter()]);
                         }
                         break;
 
@@ -82,21 +82,23 @@ public class SwipeGestureDetector extends GestureDetector {
 
                             break;
 
-                        } else {
-                            context.setCounter(0);
-                            imagePic.setImageResource(Mood.ARRAY_MOODS[context.getCounter()]);
-                            view.setBackgroundResource(Mood.ARRAY_BACKGROUND_COLOR[context.getCounter()]);
 
                         }
-                        break;
+//                        else {
+//                            context.setCounter(0);
+//                            imagePic.setImageResource(Mood.ARRAY_MOODS[context.getCounter()]);
+//                            view.setBackgroundResource(Mood.ARRAY_BACKGROUND_COLOR[context.getCounter()]);
+//
+//                        }
+//                        break;
 
 
                 }
 
             }
 
-
         });
+
 
     }
 

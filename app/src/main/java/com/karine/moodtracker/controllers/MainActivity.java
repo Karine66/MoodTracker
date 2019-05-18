@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.karine.moodtracker.R;
 import com.karine.moodtracker.models.AlertDialog;
 import com.karine.moodtracker.models.Mood;
@@ -20,6 +21,7 @@ import com.karine.moodtracker.models.SwipeGestureDetector;
 import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
 
 
 
@@ -69,8 +71,8 @@ public class MainActivity extends AppCompatActivity {
 
         mMood = new Mood(counter);
         mView = this.getWindow().getDecorView();
-        mNoteAdd = (ImageView) findViewById(R.id.note_add_btn);
-        mHistory = (ImageView) findViewById(R.id.history_black_button);
+        mNoteAdd = findViewById(R.id.note_add_btn);
+        mHistory = findViewById(R.id.history_black_button);
 
 
         //Instatiation SwipeGestureDetector
@@ -115,8 +117,8 @@ public class MainActivity extends AppCompatActivity {
         String json = gson.toJson(mMood);
         SharedPreferences sharedPreferences = getSharedPreferences("save_bg", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("save_bg", json);
-        editor.remove("save_bg");
+        editor.putString("save_bg",json);
+        //editor.remove("save_bg");
         editor.apply();
 
         Log.d("Text", "Mood" + mMood.getSelectedMood());

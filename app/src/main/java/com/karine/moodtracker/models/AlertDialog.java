@@ -8,10 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.karine.moodtracker.R;
-
-import org.json.JSONException;
 import org.json.JSONObject;
 
 /**

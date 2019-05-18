@@ -15,7 +15,6 @@ public class Mood {
             R.drawable.smiley_normal,
             R.drawable.smiley_happy,
             R.drawable.smiley_super_happy,
-
     };
 
     //Array background colors
@@ -26,30 +25,24 @@ public class Mood {
             R.color.cornflower_blue_65,
             R.color.light_sage,
             R.color.banana_yellow,
-
-
     };
 
     private int selectedMood;
 
-
-
     //constructor
     public Mood(int selectedMood) {
-
         this.selectedMood = selectedMood;
     }
+
+
 
     // create getter et setter
 
     public int getSelectedMood() {
-
-
         return selectedMood;
     }
 
     public void setSelectedMood(int selectedMood) {
-
         this.selectedMood = selectedMood;
     }
 
