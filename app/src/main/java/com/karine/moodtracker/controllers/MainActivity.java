@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 import com.karine.moodtracker.R;
 import com.karine.moodtracker.models.AlertDialog;
 import com.karine.moodtracker.models.Mood;

@@ -2,6 +2,7 @@ package com.karine.moodtracker.controllers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -15,6 +16,8 @@ import com.google.gson.Gson;
 import com.karine.moodtracker.R;
 import com.karine.moodtracker.models.Mood;
 
+import static android.view.View.*;
+
 
 public class HistoryActivity extends AppCompatActivity {
 
@@ -27,7 +30,8 @@ public class HistoryActivity extends AppCompatActivity {
     private Gson gson;
     private String json;
     private SharedPreferences sharedPreferences;
-    private FrameLayout mDay1ago;
+    private MainActivity context;
+    private View mYesterday;
 
 
     @Override
@@ -38,11 +42,11 @@ public class HistoryActivity extends AppCompatActivity {
 
         mTvYesterday = findViewById(R.id.tvYesterday);
         mHistorybtn1 = findViewById(R.id.history_btn_1);
-       mDay1ago  = findViewById(R.id.day1_ago);
+        mYesterday  = findViewById(R.id.day1_ago);
 
 
 
-        mHistorybtn1.setOnClickListener(new View.OnClickListener() {
+        mHistorybtn1.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 mPreferences = getSharedPreferences("saved", Context.MODE_PRIVATE);
@@ -58,6 +62,7 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
 
+
     private void retrieveBackground() {
 
         SharedPreferences sharedPreferences = getSharedPreferences("save_bg", Context.MODE_PRIVATE);
@@ -67,7 +72,7 @@ public class HistoryActivity extends AppCompatActivity {
 
             Log.d("Test_bg", "color" +  mood.getSelectedMood());
 
-           //mDay1ago.setBackgroundResource(mood.getSelectedMood());
+          // mYesterday.setBackgroundResource(mood.getSelectedMood());
 
     }
 
