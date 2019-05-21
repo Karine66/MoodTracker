@@ -48,14 +48,14 @@ public class SwipeGestureDetector extends GestureDetector {
             public void onSwipe(SwipeGestureDetector.SwipeDirection direction) {
                 ImageView imagePic = (ImageView) context.findViewById(R.id.view);
 
-                context.saveBackground();
+
                 context.saveDate();
 
 
                 switch (direction) {
-                    case TOP_TO_BOTTOM:
+                    case BOTTOM_TO_TOP:
 
-                        mood.setSelectedMood(context.getCounter());
+
 
                         if (context.getCounter() > 0) {
                             context.decreaseCounter();
@@ -71,9 +71,9 @@ public class SwipeGestureDetector extends GestureDetector {
                         }
                         break;
 
-                    case BOTTOM_TO_TOP:
+                    case TOP_TO_BOTTOM:
 
-                        mood.setSelectedMood(context.getCounter());
+
 
                         if (context.getCounter() < 4) {
                             context.increaseCOunter();
@@ -84,17 +84,18 @@ public class SwipeGestureDetector extends GestureDetector {
 
 
                         }
-//                        else {
-//                            context.setCounter(0);
-//                            imagePic.setImageResource(Mood.ARRAY_MOODS[context.getCounter()]);
-//                            view.setBackgroundResource(Mood.ARRAY_BACKGROUND_COLOR[context.getCounter()]);
-//
-//                        }
-//                        break;
+                      else {
+                            context.setCounter(0);
+                            imagePic.setImageResource(Mood.ARRAY_MOODS[context.getCounter()]);
+                            view.setBackgroundResource(Mood.ARRAY_BACKGROUND_COLOR[context.getCounter()]);
+
+                       }
+                        break;
 
 
                 }
-
+                mood.setSelectedMood(context.getCounter());
+                context.saveBackground();
             }
 
         });

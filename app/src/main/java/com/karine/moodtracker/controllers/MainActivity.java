@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences.Editor mEdit;
     private Mood mMood;
     private View mView;
-    private int counter = 0;
+    private int counter = 3;
     private ImageSwitcher imagePic;
     private ImageView mNoteAdd;
     private ImageView mHistory;

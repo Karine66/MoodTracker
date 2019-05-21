@@ -2,12 +2,10 @@ package com.karine.moodtracker.controllers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,14 +21,9 @@ public class HistoryActivity extends AppCompatActivity {
 
 
     private SharedPreferences mPreferences;
-    private SharedPreferences.Editor mEditor;
     private ImageView mHistorybtn1;
     private TextView mTvYesterday;
     private SharedPreferences myPrefs;
-    private Gson gson;
-    private String json;
-    private SharedPreferences sharedPreferences;
-    private MainActivity context;
     private View mYesterday;
 
 
@@ -42,10 +35,10 @@ public class HistoryActivity extends AppCompatActivity {
 
         mTvYesterday = findViewById(R.id.tvYesterday);
         mHistorybtn1 = findViewById(R.id.history_btn_1);
-        mYesterday  = findViewById(R.id.day1_ago);
+        mYesterday  = findViewById(R.id.yesterday);
 
 
-
+        //retrieve comment
         mHistorybtn1.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,7 +65,7 @@ public class HistoryActivity extends AppCompatActivity {
 
             Log.d("Test_bg", "color" +  mood.getSelectedMood());
 
-          // mYesterday.setBackgroundResource(mood.getSelectedMood());
+           mYesterday.setBackgroundResource(Mood.ARRAY_BACKGROUND_COLOR[mood.getSelectedMood()]);
 
     }
 
