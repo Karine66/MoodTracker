@@ -55,13 +55,13 @@ public class AlertDialog implements View.OnClickListener {
             public void onClick(DialogInterface dialog, int which) {
                 //Click on for validate Edittext
                 EditText et = (EditText) commentView.findViewById(R.id.mood_dialog);
-                String s = et.getText().toString();
-                Log.d("testing", s + "");
+                String comment = et.getText().toString();
+                Log.d("test_comment", comment + "");
 
-                    mEditor.putString("saved", s);
+                    mEditor.putString("saved", comment);
                     mEditor.apply();
 
-                    Toast.makeText(mContext.getApplicationContext(), s, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext.getApplicationContext(), comment, Toast.LENGTH_SHORT).show();
             }
         });
 

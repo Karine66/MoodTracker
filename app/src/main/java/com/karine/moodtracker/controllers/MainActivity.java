@@ -27,6 +27,7 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity {
 
 
+    public static String getComment;
     private SwipeGestureDetector mGestureDetector;
     private SharedPreferences mPreferences;
     private SharedPreferences.Editor mEditor;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView mHistory;
     private EditText et;
     private JSONObject mSaved = new JSONObject();
+    private String comment;
 
 
 
@@ -58,6 +60,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void increaseCOunter() {
         counter++;
+    }
+
+    public  String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     @Override
@@ -85,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent.getIntExtra("position", -1) != -1) {
 
-                String s = et.getText().toString();
+                String comment = et.getText().toString();
         }
 
         mNoteAdd.setOnClickListener(new AlertDialog(MainActivity.this, mPreferences, mEditor, mSaved));

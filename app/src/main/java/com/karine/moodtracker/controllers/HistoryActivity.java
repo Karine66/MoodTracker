@@ -12,7 +12,10 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.karine.moodtracker.R;
+import com.karine.moodtracker.models.AlertDialog;
 import com.karine.moodtracker.models.Mood;
+
+import java.util.Objects;
 
 import static android.view.View.*;
 
@@ -25,6 +28,7 @@ public class HistoryActivity extends AppCompatActivity {
     private TextView mTvYesterday;
     private SharedPreferences myPrefs;
     private View mYesterday;
+    private MainActivity mContext;
 
 
     @Override
@@ -37,8 +41,17 @@ public class HistoryActivity extends AppCompatActivity {
         mHistorybtn1 = findViewById(R.id.history_btn_1);
         mYesterday  = findViewById(R.id.yesterday);
 
+        retrieveComment();
+        retrieveBackground();
+        retrieveDate();
+    }
 
-        //retrieve comment
+    private void retrieveComment(){
+        //if (mContext.getComment.isEmpty()) {
+            //mHistorybtn1.setVisibility(INVISIBLE);
+        //}else {
+           // mHistorybtn1.setVisibility(GONE);
+
         mHistorybtn1.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,15 +62,9 @@ public class HistoryActivity extends AppCompatActivity {
             }
 
         });
-
-        retrieveBackground();
-        retrieveDate();
     }
 
-
-
     private void retrieveBackground() {
-
         SharedPreferences sharedPreferences = getSharedPreferences("save_bg", Context.MODE_PRIVATE);
         String json = sharedPreferences.getString("save_bg", "");
         Gson gson = new Gson();
