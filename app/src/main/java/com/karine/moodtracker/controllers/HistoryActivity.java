@@ -46,22 +46,25 @@ public class HistoryActivity extends AppCompatActivity {
         retrieveDate();
     }
 
-    private void retrieveComment(){
-        //if (mContext.getComment.isEmpty()) {
-            //mHistorybtn1.setVisibility(INVISIBLE);
-        //}else {
-           // mHistorybtn1.setVisibility(GONE);
+    private void retrieveComment() {
+        
+        mPreferences = getSharedPreferences("saved", Context.MODE_PRIVATE);
+        if ( mPreferences.getString("saved","").isEmpty()) {
+            mHistorybtn1.setVisibility(INVISIBLE);
+        } else {
+            mHistorybtn1.setVisibility(VISIBLE);
 
-        mHistorybtn1.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPreferences = getSharedPreferences("saved", Context.MODE_PRIVATE);
-                Log.d("Testing", mPreferences.getString("saved", ""));
+            mHistorybtn1.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-                Toast.makeText(HistoryActivity.this, mPreferences.getString("saved", ""), Toast.LENGTH_SHORT).show();
-            }
+                    Log.d("Testing", mPreferences.getString("saved", ""));
 
-        });
+                    Toast.makeText(HistoryActivity.this, mPreferences.getString("saved", ""), Toast.LENGTH_SHORT).show();
+                }
+
+            });
+        }
     }
 
     private void retrieveBackground() {

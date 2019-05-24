@@ -62,13 +62,7 @@ public class MainActivity extends AppCompatActivity {
         counter++;
     }
 
-    public  String getComment() {
-        return comment;
-    }
 
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
