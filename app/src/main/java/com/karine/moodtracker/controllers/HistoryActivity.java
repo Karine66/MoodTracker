@@ -13,6 +13,9 @@ import com.google.gson.Gson;
 import com.karine.moodtracker.R;
 import com.karine.moodtracker.models.Mood;
 
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -28,6 +31,8 @@ public class HistoryActivity extends AppCompatActivity {
     private TextView mTvYesterday;
     private SharedPreferences myPrefs;
     private View mYesterday;
+    private Date dateYesterday;
+    private java.util.Date date2DayAgo;
 
 
     @Override
@@ -78,39 +83,38 @@ public class HistoryActivity extends AppCompatActivity {
 
     }
 
-
     public void retrieveDate() {
-
 
         myPrefs = getSharedPreferences("save_date", Context.MODE_PRIVATE);
         String date = myPrefs.getString("save_date", "");
         Log.d("Test_Date", "onCreate() called with" + date);
 
+
+//        compare();
+//        Log.d("Test_compareDate", "Yesterday was" + compare() );
         compareDate();
-        Log.d("Test_compareDate", "Yesterday was" + compareDate() );
+        Log.d("Test_compareDate", "Yesterday was" + compareDate());
         mTvYesterday.setText(date);
     }
-        public java.util.Date compareDate() {
+
+    public java.util.Date compareDate() {
+
+        Calendar toDayCalendar = Calendar.getInstance();
+        Date dateToday = toDayCalendar.getTime();
 
 
-            Calendar toDayCalendar = Calendar.getInstance();
-            Date date1 = toDayCalendar.getTime();
+        Calendar yesterdayCalendar = Calendar.getInstance();
+        yesterdayCalendar.add(Calendar.DAY_OF_MONTH, -1);
+        Date dateYesterday = yesterdayCalendar.getTime();
 
-
-            Calendar yesterdayCalendar = Calendar.getInstance();
-            yesterdayCalendar.add(Calendar.DAY_OF_MONTH, -1);
-            Date date2 = yesterdayCalendar.getTime();
-
-
-            if (date1.compareTo(date2) < -1) {
-
-
+            if (dateToday.compareTo(dateYesterday) < -1) {
+                
             }
-            return date2;
-        }
+          return dateYesterday;
+    }
 }
 
-//    private String compare (String stringData, String yesterday) {
+//    private String compare (String stringData, String dateYesterday) {
 //        String result = "";
 //
 //        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -132,14 +136,14 @@ public class HistoryActivity extends AppCompatActivity {
 //            if (diff < day && getCurrentDayOfMonth() == getDateDayOfMonth(dateMonth)) {
 //                result = convertMillisSecondsToDateString(millisSecond);
 //            } else if (diff < (day * 2) && getCurrentDayOfMonth() - 1 == getDateDayOfMonth(dateMonth)) {
-//                result = yesterday;
+//                result = dateYesterday;
 //
 //            } else {
 //                result = convertMillisSecondsToDateString(millisSecond);
 //
 //            }
 //        }
-//        Log.d("Test_Yesterday", "Yesterday was" + result);
+//
 //        return result;
 //
 //
