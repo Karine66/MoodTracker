@@ -13,11 +13,10 @@ import com.google.gson.Gson;
 import com.karine.moodtracker.R;
 import com.karine.moodtracker.models.Mood;
 
-import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import static android.view.View.*;
 
@@ -32,7 +31,8 @@ public class HistoryActivity extends AppCompatActivity {
     private SharedPreferences myPrefs;
     private View mYesterday;
     private Date dateYesterday;
-    private java.util.Date date2DayAgo;
+    private java.util.Date yesterday;
+    private String daysBetween;
 
 
     @Override
@@ -90,28 +90,49 @@ public class HistoryActivity extends AppCompatActivity {
         Log.d("Test_Date", "onCreate() called with" + date);
 
 
-//        compare();
+       daysBetween();
+        Log.d("Test_Compare", "Yesterday was" + daysBetween);
+//        compare();d
 //        Log.d("Test_compareDate", "Yesterday was" + compare() );
-        compareDate();
-        Log.d("Test_compareDate", "Yesterday was" + compareDate());
+        // compareDate();
+        // Log.d("Test_compareDate", "Yesterday was" + compareDate());
         mTvYesterday.setText(date);
     }
 
-    public java.util.Date compareDate() {
 
-        Calendar toDayCalendar = Calendar.getInstance();
-        Date dateToday = toDayCalendar.getTime();
+    public String daysBetween(String day1, String day2) {
+        String daysBetween = "";
+        SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
 
+        try {
+            Date date1 = myFormat.parse(day1);
+            Date date2 = myFormat.parse(day2);
+            long diff = date2.getTime() - date1.getTime();
+            daysBetween = ""+(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return daysBetween;
 
-        Calendar yesterdayCalendar = Calendar.getInstance();
-        yesterdayCalendar.add(Calendar.DAY_OF_MONTH, -1);
-        Date dateYesterday = yesterdayCalendar.getTime();
-
-            if (dateToday.compareTo(dateYesterday) < -1) {
-                
-            }
-          return dateYesterday;
     }
+
+
+
+//    public java.util.Date compareDate() {
+//
+//        Calendar toDayCalendar = Calendar.getInstance();
+//        Date dateToday = toDayCalendar.getTime();
+//
+//
+//        Calendar yesterdayCalendar = Calendar.getInstance();
+//        yesterdayCalendar.add(Calendar.DAY_OF_MONTH, -1);
+//        Date dateYesterday = yesterdayCalendar.getTime();
+//
+//            if (dateToday.compareTo(dateYesterday) < -1) {
+//
+//            }
+//          return dateYesterday;
+//    }
 }
 
 //    private String compare (String stringData, String dateYesterday) {
