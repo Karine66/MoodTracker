@@ -15,6 +15,8 @@ import com.karine.moodtracker.models.Mood;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -32,7 +34,7 @@ public class HistoryActivity extends AppCompatActivity {
     private View mYesterday;
     private Date dateYesterday;
     private java.util.Date yesterday;
-    private String daysBetween;
+   private long yesterdayResult;
 
 
     @Override
@@ -48,6 +50,7 @@ public class HistoryActivity extends AppCompatActivity {
         retrieveComment();
         retrieveBackground();
         retrieveDate();
+
     }
 
     private void retrieveComment() {
@@ -89,108 +92,54 @@ public class HistoryActivity extends AppCompatActivity {
         String date = myPrefs.getString("save_date", "");
         Log.d("Test_Date", "onCreate() called with" + date);
 
+        Calendar mCalendar = Calendar.getInstance();
+        mCalendar.add(Calendar.DAY_OF_MONTH, -1);//supp
+        SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/YYYY");
+        String dayDate = jsonDateFormat.format(mCalendar.getTime());
 
-       daysBetween();
-        Log.d("Test_Compare", "Yesterday was" + daysBetween);
-//        compare();d
-//        Log.d("Test_compareDate", "Yesterday was" + compare() );
-        // compareDate();
-        // Log.d("Test_compareDate", "Yesterday was" + compareDate());
+
+       daysBetween(date, dayDate );
+       yesterdayResult = daysBetween(date, dayDate);
+       Log.d("Test_Compare", "Yesterday was" + yesterdayResult);
+
+
+//
         mTvYesterday.setText(date);
     }
 
 
-    public String daysBetween(String day1, String day2) {
-        String daysBetween = "";
-        SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
+    public long daysBetween (String day1, String day2) {
+
+        long daysBetween = 0;
+        SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
 
         try {
             Date date1 = myFormat.parse(day1);
             Date date2 = myFormat.parse(day2);
             long diff = date2.getTime() - date1.getTime();
-            daysBetween = ""+(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+            daysBetween =  (TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+            Log.d("Test_Between", "diff" + diff);
         } catch (ParseException e) {
             e.printStackTrace();
         }
         return daysBetween;
-
     }
 
 
-
-//    public java.util.Date compareDate() {
+//        long daysBetween = 0;
+//        switch ((int) daysBetween) {
+//            case 0 :
 //
-//        Calendar toDayCalendar = Calendar.getInstance();
-//        Date dateToday = toDayCalendar.getTime();
-//
-//
-//        Calendar yesterdayCalendar = Calendar.getInstance();
-//        yesterdayCalendar.add(Calendar.DAY_OF_MONTH, -1);
-//        Date dateYesterday = yesterdayCalendar.getTime();
-//
-//            if (dateToday.compareTo(dateYesterday) < -1) {
-//
-//            }
-//          return dateYesterday;
+//        }
 //    }
 }
 
-//    private String compare (String stringData, String dateYesterday) {
-//        String result = "";
-//
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//        Date dateMonth = null;
-//
-//        try {
-//            Date = simpleDateFormat.parse(stringData);
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//
-//        Long millisSecond = convertToMillisSecond(dateMonth);
-//        Long currencyMillisSecond = System.currentTimeMillis();
-//
-//        if (currencyMillisSecond > millisSecond) {
-//            Long diff = currencyMillisSecond - millisSecond;
-//            Long day = 86400000L;
-//
-//            if (diff < day && getCurrentDayOfMonth() == getDateDayOfMonth(dateMonth)) {
-//                result = convertMillisSecondsToDateString(millisSecond);
-//            } else if (diff < (day * 2) && getCurrentDayOfMonth() - 1 == getDateDayOfMonth(dateMonth)) {
-//                result = dateYesterday;
-//
-//            } else {
-//                result = convertMillisSecondsToDateString(millisSecond);
-//
-//            }
-//        }
-//
-//        return result;
-//
-//
-//    }
-//
-//
-//    private static int getDateDayOfMonth(Date dateMonth) {
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.setTime(dateMonth);
-//        return calendar.get(Calendar.DAY_OF_MONTH);
-//    }
-//
-//    public static int getCurrentDayOfMonth() {
-//        Calendar calendar = Calendar.getInstance();
-//        return calendar.get(Calendar.DAY_OF_MONTH);
-//    }
-//
-//    public static String convertMillisSecondsToDateString(long millisSecond) {
-//        Date dateMonth = new Date(millisSecond);
-//        Format formatter = new SimpleDateFormat("dd / MM / yyyy");
-//        return formatter.format(dateMonth);
-//    }
-//
-//    public static long convertToMillisSecond(Date dateMonth) {
-//        return dateMonth.getTime();
-//    }
+
+
+
+
+
+
 
 
 

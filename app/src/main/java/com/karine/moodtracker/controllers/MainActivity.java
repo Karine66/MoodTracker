@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void saveDate() {
         Calendar mCalendar = Calendar.getInstance();
-        SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/YYYY");
+        SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String dayDate = jsonDateFormat.format(mCalendar.getTime());
         SharedPreferences myPrefs = getSharedPreferences("save_date", MODE_PRIVATE);
         SharedPreferences.Editor mEdit = myPrefs.edit();
