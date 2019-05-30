@@ -15,12 +15,12 @@ import com.karine.moodtracker.models.Mood;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import static android.view.View.*;
+
 
 
 public class HistoryActivity extends AppCompatActivity {
@@ -34,7 +34,9 @@ public class HistoryActivity extends AppCompatActivity {
     private View mYesterday;
     private Date dateYesterday;
     private java.util.Date yesterday;
-   private long yesterdayResult;
+    private long yesterdayResult;
+    private long days2agoResult;
+    private long daysBetween;
 
 
     @Override
@@ -50,6 +52,7 @@ public class HistoryActivity extends AppCompatActivity {
         retrieveComment();
         retrieveBackground();
         retrieveDate();
+
 
     }
 
@@ -93,22 +96,42 @@ public class HistoryActivity extends AppCompatActivity {
         Log.d("Test_Date", "onCreate() called with" + date);
 
         Calendar mCalendar = Calendar.getInstance();
-        mCalendar.add(Calendar.DAY_OF_MONTH, -1);//supp
-        SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/YYYY");
+        //mCalendar.add(Calendar.DAY_OF_MONTH, -1);//supp
+        SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String dayDate = jsonDateFormat.format(mCalendar.getTime());
 
 
-       daysBetween(date, dayDate );
-       yesterdayResult = daysBetween(date, dayDate);
-       Log.d("Test_Compare", "Yesterday was" + yesterdayResult);
-
-
+        daysBetween(date, dayDate);
+        //yesterdayResult = daysBetween(date, dayDate);
+        //Log.d("Test_Compare", "Yesterday was" + yesterdayResult);
 //
-        mTvYesterday.setText(date);
+        //mTvYesterday.setText(date);}
+
+        switch ((int) daysBetween) {
+            case 0:
+                if (daysBetween == 0) {
+
+                    mCalendar.add(Calendar.DAY_OF_MONTH, -1);
+                    yesterdayResult = daysBetween(date, dayDate);
+                    Log.d("Test_compare", " Yesterday was" + yesterdayResult);
+
+                    break;
+                }
+            case 1:
+                if (daysBetween == -1) {
+
+                    daysBetween = days2agoResult;
+                    days2agoResult = daysBetween(date, dayDate);
+                    mCalendar.add(Calendar.DAY_OF_MONTH, -2);
+
+                    Log.d("Test_compare2", " days2Ago" + days2agoResult);
+
+                    break;
+                }
+        }
     }
 
-
-    public long daysBetween (String day1, String day2) {
+    public long daysBetween(String day1, String day2) {
 
         long daysBetween = 0;
         SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -117,22 +140,30 @@ public class HistoryActivity extends AppCompatActivity {
             Date date1 = myFormat.parse(day1);
             Date date2 = myFormat.parse(day2);
             long diff = date2.getTime() - date1.getTime();
-            daysBetween =  (TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+            daysBetween = (TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
             Log.d("Test_Between", "diff" + diff);
         } catch (ParseException e) {
             e.printStackTrace();
+
+
         }
         return daysBetween;
     }
 
-
-//        long daysBetween = 0;
-//        switch ((int) daysBetween) {
-//            case 0 :
-//
-//        }
-//    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
