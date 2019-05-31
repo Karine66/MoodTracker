@@ -2,9 +2,7 @@ package com.karine.moodtracker.controllers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -15,7 +13,6 @@ import com.google.gson.Gson;
 import com.karine.moodtracker.R;
 import com.karine.moodtracker.models.Mood;
 
-import java.text.BreakIterator;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -123,64 +120,12 @@ public class HistoryActivity extends AppCompatActivity {
         SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String dayDate = jsonDateFormat.format(mCalendar.getTime());
 
+        olderDays(date, dayDate);
         daysBetween(date, dayDate);
-        dayAgoResult = daysBetween(date, dayDate);
         //Log.d("Test_Compare", "Yesterday was" + dayAgoResult);
 //
         //mTvYesterday.setText(date);}
 
-        switch ((int) dayAgoResult) {
-
-
-            case 0:
-
-                mTvYesterday.setText("Hier");
-
-                Log.d("Test_Yesterday", "Yesterday was" + dayAgoResult);
-
-                break;
-            case 1:
-
-                mTvDays2Ago.setText("Il y a 2 jours");
-                Log.d("Test_2Days", "Il y a 2 jours" + dayAgoResult);
-
-                break;
-            case 3:
-
-                mTvDays3Ago.setText("Il y a 3 jours");
-
-                Log.d("Test_3Days", "Il y a 3 jours" + dayAgoResult);
-
-                break;
-            case 4:
-
-                mTvDays4Ago.setText("Il y a 4 jours");
-
-                Log.d("Test_4Days", "Il y a 4 jours" + dayAgoResult);
-
-                break;
-            case 5:
-
-                mTvDays5Ago.setText("Il y a 5 jours");
-
-                Log.d("Test_5Days", "Il y a 5 jours" + dayAgoResult);
-
-                break;
-            case 6:
-
-                mTvDays6Ago.setText("Il y a 6 jours");
-
-                Log.d("Test_6Days", "Il y a 6 jours" + dayAgoResult);
-
-                break;
-            case 7:
-
-                mTvDays7Ago.setText("Il y a 7 jours");
-
-                Log.d("Test_7Days", "Il y a 7 jours" + dayAgoResult);
-
-                break;
-        }
 
     }
 
@@ -203,6 +148,67 @@ public class HistoryActivity extends AppCompatActivity {
 
         }
         return daysBetween;
+    }
+
+    private long olderDays (String date, String dayDate) {
+
+
+        daysBetween(date, dayDate);
+        dayAgoResult = daysBetween(date, dayDate);
+
+        switch ((int) dayAgoResult) {
+            case 0:
+
+                mTvYesterday.setText("Hier");
+
+            Log.d("Test_Yesterday", "Yesterday was" + dayAgoResult);
+
+
+            case 1:
+
+                mTvDays2Ago.setText("Il y a 2 jours");
+                Log.d("Test_2Days", "Il y a 2 jours" + dayAgoResult);
+
+
+            case 3:
+
+                mTvDays3Ago.setText("Il y a 3 jours");
+
+                Log.d("Test_3Days", "Il y a 3 jours" + dayAgoResult);
+
+
+            case 4:
+
+                mTvDays4Ago.setText("Il y a 4 jours");
+
+                Log.d("Test_4Days", "Il y a 4 jours" + dayAgoResult);
+
+
+            case 5:
+
+                mTvDays5Ago.setText("Il y a 5 jours");
+
+                Log.d("Test_5Days", "Il y a 5 jours" + dayAgoResult);
+
+
+            case 6:
+
+                mTvDays6Ago.setText("Il y a 6 jours");
+
+                Log.d("Test_6Days", "Il y a 6 jours" + dayAgoResult);
+
+
+            case 7:
+
+                mTvDays7Ago.setText("Il y a 7 jours");
+
+                Log.d("Test_7Days", "Il y a 7 jours" + dayAgoResult);
+
+
+        }
+
+        return dayAgoResult;
+
     }
 
 }
