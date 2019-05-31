@@ -19,9 +19,10 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/tvDays7Ago"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="7 days ago"
+                android:text=""
                android:layout_marginRight="30dp"
                 android:textStyle="bold"/>
 
@@ -50,9 +51,10 @@
             android:layout_weight="50"
             android:layout_height="match_parent">
             <TextView
+                android:id="@+id/tvDays6Ago"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="6 days ago"
+                android:text=""
                 android:textStyle="bold"/>
 
             <ImageView
@@ -80,9 +82,10 @@
             android:layout_weight="50"
             android:layout_height="match_parent">
             <TextView
+                android:id="@+id/tvDays5Ago"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" 5 days ago"
+                android:text=""
                 android:textStyle="bold"/>
 
             <ImageView
@@ -110,9 +113,10 @@
             android:layout_weight="50"
             android:layout_height="match_parent">
             <TextView
+                android:id="@+id/tvDays4Ago"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" 4 days ago"
+                android:text=" "
                 android:textStyle="bold"/>
 
             <ImageView
@@ -141,9 +145,10 @@
             android:layout_weight="50"
             android:layout_height="match_parent">
             <TextView
+                android:id="@+id/tvDays3Ago"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" 3 days ago"
+                android:text=" "
                 android:textStyle="bold"/>
 
             <ImageView
@@ -162,6 +167,7 @@
 
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:id="@+id/days2_ago"
         android:layout_height="0dp"
@@ -172,9 +178,10 @@
             android:layout_weight="50"
             android:layout_height="match_parent">
             <TextView
+                android:id="@+id/tvDays2Ago"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" 2 days ago"
+                android:text=" "
                 android:textStyle="bold"/>
 
             <ImageView
@@ -199,7 +206,7 @@
         android:layout_weight="1">
 
         <FrameLayout
-            android:id="@+id/day1_ago"
+
             android:layout_width="0dp"
             android:layout_weight="50"
             android:layout_height="match_parent">
