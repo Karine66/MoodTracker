@@ -178,16 +178,20 @@ public class HistoryActivity extends AppCompatActivity {
 
 
        dayAgoResult= daysBetween(date, dayDate);
+       diff = date.compareTo(dayDate);
 
 
 
         switch ((int) dayAgoResult) {
             case 0:
 
+                if (diff == -1) {
                 mTvYesterday.setText("Il y a" + dayAgoResult + "jours");
 
                 Log.d("Test_Days", "Il y a" + dayAgoResult + "jours");
-            
+           } else {
+               mTvYesterday.setText("Pas d'historique");
+            }
             break;
 
             case 1:
