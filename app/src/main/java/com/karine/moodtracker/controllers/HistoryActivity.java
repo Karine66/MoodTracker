@@ -1,8 +1,11 @@
 package com.karine.moodtracker.controllers;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -15,12 +18,14 @@ import com.karine.moodtracker.models.Mood;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import static android.view.View.*;
-
+import static com.karine.moodtracker.models.Mood.*;
+import static com.karine.moodtracker.models.Mood.ARRAY_BACKGROUND_COLOR;
 
 
 public class HistoryActivity extends AppCompatActivity {
@@ -42,12 +47,17 @@ public class HistoryActivity extends AppCompatActivity {
     private View mYesterday;
     private View mDays2Ago;
 
-    private Date dateYesterday;
+
     private long dayAgoResult;
-    private long days2agoResult;
+
     private SharedPreferences myPrefs;
 
-
+    private Mood mood;
+    private String date;
+    private String dayDate;
+    private String daydate;
+    private long diff;
+    private long daysBetween;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,10 +114,12 @@ public class HistoryActivity extends AppCompatActivity {
 
         Log.d("Test_bg", "color" + mood.getSelectedMood());
 
-        mYesterday.setBackgroundResource(Mood.ARRAY_BACKGROUND_COLOR[mood.getSelectedMood()]);
-        mDays2Ago.setBackgroundResource(Mood.ARRAY_BACKGROUND_COLOR[mood.getSelectedMood()]);
+       mYesterday.setBackgroundResource(ARRAY_BACKGROUND_COLOR[mood.getSelectedMood()]);
+
 
     }
+
+
 
     public void retrieveDate() {
 
@@ -116,7 +128,7 @@ public class HistoryActivity extends AppCompatActivity {
         Log.d("Test_Date", "onCreate() called with" + date);
 
         Calendar mCalendar = Calendar.getInstance();
-        //mCalendar.add(Calendar.DAY_OF_MONTH, -1);//supp
+        //mCalendar.add(Calendar.DAY_OF_MONTH, -1);
         SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String dayDate = jsonDateFormat.format(mCalendar.getTime());
 
@@ -133,77 +145,92 @@ public class HistoryActivity extends AppCompatActivity {
 
     public long daysBetween (String day1, String day2) {
 
+
+
         long daysBetween = 0;
         SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
 
         try {
             Date date1 = myFormat.parse(day1);
             Date date2 = myFormat.parse(day2);
+
             long diff = date2.getTime() - date1.getTime();
+
+
+
             daysBetween = (TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+
             Log.d("Test_Between", "diff" + diff);
+            Log.d("Test_yesterday","Il ya a"+daysBetween+"jours");
         } catch (ParseException e) {
             e.printStackTrace();
 
 
         }
+
         return daysBetween;
+
     }
+
+
 
     private long olderDays (String date, String dayDate) {
 
 
-        daysBetween(date, dayDate);
-        dayAgoResult = daysBetween(date, dayDate);
+       dayAgoResult= daysBetween(date, dayDate);
+
+
 
         switch ((int) dayAgoResult) {
             case 0:
 
-                mTvYesterday.setText("Hier");
+                mTvYesterday.setText("Il y a" + dayAgoResult + "jours");
 
-            Log.d("Test_Yesterday", "Yesterday was" + dayAgoResult);
-
+                Log.d("Test_Days", "Il y a" + dayAgoResult + "jours");
+            
+            break;
 
             case 1:
 
                 mTvDays2Ago.setText("Il y a 2 jours");
+
                 Log.d("Test_2Days", "Il y a 2 jours" + dayAgoResult);
+            break;
 
-
-            case 3:
+            case 2:
 
                 mTvDays3Ago.setText("Il y a 3 jours");
 
                 Log.d("Test_3Days", "Il y a 3 jours" + dayAgoResult);
+            break;
 
-
-            case 4:
+            case 3:
 
                 mTvDays4Ago.setText("Il y a 4 jours");
 
                 Log.d("Test_4Days", "Il y a 4 jours" + dayAgoResult);
+            break;
 
-
-            case 5:
+            case 4:
 
                 mTvDays5Ago.setText("Il y a 5 jours");
 
                 Log.d("Test_5Days", "Il y a 5 jours" + dayAgoResult);
+            break;
 
-
-            case 6:
+            case 5:
 
                 mTvDays6Ago.setText("Il y a 6 jours");
 
                 Log.d("Test_6Days", "Il y a 6 jours" + dayAgoResult);
+            break;
 
-
-            case 7:
+            case 6:
 
                 mTvDays7Ago.setText("Il y a 7 jours");
 
                 Log.d("Test_7Days", "Il y a 7 jours" + dayAgoResult);
-
+            break;
 
         }
 

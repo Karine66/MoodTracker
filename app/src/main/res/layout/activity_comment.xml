@@ -17,8 +17,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#3227B0A0"
-        android:hint="Enter your Mood"
-        android:maxLines="10"
+        android:hint="Entrez votre humeur"
+        android:maxLines="2"
         android:layout_below="@id/comment_title"/>
 
 

@@ -47,10 +47,10 @@ public class AlertDialog implements View.OnClickListener {
         adb.setView(commentView);
 
         //AlertDialog title
-        adb.setTitle("What is your Mood today ?");
+        adb.setTitle("Quelle est votre humeur aujourd'hui ?");
 
         //Button "Save"
-        adb.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+        adb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //Click on for validate Edittext
