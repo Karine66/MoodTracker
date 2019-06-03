@@ -31,7 +31,7 @@ import static com.karine.moodtracker.models.Mood.ARRAY_BACKGROUND_COLOR;
 public class HistoryActivity extends AppCompatActivity {
 
 
-    private static Object Date;
+
     private SharedPreferences mPreferences;
     private ImageView mHistorybtn1;
 
@@ -52,10 +52,10 @@ public class HistoryActivity extends AppCompatActivity {
 
     private SharedPreferences myPrefs;
 
-    private Mood mood;
+
     private String date;
     private String dayDate;
-    private String daydate;
+
     private long diff;
     private long daysBetween;
 
@@ -133,11 +133,10 @@ public class HistoryActivity extends AppCompatActivity {
         String dayDate = jsonDateFormat.format(mCalendar.getTime());
 
         olderDays(date, dayDate);
-        daysBetween(date, dayDate);
+        //daysBetween(date, dayDate);
         //Log.d("Test_Compare", "Yesterday was" + dayAgoResult);
 //
-        //mTvYesterday.setText(date);}
-
+        //mTvYesterday.setText(dat
 
     }
 
@@ -160,8 +159,8 @@ public class HistoryActivity extends AppCompatActivity {
 
             daysBetween = (TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
 
-            Log.d("Test_Between", "diff" + diff);
-            Log.d("Test_yesterday","Il ya a"+daysBetween+"jours");
+            //Log.d("Test_Between", "diff" + diff);
+            //Log.d("Test_yesterday","Il ya a"+daysBetween+"jours");
         } catch (ParseException e) {
             e.printStackTrace();
 
@@ -178,58 +177,57 @@ public class HistoryActivity extends AppCompatActivity {
 
 
        dayAgoResult= daysBetween(date, dayDate);
-       diff = date.compareTo(dayDate);
+        dayAgoResult=1;
 
 
 
         switch ((int) dayAgoResult) {
-            case 0:
+            case 1 :
 
-                if (diff == -1) {
-                mTvYesterday.setText("Il y a" + dayAgoResult + "jours");
 
-                Log.d("Test_Days", "Il y a" + dayAgoResult + "jours");
-           } else {
-               mTvYesterday.setText("Pas d'historique");
-            }
+                    mTvYesterday.setText("Il y a" + dayAgoResult + "jours");
+
+                Log.d("Test_Days", "Il y a" + dayAgoResult+ "jours");
+
             break;
 
-            case 1:
+            case 2:
 
-                mTvDays2Ago.setText("Il y a 2 jours");
+
+                    mTvDays2Ago.setText("Il y a" + dayAgoResult + "jours");
 
                 Log.d("Test_2Days", "Il y a 2 jours" + dayAgoResult);
             break;
 
-            case 2:
+            case 3:
 
                 mTvDays3Ago.setText("Il y a 3 jours");
 
                 Log.d("Test_3Days", "Il y a 3 jours" + dayAgoResult);
             break;
 
-            case 3:
+            case 4:
 
                 mTvDays4Ago.setText("Il y a 4 jours");
 
                 Log.d("Test_4Days", "Il y a 4 jours" + dayAgoResult);
             break;
 
-            case 4:
+            case 5:
 
                 mTvDays5Ago.setText("Il y a 5 jours");
 
                 Log.d("Test_5Days", "Il y a 5 jours" + dayAgoResult);
             break;
 
-            case 5:
+            case 6:
 
                 mTvDays6Ago.setText("Il y a 6 jours");
 
                 Log.d("Test_6Days", "Il y a 6 jours" + dayAgoResult);
             break;
 
-            case 6:
+            case 7:
 
                 mTvDays7Ago.setText("Il y a 7 jours");
 
