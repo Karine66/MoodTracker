@@ -9,18 +9,17 @@
 
 
     <LinearLayout
-        android:id="@+id/days7_ago"
+        android:id="@+id/yesterday"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
         <FrameLayout
-
             android:layout_width="0dp"
             android:layout_weight="50"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tvDays7Ago"
+                android:id="@+id/tvYesterday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
@@ -28,7 +27,7 @@
                 android:textStyle="bold"/>
 
             <ImageView
-                android:id="@+id/history_btn_7"
+                android:id="@+id/history_btn_1"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center|end"
@@ -43,7 +42,7 @@
 
 
     <LinearLayout
-        android:id="@+id/days6_ago"
+        android:id="@+id/days2_ago"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
@@ -53,14 +52,14 @@
             android:layout_weight="50"
             android:layout_height="match_parent">
             <TextView
-                android:id="@+id/tvDays6Ago"
+                android:id="@+id/tvDays2Ago"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textStyle="bold"/>
 
             <ImageView
-                android:id="@+id/history_btn_6"
+                android:id="@+id/history_btn_2"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center|end"
@@ -75,7 +74,7 @@
 
 
     <LinearLayout
-        android:id="@+id/days5_ago"
+        android:id="@+id/days3_ago"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
@@ -85,14 +84,14 @@
             android:layout_weight="50"
             android:layout_height="match_parent">
             <TextView
-                android:id="@+id/tvDays5Ago"
+                android:id="@+id/tvDays3Ago"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textStyle="bold"/>
 
             <ImageView
-                android:id="@+id/history_btn_5"
+                android:id="@+id/history_btn_3"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center|end"
@@ -139,7 +138,7 @@
 
 
     <LinearLayout
-        android:id="@+id/days3_ago"
+        android:id="@+id/days5_ago"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
@@ -150,14 +149,14 @@
             android:layout_weight="50"
             android:layout_height="match_parent">
             <TextView
-                android:id="@+id/tvDays3Ago"
+                android:id="@+id/tvDays5Ago"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" "
                 android:textStyle="bold"/>
 
             <ImageView
-                android:id="@+id/history_btn_3"
+                android:id="@+id/history_btn_5"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center|end"
@@ -174,7 +173,7 @@
     <LinearLayout
 
         android:layout_width="match_parent"
-        android:id="@+id/days2_ago"
+        android:id="@+id/days6_ago"
         android:layout_height="0dp"
         android:layout_weight="1">
         <FrameLayout
@@ -183,14 +182,14 @@
             android:layout_weight="50"
             android:layout_height="match_parent">
             <TextView
-                android:id="@+id/tvDays2Ago"
+                android:id="@+id/tvDays6Ago"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" "
                 android:textStyle="bold"/>
 
             <ImageView
-                android:id="@+id/history_btn_2"
+                android:id="@+id/history_btn_6"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center|end"
@@ -205,7 +204,7 @@
 
     <LinearLayout
 
-        android:id="@+id/yesterday"
+        android:id="@+id/days7_ago"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
@@ -217,14 +216,14 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tvYesterday"
+                android:id="@+id/tvDays7Ago"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" "
                 android:textStyle="bold" />
 
             <ImageView
-                android:id="@+id/history_btn_1"
+                android:id="@+id/history_btn_7"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center|right"
