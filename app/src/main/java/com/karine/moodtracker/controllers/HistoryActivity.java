@@ -139,7 +139,7 @@ public class HistoryActivity extends AppCompatActivity {
     private long olderDays (String date, String dayDate, TextView textView) {
 
         dayAgoResult= daysBetween(date, dayDate);
-        dayAgoResult=2;
+        dayAgoResult=1;
 
         switch ((int) dayAgoResult) {
             case 1 :
