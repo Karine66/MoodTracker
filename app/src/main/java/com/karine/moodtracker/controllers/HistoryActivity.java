@@ -11,31 +11,37 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.karine.moodtracker.R;
 import com.karine.moodtracker.models.Mood;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
-import static android.view.View.*;
-import static com.karine.moodtracker.models.Mood.ARRAY_BACKGROUND_COLOR;
-
+import static android.view.View.INVISIBLE;
+import static android.view.View.OnClickListener;
+import static android.view.View.VISIBLE;
 
 public class HistoryActivity extends AppCompatActivity {
 
     private SharedPreferences mPreferences;
     private ImageView mHistorybtn1;
     private TextView mTvpastDays;
-      private long dayAgoResult;
+    private long dayAgoResult;
     private SharedPreferences myPrefs;
     private String date;
     private String dayDate;
     private long diff;
     private long daysBetween;
-
     private View mDays2Ago;
     private View mYesterday;
+    private SharedPreferences.Editor editorStore;
+    private ArrayList<Integer> moodStorage;
+    private Context context;
+    private Object moodStore;
 
 
     @Override
@@ -61,6 +67,7 @@ public class HistoryActivity extends AppCompatActivity {
         retrieveBackground();
         retrieveDate();
 
+
     }
 
     private void retrieveComment() {
@@ -84,7 +91,7 @@ public class HistoryActivity extends AppCompatActivity {
         }
     }
 
-    private void retrieveBackground() {
+    public void retrieveBackground() {
         SharedPreferences sharedPreferences = getSharedPreferences("save_bg", Context.MODE_PRIVATE);
         String json = sharedPreferences.getString("save_bg", "");
         Gson gson = new Gson();
@@ -92,7 +99,7 @@ public class HistoryActivity extends AppCompatActivity {
 
         Log.d("Test_bg", "color" + mood.getSelectedMood());
 
-       mYesterday.setBackgroundResource(ARRAY_BACKGROUND_COLOR[mood.getSelectedMood()]);
+       // mYesterday.setBackgroundResource(ARRAY_BACKGROUND_COLOR[mood.getSelectedMood()]);
 
     }
 
@@ -101,9 +108,7 @@ public class HistoryActivity extends AppCompatActivity {
         myPrefs = getSharedPreferences("save_date", Context.MODE_PRIVATE);
         String date = myPrefs.getString("save_date", "");
         Log.d("Test_Date", "onCreate() called with" + date);
-
         Calendar mCalendar = Calendar.getInstance();
-        //mCalendar.add(Calendar.DAY_OF_MONTH, -1);
         SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String dayDate = jsonDateFormat.format(mCalendar.getTime());
 
@@ -113,7 +118,7 @@ public class HistoryActivity extends AppCompatActivity {
 
     }
 
-    public long daysBetween (String day1, String day2) {
+    public long daysBetween(String day1, String day2) {
 
         long daysBetween = 0;
         SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -136,31 +141,34 @@ public class HistoryActivity extends AppCompatActivity {
 
     }
 
-    private long olderDays (String date, String dayDate, TextView textView) {
+    public long olderDays(String date, String dayDate, TextView textView) {
 
-        dayAgoResult= daysBetween(date, dayDate);
-        dayAgoResult=1;
+
+        dayAgoResult = daysBetween(date, dayDate);
+
+        dayAgoResult = 1;
+        moodStore = mTvpastDays.getTag();
 
         switch ((int) dayAgoResult) {
-            case 1 :
+            case 1:
 
                 textView.setText("Hier");
 
                 Log.d("Test_Days", "Hier");
 
-            break;
+                break;
 
             case 2:
 
                 textView.setText("Avant-hier");
 
-            break;
+                break;
 
             case 3: case 4: case 5: case 6:
 
-               textView.setText("Il y a " + dayAgoResult + "jours");
+                textView.setText("Il y a " + dayAgoResult + "jours");
 
-            break;
+                break;
 
             case 7:
 
@@ -171,7 +179,20 @@ public class HistoryActivity extends AppCompatActivity {
 
     }
 
+    public void retrieveMoodStore() {
+
+        SharedPreferences sharedPref = context.getSharedPreferences("Storage", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+
+        String json = sharedPref.getString("Storage", null);
+        List<Integer> moodStorage = null;
+        if(json!= null)
+            moodStore = gson.fromJson(json, new TypeToken<List<Integer>>() {}.getType());
+
+        Log.d("Test_MoodStore", "Essai Store" + null);
+    }
 }
+
 
 
 

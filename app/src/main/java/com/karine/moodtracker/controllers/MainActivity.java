@@ -27,21 +27,16 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity {
 
 
-    public static String getComment;
     private SwipeGestureDetector mGestureDetector;
     private SharedPreferences mPreferences;
     private SharedPreferences.Editor mEditor;
-    private SharedPreferences.Editor mEdit;
     private Mood mMood;
     private View mView;
     private int counter = 3;
-    private ImageSwitcher imagePic;
     private ImageView mNoteAdd;
     private ImageView mHistory;
     private EditText et;
     private JSONObject mSaved = new JSONObject();
-    private String comment;
-
 
 
     public int getCounter() {
@@ -61,8 +56,6 @@ public class MainActivity extends AppCompatActivity {
     public void increaseCOunter() {
         counter++;
     }
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,8 +138,6 @@ public class MainActivity extends AppCompatActivity {
         this.mGestureDetector.onTouchEvent(event);
         return super.onTouchEvent(event);
     }
-
-
 }
 
 

@@ -1,13 +1,10 @@
 package com.karine.moodtracker.models;
-
-import android.support.v7.app.AppCompatActivity;
-
 import com.karine.moodtracker.R;
 
 /**
  * Created by <Karine> on <DATE-DU-JOUR>.
  */
-public class Mood extends AppCompatActivity {
+public class Mood {
 
     //Array moods
     public static final int[] ARRAY_MOODS = new int[]{
@@ -33,12 +30,14 @@ public class Mood extends AppCompatActivity {
 
     //constructor
     public Mood(int selectedMood) {
+
         this.selectedMood = selectedMood;
     }
 
     // create getter et setter
 
     public int getSelectedMood() {
+
         return selectedMood;
     }
 

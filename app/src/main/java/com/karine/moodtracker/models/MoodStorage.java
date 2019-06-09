@@ -1,6 +1,10 @@
 package com.karine.moodtracker.models;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.util.Log;
+
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,17 +12,43 @@ import java.util.List;
 /**
  * Created by <Karine> on <DATE-DU-JOUR>.
  */
-public class MoodStorage extends  Mood {
+public class MoodStorage {
+
+    private Context context;
+    private SharedPreferences.Editor editorStore;
+    private ArrayList<Integer> moodStorage;
 
 
-    List<Integer> moodStorage = new ArrayList<>(getSelectedMood());
+    public void moodStoreAdd(Mood mood) {
 
-    
+        moodStorage.add(mood.getSelectedMood());
 
-    public MoodStorage(int selectedMood) {
-        super(selectedMood);
-
-        System.out.println(moodStorage);
     }
 
+    public List<Integer> getMoodStorage() {
+
+        return moodStorage;
+
+    }
+
+    public void saveMoodStore() {
+        SharedPreferences sharedPref = context.getSharedPreferences("Storage", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        List<Integer> moodStorage = new ArrayList<>();
+        SharedPreferences.Editor editStore = sharedPref.edit();
+        editStore.putString("Storage", gson.toJson(moodStorage));
+        editStore.apply();
+
+
+    }
 }
+
+
+
+
+
+
+
+
+
+
