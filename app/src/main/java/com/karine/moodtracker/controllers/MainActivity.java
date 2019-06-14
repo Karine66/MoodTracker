@@ -10,15 +10,16 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import com.google.gson.Gson;
 import com.karine.moodtracker.R;
 import com.karine.moodtracker.models.AlertDialog;
 import com.karine.moodtracker.models.Mood;
+import com.karine.moodtracker.models.MoodStorage;
 import com.karine.moodtracker.models.SwipeGestureDetector;
 import org.json.JSONObject;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 
@@ -37,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
     private ImageView mHistory;
     private EditText et;
     private JSONObject mSaved = new JSONObject();
+    private MoodStorage mMoodStorage;
+    private ArrayList <Integer> moodStorage;
+
 
 
     public int getCounter() {
@@ -64,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         getWindow().getDecorView().setBackgroundResource(R.color.light_sage);
 
         //Declaration
-
+        mMoodStorage = new MoodStorage(moodStorage);
         mMood = new Mood(counter);
         mView = this.getWindow().getDecorView();
         mNoteAdd = findViewById(R.id.note_add_btn);

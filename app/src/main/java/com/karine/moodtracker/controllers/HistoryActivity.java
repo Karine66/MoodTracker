@@ -14,6 +14,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.karine.moodtracker.R;
 import com.karine.moodtracker.models.Mood;
+import com.karine.moodtracker.models.MoodStorage;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -41,7 +43,7 @@ public class HistoryActivity extends AppCompatActivity {
     private SharedPreferences.Editor editorStore;
     private ArrayList<Integer> moodStorage;
     private Context context;
-    private Object moodStore;
+
 
 
     @Override
@@ -95,9 +97,9 @@ public class HistoryActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("save_bg", Context.MODE_PRIVATE);
         String json = sharedPreferences.getString("save_bg", "");
         Gson gson = new Gson();
-        Mood mood = gson.fromJson(json, Mood.class);
+        MoodStorage moodStorage = gson.fromJson(json, MoodStorage.class);
 
-        Log.d("Test_bg", "color" + mood.getSelectedMood());
+        Log.d("Test_bg", "color" + moodStorage.getMoodStorage());
 
        // mYesterday.setBackgroundResource(ARRAY_BACKGROUND_COLOR[mood.getSelectedMood()]);
 
@@ -145,13 +147,13 @@ public class HistoryActivity extends AppCompatActivity {
 
 
         dayAgoResult = daysBetween(date, dayDate);
-
         dayAgoResult = 1;
-        moodStore = mTvpastDays.getTag();
+
+
 
         switch ((int) dayAgoResult) {
             case 1:
-
+             ;
                 textView.setText("Hier");
 
                 Log.d("Test_Days", "Hier");
@@ -179,18 +181,7 @@ public class HistoryActivity extends AppCompatActivity {
 
     }
 
-    public void retrieveMoodStore() {
 
-        SharedPreferences sharedPref = context.getSharedPreferences("Storage", Context.MODE_PRIVATE);
-        Gson gson = new Gson();
-
-        String json = sharedPref.getString("Storage", null);
-        List<Integer> moodStorage = null;
-        if(json!= null)
-            moodStore = gson.fromJson(json, new TypeToken<List<Integer>>() {}.getType());
-
-        Log.d("Test_MoodStore", "Essai Store" + null);
-    }
 }
 
 
