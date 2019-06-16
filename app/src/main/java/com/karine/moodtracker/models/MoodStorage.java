@@ -2,11 +2,10 @@ package com.karine.moodtracker.models;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 import android.util.Log;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,23 +14,23 @@ import java.util.List;
  */
 public class MoodStorage {
 
+
     private Context context;
     private SharedPreferences.Editor editorStore;
     public ArrayList<Integer> moodStorage;
 
     //constructor
-    public MoodStorage(ArrayList<Integer> moodStorage) {
-
+    public MoodStorage(ArrayList<Integer> moodStorage, Mood mood) {
         this.moodStorage = moodStorage;
+        moodStoreAdd(mood);
         retrieveMoodStore();
     }
 
-
-    public void moodStoreAdd(Mood mood) {
+    private void moodStoreAdd(Mood mood) {
 
         moodStorage.add(mood.getSelectedMood());
-
     }
+
 
     public List<Integer> getMoodStorage() {
 
@@ -46,9 +45,6 @@ public class MoodStorage {
         SharedPreferences.Editor editStore = sharedPref.edit();
         editStore.putString("Storage", gson.toJson(moodStorage));
         editStore.apply();
-
-        System.out.println(moodStorage);
-
 
     }
 

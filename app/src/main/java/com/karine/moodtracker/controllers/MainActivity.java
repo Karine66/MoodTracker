@@ -22,11 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-
-
-
 public class MainActivity extends AppCompatActivity {
-
 
     private SwipeGestureDetector mGestureDetector;
     private SharedPreferences mPreferences;
@@ -40,8 +36,6 @@ public class MainActivity extends AppCompatActivity {
     private JSONObject mSaved = new JSONObject();
     private MoodStorage mMoodStorage;
     private ArrayList <Integer> moodStorage;
-
-
 
     public int getCounter() {
 
@@ -68,19 +62,17 @@ public class MainActivity extends AppCompatActivity {
         getWindow().getDecorView().setBackgroundResource(R.color.light_sage);
 
         //Declaration
-        mMoodStorage = new MoodStorage(moodStorage);
+        mMoodStorage = new MoodStorage();
         mMood = new Mood(counter);
         mView = this.getWindow().getDecorView();
         mNoteAdd = findViewById(R.id.note_add_btn);
         mHistory = findViewById(R.id.history_black_button);
-
 
         //Instatiation SwipeGestureDetector
         mGestureDetector = new SwipeGestureDetector(this, mMood, mView);
 
         saveBackground();
         saveDate();
-
 
         saveComment();
         Intent intent = getIntent();
@@ -114,14 +106,13 @@ public class MainActivity extends AppCompatActivity {
     public void saveBackground() {
 
         Gson gson = new Gson();
-        String json = gson.toJson(mMood);
+        String json = gson.toJson(mMoodStorage);
         SharedPreferences sharedPreferences = getSharedPreferences("save_bg", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("save_bg",json);
-        //editor.remove("save_bg");
         editor.apply();
 
-        Log.d("Text", "Mood" + mMood.getSelectedMood());
+        Log.d("Text", "Mood" + mMoodStorage.getMoodStorage());
 
     }
 
