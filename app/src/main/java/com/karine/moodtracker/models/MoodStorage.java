@@ -15,21 +15,22 @@ import java.util.List;
 public class MoodStorage {
 
 
-    private Context context;
+    private Context mContext;
     private SharedPreferences.Editor editorStore;
     public ArrayList<Integer> moodStorage;
 
     //constructor
-    public MoodStorage(ArrayList<Integer> moodStorage, Mood mood) {
-        this.moodStorage = moodStorage;
-        moodStoreAdd(mood);
+    public MoodStorage(Context context) {
+
+        mContext = context;
         retrieveMoodStore();
     }
 
-    private void moodStoreAdd(Mood mood) {
+    public void moodStoreAdd(Mood mood) {
 
         moodStorage.add(mood.getSelectedMood());
     }
+
 
 
     public List<Integer> getMoodStorage() {
@@ -39,9 +40,9 @@ public class MoodStorage {
     }
 
     public void saveMoodStore() {
-        SharedPreferences sharedPref = context.getSharedPreferences("Storage", Context.MODE_PRIVATE);
+
+        SharedPreferences sharedPref = mContext.getSharedPreferences("Storage", Context.MODE_PRIVATE);
         Gson gson = new Gson();
-        //List<Integer> moodStorage = new ArrayList<>();
         SharedPreferences.Editor editStore = sharedPref.edit();
         editStore.putString("Storage", gson.toJson(moodStorage));
         editStore.apply();
@@ -50,16 +51,22 @@ public class MoodStorage {
 
     public void retrieveMoodStore() {
 
-        SharedPreferences sharedPref = context.getSharedPreferences("Storage", Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = mContext.getSharedPreferences("Storage", Context.MODE_PRIVATE);
         Gson gson = new Gson();
 
         String json = sharedPref.getString("Storage", null);
         //List<Integer> moodStorage = null;
-        if(json!= null)
-            moodStorage = gson.fromJson(json, new TypeToken<List<Integer>>() {}.getType());
+        if (json != null){
+            moodStorage = gson.fromJson(json, new TypeToken<List<Integer>>() {
+            }.getType());
+         }else{
+        moodStorage=new ArrayList<Integer>();
+    }
 
         Log.d("Test_MoodStore", "Essai Store" + moodStorage);
     }
+
+
 }
 
 

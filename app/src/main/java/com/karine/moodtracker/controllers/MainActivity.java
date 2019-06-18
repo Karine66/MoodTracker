@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private JSONObject mSaved = new JSONObject();
     private MoodStorage mMoodStorage;
     private ArrayList <Integer> moodStorage;
+    private Object mood;
+
 
     public int getCounter() {
 
@@ -48,10 +50,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void decreaseCounter() {
+
         counter--;
     }
 
     public void increaseCOunter() {
+
         counter++;
     }
 
@@ -62,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         getWindow().getDecorView().setBackgroundResource(R.color.light_sage);
 
         //Declaration
-        mMoodStorage = new MoodStorage();
+        mMoodStorage = new MoodStorage(this);
         mMood = new Mood(counter);
         mView = this.getWindow().getDecorView();
         mNoteAdd = findViewById(R.id.note_add_btn);
@@ -73,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
         saveBackground();
         saveDate();
+
 
         saveComment();
         Intent intent = getIntent();
@@ -105,13 +110,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void saveBackground() {
 
-        Gson gson = new Gson();
-        String json = gson.toJson(mMoodStorage);
-        SharedPreferences sharedPreferences = getSharedPreferences("save_bg", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("save_bg",json);
-        editor.apply();
-
+        mMoodStorage.moodStoreAdd(mMood);
+        mMoodStorage.saveMoodStore();
+//
         Log.d("Text", "Mood" + mMoodStorage.getMoodStorage());
 
     }

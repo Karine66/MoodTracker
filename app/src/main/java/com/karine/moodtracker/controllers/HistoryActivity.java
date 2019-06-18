@@ -26,6 +26,7 @@ import java.util.concurrent.TimeUnit;
 import static android.view.View.INVISIBLE;
 import static android.view.View.OnClickListener;
 import static android.view.View.VISIBLE;
+import static com.karine.moodtracker.models.Mood.ARRAY_BACKGROUND_COLOR;
 
 public class HistoryActivity extends AppCompatActivity {
 
@@ -41,8 +42,8 @@ public class HistoryActivity extends AppCompatActivity {
     private View mDays2Ago;
     private View mYesterday;
     private SharedPreferences.Editor editorStore;
-    private ArrayList<Integer> moodStorage;
     private Context context;
+    private MoodStorage moodStorage;
 
 
 
@@ -64,6 +65,12 @@ public class HistoryActivity extends AppCompatActivity {
         //View
         mYesterday = findViewById(R.id.yesterday);
         mDays2Ago = findViewById(R.id.days2_ago);
+
+        //déclaration
+        moodStorage = new MoodStorage(this);
+
+
+
 
         retrieveComment();
         retrieveBackground();
@@ -94,14 +101,12 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     public void retrieveBackground() {
-        SharedPreferences sharedPreferences = getSharedPreferences("save_bg", Context.MODE_PRIVATE);
-        String json = sharedPreferences.getString("save_bg", "");
-        Gson gson = new Gson();
-        MoodStorage moodStorage = gson.fromJson(json, MoodStorage.class);
 
-        Log.d("Test_bg", "color" + moodStorage.getMoodStorage());
+         moodStorage.getMoodStorage();
 
-       // mYesterday.setBackgroundResource(ARRAY_BACKGROUND_COLOR[mood.getSelectedMood()]);
+        Log.d("Test_bg", "color" + moodStorage.getMoodStorage().get(0));
+
+       mYesterday.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(0)]);
 
     }
 
@@ -148,7 +153,6 @@ public class HistoryActivity extends AppCompatActivity {
 
         dayAgoResult = daysBetween(date, dayDate);
        // dayAgoResult = 1;
-
 
 
         switch ((int) dayAgoResult) {
