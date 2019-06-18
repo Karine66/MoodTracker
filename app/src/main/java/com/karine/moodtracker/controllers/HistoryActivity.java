@@ -39,13 +39,17 @@ public class HistoryActivity extends AppCompatActivity {
     private String dayDate;
     private long diff;
     private long daysBetween;
-    private View mDays2Ago;
     private View mYesterday;
+    private View mDays2Ago;
+    private View mDays3Ago;
+    private View mDays4Ago;
+    private View mDays5Ago;
+    private View mDays6Ago;
+    private View mDays7Ago;
+
     private SharedPreferences.Editor editorStore;
     private Context context;
     private MoodStorage moodStorage;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +69,12 @@ public class HistoryActivity extends AppCompatActivity {
         //View
         mYesterday = findViewById(R.id.yesterday);
         mDays2Ago = findViewById(R.id.days2_ago);
+        mDays3Ago = findViewById(R.id.days3_ago);
+        mDays4Ago = findViewById(R.id.days4_ago);
+        mDays5Ago = findViewById(R.id.days5_ago);
+        mDays6Ago = findViewById(R.id.days6_ago);
+        mDays7Ago = findViewById(R.id.days7_ago);
+
 
         //déclaration
         moodStorage = new MoodStorage(this);
@@ -106,7 +116,7 @@ public class HistoryActivity extends AppCompatActivity {
 
         Log.d("Test_bg", "color" + moodStorage.getMoodStorage().get(0));
 
-       mYesterday.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(0)]);
+       //mYesterday.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(0)]);
 
     }
 
@@ -159,7 +169,7 @@ public class HistoryActivity extends AppCompatActivity {
             case 1:
 
                 textView.setText("Hier");
-
+                mYesterday.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(6)]);
                 Log.d("Test_Days", "Hier");
 
                 break;
@@ -167,18 +177,22 @@ public class HistoryActivity extends AppCompatActivity {
             case 2:
 
                 textView.setText("Avant-hier");
-
+                mDays2Ago.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(5)]);
                 break;
 
             case 3: case 4: case 5: case 6:
 
                 textView.setText("Il y a " + dayAgoResult + "jours");
-
+                mDays6Ago.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(1)]);
+                mDays5Ago.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(2)]);
+                mDays4Ago.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(3)]);
+                mDays3Ago.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(4)]);
                 break;
 
             case 7:
 
                 textView.setText("Il ya " + dayAgoResult + "jours");
+                mDays7Ago.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(0)]);
         }
 
         return dayAgoResult;

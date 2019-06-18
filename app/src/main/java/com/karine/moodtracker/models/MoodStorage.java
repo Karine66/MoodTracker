@@ -28,9 +28,17 @@ public class MoodStorage {
 
     public void moodStoreAdd(Mood mood) {
 
-        moodStorage.add(mood.getSelectedMood());
-    }
+        if (moodStorage.size() <= 7){
+            moodStorage.add(mood.getSelectedMood());
 
+        } else if (moodStorage.size() == 7) {
+            moodStorage.remove(mood.getSelectedMood());
+
+        } else {
+            boolean empty = moodStorage.isEmpty();
+            moodStorage.clear();
+        }
+            }
 
 
     public List<Integer> getMoodStorage() {
