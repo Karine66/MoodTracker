@@ -28,13 +28,14 @@ public class MoodStorage {
 
     public void moodStoreAdd(Mood mood) {
 
-        if (moodStorage.size() <= 7){
+        if (moodStorage.size() <= 6){
             moodStorage.add(mood.getSelectedMood());
 
-        } else if (moodStorage.size() == 7) {
+        } else if (moodStorage.size() == 6) {
             moodStorage.remove(mood.getSelectedMood());
 
         } else {
+
             boolean empty = moodStorage.isEmpty();
             moodStorage.clear();
         }

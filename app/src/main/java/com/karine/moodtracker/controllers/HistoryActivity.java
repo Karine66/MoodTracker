@@ -10,18 +10,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.karine.moodtracker.R;
-import com.karine.moodtracker.models.Mood;
 import com.karine.moodtracker.models.MoodStorage;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 import static android.view.View.INVISIBLE;
 import static android.view.View.OnClickListener;
@@ -39,17 +33,10 @@ public class HistoryActivity extends AppCompatActivity {
     private String dayDate;
     private long diff;
     private long daysBetween;
-    private View mYesterday;
-    private View mDays2Ago;
-    private View mDays3Ago;
-    private View mDays4Ago;
-    private View mDays5Ago;
-    private View mDays6Ago;
-    private View mDays7Ago;
-
     private SharedPreferences.Editor editorStore;
     private Context context;
     private MoodStorage moodStorage;
+    private View mDaysAgo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,25 +54,20 @@ public class HistoryActivity extends AppCompatActivity {
 
         mHistorybtn1 = findViewById(R.id.history_btn_1);
         //View
-        mYesterday = findViewById(R.id.yesterday);
-        mDays2Ago = findViewById(R.id.days2_ago);
-        mDays3Ago = findViewById(R.id.days3_ago);
-        mDays4Ago = findViewById(R.id.days4_ago);
-        mDays5Ago = findViewById(R.id.days5_ago);
-        mDays6Ago = findViewById(R.id.days6_ago);
-        mDays7Ago = findViewById(R.id.days7_ago);
-
+        mDaysAgo = findViewById(R.id.yesterday);
+        mDaysAgo = findViewById(R.id.days2_ago);
+        mDaysAgo = findViewById(R.id.days3_ago);
+        mDaysAgo = findViewById(R.id.days4_ago);
+        mDaysAgo = findViewById(R.id.days5_ago);
+        mDaysAgo = findViewById(R.id.days6_ago);
+        mDaysAgo = findViewById(R.id.days7_ago);
 
         //déclaration
         moodStorage = new MoodStorage(this);
 
-
-
-
         retrieveComment();
         retrieveBackground();
         retrieveDate();
-
 
     }
 
@@ -129,7 +111,7 @@ public class HistoryActivity extends AppCompatActivity {
         SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String dayDate = jsonDateFormat.format(mCalendar.getTime());
 
-        olderDays(date, dayDate, mTvpastDays);
+        olderDays(date, dayDate, mTvpastDays, mDaysAgo);
 
         Log.d("Test_Compare", "Yesterday was" + dayAgoResult);
 
@@ -158,7 +140,7 @@ public class HistoryActivity extends AppCompatActivity {
 
     }
 
-    public long olderDays(String date, String dayDate, TextView textView) {
+    public long olderDays(String date, String dayDate, TextView textView, View view) {
 
 
         dayAgoResult = daysBetween(date, dayDate);
@@ -169,7 +151,7 @@ public class HistoryActivity extends AppCompatActivity {
             case 1:
 
                 textView.setText("Hier");
-                mYesterday.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(6)]);
+                view.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(6)]);
                 Log.d("Test_Days", "Hier");
 
                 break;
@@ -177,22 +159,24 @@ public class HistoryActivity extends AppCompatActivity {
             case 2:
 
                 textView.setText("Avant-hier");
-                mDays2Ago.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(5)]);
+                view.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(5)]);
                 break;
 
             case 3: case 4: case 5: case 6:
 
                 textView.setText("Il y a " + dayAgoResult + "jours");
-                mDays6Ago.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(1)]);
-                mDays5Ago.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(2)]);
-                mDays4Ago.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(3)]);
-                mDays3Ago.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(4)]);
+
+                view.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(4)]);
+                view.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(3)]);
+                view.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(2)]);
+                view.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(1)]);
+
                 break;
 
             case 7:
 
                 textView.setText("Il ya " + dayAgoResult + "jours");
-                mDays7Ago.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(0)]);
+                view.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(0)]);
         }
 
         return dayAgoResult;
