@@ -144,7 +144,7 @@ public class HistoryActivity extends AppCompatActivity {
 
 
         dayAgoResult = daysBetween(date, dayDate);
-       // dayAgoResult = 1;
+        dayAgoResult = 1;
 
 
         switch ((int) dayAgoResult) {

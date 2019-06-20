@@ -2,11 +2,11 @@ package com.karine.moodtracker.models;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,19 +24,22 @@ public class MoodStorage {
 
         mContext = context;
         retrieveMoodStore();
+
+
     }
 
     public void moodStoreAdd(Mood mood) {
 
-        if (moodStorage.size() <= 6){
+        if (moodStorage.size() <= 7){
             moodStorage.add(mood.getSelectedMood());
 
-        } else if (moodStorage.size() == 6) {
-            moodStorage.remove(mood.getSelectedMood());
+        } else if (moodStorage.size() >= 7) {
+            moodStorage.remove(0);
+            moodStorage.add(mood.getSelectedMood());
 
         } else {
 
-            boolean empty = moodStorage.isEmpty();
+            moodStorage.isEmpty();
             moodStorage.clear();
         }
             }
