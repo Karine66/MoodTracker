@@ -2,7 +2,6 @@ package com.karine.moodtracker.models;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -13,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.ResourceBundle;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -26,14 +24,18 @@ public class MoodStorage {
     private Date mDate;
     private SharedPreferences.Editor editorStore;
     public ArrayList<Integer> moodStorage;
+    public ArrayList<Long> dateStorage;
     private SharedPreferences myPrefs;
+    private Object dayDate;
+    private SharedPreferences sharePrefsDate;
 
     //constructor
-    public MoodStorage(Context context,Date date) {
+    public MoodStorage(Context context, Date date) {
 
         mDate = date;
         mContext = context;
         retrieveMoodStore();
+        retrieveDateStore();
     }
 
     public void moodStoreAdd(Mood mood) {
@@ -41,9 +43,22 @@ public class MoodStorage {
         if (moodStorage.size() <= 6) {
             moodStorage.add(mood.getSelectedMood());
 
+
         } else if (moodStorage.size() >= 7) {
             moodStorage.remove(0);
             moodStorage.add(mood.getSelectedMood());
+
+        }
+    }
+
+    public void dateStoreAdd(Date date) {
+        if(dateStorage.size() <=6) {
+            dateStorage.add(date.getTime());
+
+        }else if (dateStorage.size() >=7) {
+            dateStorage.remove(0);
+            dateStorage.add(date.getTime());
+
         }
     }
 
@@ -52,46 +67,66 @@ public class MoodStorage {
         return moodStorage;
     }
 
-    public Date getDate() {
+    public ArrayList<Long> getDateStorage() {
 
-        return mDate;
+        return dateStorage;
     }
 
     public void saveMoodStore() {
-        //Save Moods
+
         SharedPreferences sharedPref = mContext.getSharedPreferences("Storage", MODE_PRIVATE);
         Gson gson = new Gson();
         SharedPreferences.Editor editStore = sharedPref.edit();
         editStore.putString("Storage", gson.toJson(moodStorage));
         editStore.apply();
-//        //Save Dates
-//        Calendar mCalendar = Calendar.getInstance();
-//        SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-//        String storageDate = jsonDateFormat.format(mCalendar.getTime());
-//        SharedPreferences sharePrefsDate = getSharedPreferences("save_date", MODE_PRIVATE);
-//        SharedPreferences.Editor mEdit = sharePrefsDate.edit();
-//        mEdit.putString("save_date", storageDate);
-//        mEdit.apply();
 
+    }
+
+    public void saveDateStore() {
+
+        Calendar mCalendar = Calendar.getInstance();
+        SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Gson gson = new Gson();
+        String dateStorage = jsonDateFormat.format(mCalendar.getTime());
+        SharedPreferences sharePrefsDate = mContext.getSharedPreferences("save_dateStorage", MODE_PRIVATE);
+        SharedPreferences.Editor mEdit = sharePrefsDate.edit();
+        mEdit.putString("save_dateStorage", dateStorage);
+        mEdit.apply();
+        Log.d("Test_storeDate", "storeDate" + dateStorage);
     }
 
     public void retrieveMoodStore() {
 
         SharedPreferences sharedPref = mContext.getSharedPreferences("Storage", MODE_PRIVATE);
         Gson gson = new Gson();
-
         String json = sharedPref.getString("Storage", null);
-        //List<Integer> moodStorage = null;
+
         if (json != null) {
             moodStorage = gson.fromJson(json, new TypeToken<List<Integer>>() {
             }.getType());
+
         } else {
             moodStorage = new ArrayList<Integer>();
-        }
 
-        Log.d("Test_MoodStore", "Essai Store" + moodStorage);
+        }
+    }
+
+    public void retrieveDateStore() {
+
+        sharePrefsDate = mContext.getSharedPreferences("save_date", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String dateStorage = sharePrefsDate.getString("save_dateStorage", null);
+
+        if (dateStorage != null) {
+            dateStorage = gson.fromJson(dateStorage, new TypeToken<List<Long>>() {
+            }.getType());
+
+        } else {
+            dateStorage = new String();
+        }
     }
 }
+
 
 
 

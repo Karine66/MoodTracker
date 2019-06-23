@@ -55,6 +55,7 @@ public class HistoryActivity extends AppCompatActivity {
     private View view4;
     private View view5;
     private View view6;
+    private MoodStorage dateStorage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +83,7 @@ public class HistoryActivity extends AppCompatActivity {
 
         //déclaration
         moodStorage = new MoodStorage(this, mDate);
+        dateStorage = new MoodStorage(this, mDate);
 
         retrieveComment();
         retrieveBackground();
@@ -122,16 +124,16 @@ public class HistoryActivity extends AppCompatActivity {
 
     public void retrieveDate() {
 
-        myPrefs = getSharedPreferences("save_date", Context.MODE_PRIVATE);
-        String date = myPrefs.getString("save_date", "");
-        Log.d("Test_Date", "onCreate() called with" + date);
-        Calendar mCalendar = Calendar.getInstance();
-        SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String dayDate = jsonDateFormat.format(mCalendar.getTime());
-
+//        myPrefs = getSharedPreferences("save_date", Context.MODE_PRIVATE);
+//        String date = myPrefs.getString("save_date", "");
+//        Log.d("Test_Date", "onCreate() called with" + date);
+//        Calendar mCalendar = Calendar.getInstance();
+//        SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+//        String dayDate = jsonDateFormat.format(mCalendar.getTime());
+        dateStorage.getDateStorage();
         olderDays(date, dayDate, mPastDays);
 
-        Log.d("Test_Compare", "Yesterday was" + dayAgoResult);
+        //Log.d("Test_Compare", "Yesterday was" + dayAgoResult);
 
     }
 
@@ -167,6 +169,7 @@ public class HistoryActivity extends AppCompatActivity {
             case 1:
 
                 mTvpastDays1.setText("Hier");
+
                 break;
 
             case 2:
