@@ -10,13 +10,16 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.karine.moodtracker.R;
 import com.karine.moodtracker.models.MoodStorage;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+
 import static android.view.View.INVISIBLE;
 import static android.view.View.OnClickListener;
 import static android.view.View.VISIBLE;
@@ -26,7 +29,14 @@ public class HistoryActivity extends AppCompatActivity {
 
     private SharedPreferences mPreferences;
     private ImageView mHistorybtn1;
-    private TextView mTvpastDays;
+    private TextView mPastDays;
+    private TextView mTvpastDays1;
+    private TextView mTvpastDays2;
+    private TextView mTvpastDays3;
+    private TextView mTvpastDays4;
+    private TextView mTvpastDays5;
+    private TextView mTvpastDays6;
+    private TextView mTvpastDays7;
     private long dayAgoResult;
     private SharedPreferences myPrefs;
     private String date;
@@ -36,7 +46,15 @@ public class HistoryActivity extends AppCompatActivity {
     private SharedPreferences.Editor editorStore;
     private Context context;
     private MoodStorage moodStorage;
+    private Date mDate;
     private View mDaysAgo;
+    private View view0;
+    private View view1;
+    private View view2;
+    private View view3;
+    private View view4;
+    private View view5;
+    private View view6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,26 +62,26 @@ public class HistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_history);
 
         //TextView
-        mTvpastDays = findViewById(R.id.tvYesterday);
-        mTvpastDays = findViewById(R.id.tvDays2Ago);
-        mTvpastDays = findViewById(R.id.tvDays3Ago);
-        mTvpastDays = findViewById(R.id.tvDays4Ago);
-        mTvpastDays = findViewById(R.id.tvDays5Ago);
-        mTvpastDays = findViewById(R.id.tvDays6Ago);
-        mTvpastDays = findViewById(R.id.tvDays7Ago);
-
+        mTvpastDays1 = findViewById(R.id.tvYesterday);
+        mTvpastDays2 = findViewById(R.id.tvDays2Ago);
+        mTvpastDays3 = findViewById(R.id.tvDays3Ago);
+        mTvpastDays4 = findViewById(R.id.tvDays4Ago);
+        mTvpastDays5 = findViewById(R.id.tvDays5Ago);
+        mTvpastDays6 = findViewById(R.id.tvDays6Ago);
+        mTvpastDays7 = findViewById(R.id.tvDays7Ago);
+        //History button
         mHistorybtn1 = findViewById(R.id.history_btn_1);
         //View
-        mDaysAgo = findViewById(R.id.yesterday);
-        mDaysAgo = findViewById(R.id.days2_ago);
-        mDaysAgo = findViewById(R.id.days3_ago);
-        mDaysAgo = findViewById(R.id.days4_ago);
-        mDaysAgo = findViewById(R.id.days5_ago);
-        mDaysAgo = findViewById(R.id.days6_ago);
-        mDaysAgo = findViewById(R.id.days7_ago);
+        view0 = findViewById(R.id.yesterday);
+        view1 = findViewById(R.id.days2_ago);
+        view2 = findViewById(R.id.days3_ago);
+        view3 = findViewById(R.id.days4_ago);
+        view4 = findViewById(R.id.days5_ago);
+        view5 = findViewById(R.id.days6_ago);
+        view6 = findViewById(R.id.days7_ago);
 
         //déclaration
-        moodStorage = new MoodStorage(this);
+        moodStorage = new MoodStorage(this, mDate);
 
         retrieveComment();
         retrieveBackground();
@@ -94,11 +112,11 @@ public class HistoryActivity extends AppCompatActivity {
 
     public void retrieveBackground() {
 
-         moodStorage.getMoodStorage();
-
+        moodStorage.getMoodStorage();
+        colorBackground(moodStorage, mDaysAgo);
         Log.d("Test_bg", "color" + moodStorage.getMoodStorage().get(0));
 
-       //mYesterday.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(0)]);
+        //mYesterday.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(0)]);
 
     }
 
@@ -111,7 +129,7 @@ public class HistoryActivity extends AppCompatActivity {
         SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String dayDate = jsonDateFormat.format(mCalendar.getTime());
 
-        olderDays(date, dayDate, mTvpastDays, mDaysAgo);
+        olderDays(date, dayDate, mPastDays);
 
         Log.d("Test_Compare", "Yesterday was" + dayAgoResult);
 
@@ -140,50 +158,68 @@ public class HistoryActivity extends AppCompatActivity {
 
     }
 
-    public long olderDays(String date, String dayDate, TextView textView, View view) {
-
+    public long olderDays(String date, String dayDate, TextView textView) {
 
         dayAgoResult = daysBetween(date, dayDate);
         dayAgoResult = 1;
 
-
         switch ((int) dayAgoResult) {
             case 1:
 
-                textView.setText("Hier");
-                view.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(6)]);
-                Log.d("Test_Days", "Hier");
-
+                mTvpastDays1.setText("Hier");
                 break;
 
             case 2:
 
-                textView.setText("Avant-hier");
-                view.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(5)]);
+                mTvpastDays2.setText("Avant-hier");
                 break;
 
-            case 3: case 4: case 5: case 6:
+            case 3:
 
-                textView.setText("Il y a " + dayAgoResult + "jours");
+                mTvpastDays3.setText("Il y a " + dayAgoResult + "jours");
+                break;
 
-                view.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(4)]);
-                view.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(3)]);
-                view.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(2)]);
-                view.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(1)]);
+            case 4:
+
+                mTvpastDays4.setText("Il y a " + dayAgoResult + "jours");
+                break;
+
+            case 5:
+
+                mTvpastDays5.setText("Il y a " + dayAgoResult + "jours");
+                break;
+
+            case 6:
+
+                mTvpastDays6.setText("Il y a " + dayAgoResult + "jours");
 
                 break;
 
             case 7:
 
-                textView.setText("Il ya " + dayAgoResult + "jours");
-                view.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(0)]);
+                mTvpastDays7.setText("Il ya " + dayAgoResult + "jours");
+                break;
         }
 
         return dayAgoResult;
 
     }
 
+    public MoodStorage colorBackground(MoodStorage moodStorage, View view) {
 
+        if (moodStorage != null) {
+
+            view6.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(0)]);
+            view5.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(1)]);
+            view4.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(2)]);
+            view3.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(3)]);
+            view2.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(4)]);
+            view1.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(5)]);
+            view0.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(6)]);
+
+        }
+        return moodStorage;
+    }
 }
 
 

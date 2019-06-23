@@ -21,6 +21,7 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private MoodStorage mMoodStorage;
     private ArrayList <Integer> moodStorage;
     private Object mood;
+    private Date mdate;
 
 
     public int getCounter() {
@@ -66,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         getWindow().getDecorView().setBackgroundResource(R.color.light_sage);
 
         //Declaration
-        mMoodStorage = new MoodStorage(this);
+        mMoodStorage = new MoodStorage(this, mdate);
         mMood = new Mood(counter);
         mView = this.getWindow().getDecorView();
         mNoteAdd = findViewById(R.id.note_add_btn);
