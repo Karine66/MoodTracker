@@ -1,21 +1,10 @@
 package com.karine.moodtracker.models;
-import android.graphics.Color;
-import android.text.Layout;
-import android.util.Size;
-import android.view.LayoutInflater;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-
 import com.karine.moodtracker.R;
-
-import java.io.FileReader;
 
 /**
  * Created by <Karine> on <DATE-DU-JOUR>.
  */
 public class Mood {
-
-
 
     //Array moods
     public static final int[] ARRAY_MOODS = new int[]{

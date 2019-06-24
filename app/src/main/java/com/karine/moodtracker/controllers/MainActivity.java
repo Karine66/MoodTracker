@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private MoodStorage mMoodStorage;
     private ArrayList <Integer> moodStorage;
     private Object mood;
-    private Date mdate;
+    private Date mdayDate;
     private MoodStorage mDateStorage
             ;
 
@@ -70,8 +70,8 @@ public class MainActivity extends AppCompatActivity {
         getWindow().getDecorView().setBackgroundResource(R.color.light_sage);
 
         //Declaration
-        mDateStorage = new MoodStorage(this, mdate);
-        mMoodStorage = new MoodStorage(this, mdate);
+        mDateStorage = new MoodStorage(this, mdayDate);
+        mMoodStorage = new MoodStorage(this, mdayDate);
         mMood = new Mood(counter);
         mView = this.getWindow().getDecorView();
         mNoteAdd = findViewById(R.id.note_add_btn);
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
 //        SharedPreferences.Editor mEdit = myPrefs.edit();
 //        mEdit.putString("save_date", dayDate);
 //        mEdit.apply();
-        mDateStorage.dateStoreAdd(mdate);
+        mDateStorage.dateStoreAdd(mdayDate);
         mDateStorage.saveDateStore();
         Log.d("Test_DateStorage", "DateStorage"+ mDateStorage.getDateStorage());
     }

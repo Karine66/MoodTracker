@@ -21,7 +21,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class MoodStorage {
 
     private Context mContext;
-    private Date mDate;
+    private Date mDaydate;
     private SharedPreferences.Editor editorStore;
     public ArrayList<Integer> moodStorage;
     public ArrayList<Long> dateStorage;
@@ -30,9 +30,9 @@ public class MoodStorage {
     private SharedPreferences sharePrefsDate;
 
     //constructor
-    public MoodStorage(Context context, Date date) {
+    public MoodStorage(Context context, Date dayDate) {
 
-        mDate = date;
+        mDaydate = dayDate;
         mContext = context;
         retrieveMoodStore();
         retrieveDateStore();
@@ -51,13 +51,13 @@ public class MoodStorage {
         }
     }
 
-    public void dateStoreAdd(Date date) {
+    public void dateStoreAdd(Date dayDate) {
         if(dateStorage.size() <=6) {
-            dateStorage.add(date.getTime());
+            dateStorage.add(dayDate.getTime());
 
         }else if (dateStorage.size() >=7) {
             dateStorage.remove(0);
-            dateStorage.add(date.getTime());
+            dateStorage.add(dayDate.getTime());
 
         }
     }
@@ -113,7 +113,7 @@ public class MoodStorage {
 
     public void retrieveDateStore() {
 
-        sharePrefsDate = mContext.getSharedPreferences("save_date", MODE_PRIVATE);
+        sharePrefsDate = mContext.getSharedPreferences("save_dateStorage", MODE_PRIVATE);
         Gson gson = new Gson();
         String dateStorage = sharePrefsDate.getString("save_dateStorage", null);
 

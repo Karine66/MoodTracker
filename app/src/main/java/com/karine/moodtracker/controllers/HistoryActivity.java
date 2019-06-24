@@ -124,12 +124,12 @@ public class HistoryActivity extends AppCompatActivity {
 
     public void retrieveDate() {
 
-//        myPrefs = getSharedPreferences("save_date", Context.MODE_PRIVATE);
-//        String date = myPrefs.getString("save_date", "");
-//        Log.d("Test_Date", "onCreate() called with" + date);
-//        Calendar mCalendar = Calendar.getInstance();
-//        SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-//        String dayDate = jsonDateFormat.format(mCalendar.getTime());
+        myPrefs = getSharedPreferences("save_date", Context.MODE_PRIVATE);
+        String date = myPrefs.getString("save_date", "");
+        Log.d("Test_Date", "onCreate() called with" + date);
+        Calendar mCalendar = Calendar.getInstance();
+        SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String dayDate = jsonDateFormat.format(mCalendar.getTime());
         dateStorage.getDateStorage();
         olderDays(date, dayDate, mPastDays);
 
