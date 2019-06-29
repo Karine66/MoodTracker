@@ -38,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
     private MoodStorage mMoodStorage;
     private ArrayList <Integer> moodStorage;
     private Object mood;
-    private Date mdayDate;
-    private MoodStorage mDateStorage
+    private String mdayDate;
+
             ;
 
 
@@ -70,8 +70,8 @@ public class MainActivity extends AppCompatActivity {
         getWindow().getDecorView().setBackgroundResource(R.color.light_sage);
 
         //Declaration
-        mDateStorage = new MoodStorage(this, mdayDate);
-        mMoodStorage = new MoodStorage(this, mdayDate);
+
+        mMoodStorage = new MoodStorage(this);
         mMood = new Mood(counter);
         mView = this.getWindow().getDecorView();
         mNoteAdd = findViewById(R.id.note_add_btn);
@@ -104,16 +104,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void saveDate() {
-//        Calendar mCalendar = Calendar.getInstance();
-//        SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-//        String dayDate = jsonDateFormat.format(mCalendar.getTime());
+       Calendar mCalendar = Calendar.getInstance();
+       SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+       String dayDate = jsonDateFormat.format(mCalendar.getTime());
 //        SharedPreferences myPrefs = getSharedPreferences("save_date", MODE_PRIVATE);
 //        SharedPreferences.Editor mEdit = myPrefs.edit();
 //        mEdit.putString("save_date", dayDate);
 //        mEdit.apply();
-        mDateStorage.dateStoreAdd(mdayDate);
-        mDateStorage.saveDateStore();
-        Log.d("Test_DateStorage", "DateStorage"+ mDateStorage.getDateStorage());
+
+        mMoodStorage.dateStoreAdd(dayDate);
+        mMoodStorage.saveDateStore();
+        Log.d("Test_DateStorage", "DateStorage"+ mMoodStorage.getDateStorage());
     }
 
     public void saveBackground() {

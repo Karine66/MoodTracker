@@ -24,15 +24,14 @@ public class MoodStorage {
     private Date mDaydate;
     private SharedPreferences.Editor editorStore;
     public ArrayList<Integer> moodStorage;
-    public ArrayList<Long> dateStorage;
+    public ArrayList<String> dateStorage;
     private SharedPreferences myPrefs;
-    private Object dayDate;
+    private String dayDate;
     private SharedPreferences sharePrefsDate;
 
     //constructor
-    public MoodStorage(Context context, Date dayDate) {
+    public MoodStorage(Context context) {
 
-        mDaydate = dayDate;
         mContext = context;
         retrieveMoodStore();
         retrieveDateStore();
@@ -51,13 +50,13 @@ public class MoodStorage {
         }
     }
 
-    public void dateStoreAdd(Date dayDate) {
+    public void dateStoreAdd(String dayDate) {
         if(dateStorage.size() <=6) {
-            dateStorage.add(dayDate.getTime());
+            dateStorage.add(dayDate);
 
         }else if (dateStorage.size() >=7) {
             dateStorage.remove(0);
-            dateStorage.add(dayDate.getTime());
+            dateStorage.add(dayDate);
 
         }
     }
@@ -67,7 +66,7 @@ public class MoodStorage {
         return moodStorage;
     }
 
-    public ArrayList<Long> getDateStorage() {
+    public ArrayList<String> getDateStorage() {
 
         return dateStorage;
     }
@@ -84,15 +83,12 @@ public class MoodStorage {
 
     public void saveDateStore() {
 
-        Calendar mCalendar = Calendar.getInstance();
-        SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Gson gson = new Gson();
-        String dateStorage = jsonDateFormat.format(mCalendar.getTime());
         SharedPreferences sharePrefsDate = mContext.getSharedPreferences("save_dateStorage", MODE_PRIVATE);
+        Gson gson = new Gson();
         SharedPreferences.Editor mEdit = sharePrefsDate.edit();
-        mEdit.putString("save_dateStorage", dateStorage);
+        mEdit.putString("save_dateStorage", gson.toJson(dateStorage));
         mEdit.apply();
-        Log.d("Test_storeDate", "storeDate" + dateStorage);
+
     }
 
     public void retrieveMoodStore() {
@@ -107,7 +103,6 @@ public class MoodStorage {
 
         } else {
             moodStorage = new ArrayList<Integer>();
-
         }
     }
 
@@ -115,14 +110,14 @@ public class MoodStorage {
 
         sharePrefsDate = mContext.getSharedPreferences("save_dateStorage", MODE_PRIVATE);
         Gson gson = new Gson();
-        String dateStorage = sharePrefsDate.getString("save_dateStorage", null);
+        String dateStore = sharePrefsDate.getString("save_dateStorage", null);
 
         if (dateStorage != null) {
-            dateStorage = gson.fromJson(dateStorage, new TypeToken<List<Long>>() {
+            dateStorage = gson.fromJson(dateStore, new TypeToken<List<String>>() {
             }.getType());
 
         } else {
-            dateStorage = new String();
+            dateStorage = new ArrayList<String>();
         }
     }
 }
