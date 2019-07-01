@@ -1,8 +1,11 @@
 package com.karine.moodtracker.models;
 
+import android.app.Notification;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
+import android.widget.EditText;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -25,9 +28,13 @@ public class MoodStorage {
     private SharedPreferences.Editor editorStore;
     public ArrayList<Integer> moodStorage;
     public ArrayList<String> dateStorage;
+    public ArrayList<String> commentStorage;
     private SharedPreferences myPrefs;
     private String dayDate;
     private SharedPreferences sharePrefsDate;
+    private SharedPreferences mPrefsComment;
+    private SharedPreferences.Editor mEditComment;
+    private EditText et;
 
     //constructor
     public MoodStorage(Context context) {
@@ -35,6 +42,7 @@ public class MoodStorage {
         mContext = context;
         retrieveMoodStore();
         retrieveDateStore();
+        retrieveCommentStore();
     }
 
     public void moodStoreAdd(Mood mood) {
@@ -62,13 +70,15 @@ public class MoodStorage {
     }
 
     public List<Integer> getMoodStorage() {
-
         return moodStorage;
     }
 
     public ArrayList<String> getDateStorage() {
-
         return dateStorage;
+    }
+
+    public ArrayList<String> getCommentStorage() {
+        return commentStorage;
     }
 
     public void saveMoodStore() {
@@ -89,6 +99,16 @@ public class MoodStorage {
         mEdit.putString("save_dateStorage", gson.toJson(dateStorage));
         mEdit.apply();
 
+    }
+
+    public void saveCommentStore() {
+
+        SharedPreferences mPrefsComment = mContext.getSharedPreferences("saved", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        SharedPreferences.Editor mEditComment = mPrefsComment.edit();
+        String comment = et.getText().toString();
+        mEditComment.remove("saved");
+        mEditComment.apply();
     }
 
     public void retrieveMoodStore() {
@@ -118,6 +138,19 @@ public class MoodStorage {
 
         } else {
             dateStorage = new ArrayList<String>();
+        }
+        }
+    public void retrieveCommentStore() {
+
+        mPrefsComment = mContext.getSharedPreferences("saved", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String commentStore = mPrefsComment.getString("saved", null);
+
+        if(commentStorage !=null) {
+            commentStorage = gson.fromJson(commentStore, new TypeToken<List<String>>() {}.getType());
+
+            }else{
+            commentStorage = new ArrayList<String>();
         }
     }
 }

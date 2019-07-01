@@ -40,26 +40,19 @@ public class MainActivity extends AppCompatActivity {
     private Object mood;
     private String mdayDate;
 
-            ;
-
-
     public int getCounter() {
-
         return counter;
     }
 
     public void setCounter(int counter) {
-
         this.counter = counter;
     }
 
     public void decreaseCounter() {
-
         counter--;
     }
 
     public void increaseCOunter() {
-
         counter++;
     }
 
@@ -82,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
 
         saveBackground();
         saveDate();
-
 
         saveComment();
         Intent intent = getIntent();
