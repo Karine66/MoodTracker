@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList <Integer> moodStorage;
     private Object mood;
     private String mdayDate;
+    private String mComment;
 
     public int getCounter() {
         return counter;
@@ -106,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
 
         mMoodStorage.dateStoreAdd(dayDate);
         mMoodStorage.saveDateStore();
+
         Log.d("Test_DateStorage", "DateStorage"+ mMoodStorage.getDateStorage());
     }
 
@@ -114,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
         mMoodStorage.moodStoreAdd(mMood);
         mMoodStorage.saveMoodStore();
 //
-        Log.d("Text", "Mood" + mMoodStorage.getMoodStorage());
+        Log.d("Test", "Mood" + mMoodStorage.getMoodStorage());
 
     }
 
@@ -126,6 +128,8 @@ public class MainActivity extends AppCompatActivity {
         mEditor.apply();
         et = findViewById(R.id.mood_dialog);
         mHistory = findViewById(R.id.history_black_button);
+        mMoodStorage.commentStoreAdd(mComment);
+        mMoodStorage.saveCommentStore();
 
     }
 

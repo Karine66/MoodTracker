@@ -1,7 +1,5 @@
 package com.karine.moodtracker.controllers;
 
-
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -38,7 +36,7 @@ public class HistoryActivity extends AppCompatActivity {
     private TextView mTvpastDays5;
     private TextView mTvpastDays6;
     private TextView mTvpastDays7;
-    private ArrayList<TextView> dateStorage;
+    private ArrayList<String> dateStorage;
     private long dayAgoResult;
     private SharedPreferences myPrefs;
     private String date;
@@ -94,6 +92,8 @@ public class HistoryActivity extends AppCompatActivity {
     private void retrieveComment() {
 
         mPreferences = getSharedPreferences("saved", Context.MODE_PRIVATE);
+        ArrayList<String> commentStorage = moodStorage.getCommentStorage();
+       // olderComments(moodStorage);
         if (mPreferences.getString("saved", "").isEmpty()) {
             mHistorybtn1.setVisibility(INVISIBLE);
         } else {
@@ -116,7 +116,7 @@ public class HistoryActivity extends AppCompatActivity {
 
         moodStorage.getMoodStorage();
         colorBackground(moodStorage);
-        Log.d("Test_bg", "color" + moodStorage.getMoodStorage().get(0));
+        //Log.d("Test_bg", "color" + moodStorage.getMoodStorage().get(0));
     }
 
     public void retrieveDate() {
@@ -128,13 +128,15 @@ public class HistoryActivity extends AppCompatActivity {
         SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String dayDate = jsonDateFormat.format(mCalendar.getTime());
         ArrayList<String> dateStorage = moodStorage.getDateStorage();
-
+       daysBetween(date, dayDate);
         olderDates(moodStorage);
+        Log.d("Test_Compare", "Yesterday was" + dayAgoResult);
+
     }
 
     public long daysBetween(String day1, String day2) {
 
-        long daysBetween = 0;
+        long daysBetween = 1;
         SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
 
         try {
@@ -162,41 +164,18 @@ public class HistoryActivity extends AppCompatActivity {
 
         switch ((int) dayAgoResult) {
             case 1:
-
                 textView.setText("Hier");
                 break;
 
             case 2:
-
                 textView.setText("Avant-hier");
                 break;
 
-            case 3:
-
-                textView.setText("Il y a " + dayAgoResult + "jours");
-                break;
-
-            case 4:
-
-                textView.setText("Il y a " + dayAgoResult + "jours");
-                break;
-
-            case 5:
-
-                textView.setText("Il y a " + dayAgoResult + "jours");
-                break;
-
-            case 6:
-                textView.setText("Il y a " + dayAgoResult + "jours");
-                break;
-
-            case 7:
+            case 3 : case 4 :case 5: case 6 : case 7:
                 textView.setText("Il ya " + dayAgoResult + "jours");
                 break;
         }
-
         return dayAgoResult;
-
     }
 
     public void colorBackground(MoodStorage moodStorage) {
@@ -237,6 +216,13 @@ public class HistoryActivity extends AppCompatActivity {
             olderDays(date, moodStorage.getDateStorage().get(6), mTvpastDays1);
         }
     }
+
+//    public void olderComments (MoodStorage moodStorage) {
+//        if(moodStorage.getCommentStorage().size()>=1) {
+//            mHistorybtn1.s
+//        }
+//    }
+
 }
 
 

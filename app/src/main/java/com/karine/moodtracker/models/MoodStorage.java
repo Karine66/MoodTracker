@@ -68,6 +68,14 @@ public class MoodStorage {
 
         }
     }
+    public void commentStoreAdd (String comment) {
+        if(commentStorage.size() <=6) {
+            commentStorage.add(comment);
+        } else if (commentStorage.size()>=7) {
+            commentStorage.remove(0);
+            commentStorage.add(comment);
+        }
+    }
 
     public List<Integer> getMoodStorage() {
         return moodStorage;
@@ -103,11 +111,11 @@ public class MoodStorage {
 
     public void saveCommentStore() {
 
-        SharedPreferences mPrefsComment = mContext.getSharedPreferences("saved", Context.MODE_PRIVATE);
+        SharedPreferences mPrefsComment = mContext.getSharedPreferences("save_commentStorage", Context.MODE_PRIVATE);
         Gson gson = new Gson();
         SharedPreferences.Editor mEditComment = mPrefsComment.edit();
-        String comment = et.getText().toString();
-        mEditComment.remove("saved");
+        //String comment = et.getText().toString();
+        mEditComment.remove("save_commentStorage");
         mEditComment.apply();
     }
 
@@ -142,9 +150,9 @@ public class MoodStorage {
         }
     public void retrieveCommentStore() {
 
-        mPrefsComment = mContext.getSharedPreferences("saved", MODE_PRIVATE);
+        mPrefsComment = mContext.getSharedPreferences("save_commentStorage", MODE_PRIVATE);
         Gson gson = new Gson();
-        String commentStore = mPrefsComment.getString("saved", null);
+        String commentStore = mPrefsComment.getString("save_commentStorage", null);
 
         if(commentStorage !=null) {
             commentStorage = gson.fromJson(commentStore, new TypeToken<List<String>>() {}.getType());
