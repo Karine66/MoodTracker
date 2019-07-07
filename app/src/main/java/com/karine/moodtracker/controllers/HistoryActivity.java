@@ -10,8 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.karine.moodtracker.R;
 import com.karine.moodtracker.models.MoodStorage;
+
+import org.w3c.dom.Comment;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -29,6 +32,12 @@ public class HistoryActivity extends AppCompatActivity {
 
     private SharedPreferences mPreferences;
     private ImageView mHistorybtn1;
+    private ImageView mHistorybtn2;
+    private ImageView mHistorybtn3;
+    private ImageView mHistorybtn4;
+    private ImageView mHistorybtn5;
+    private ImageView mHistorybtn6;
+    private ImageView mHistorybtn7;
     private TextView mTvpastDays1;
     private TextView mTvpastDays2;
     private TextView mTvpastDays3;
@@ -46,7 +55,6 @@ public class HistoryActivity extends AppCompatActivity {
     private SharedPreferences.Editor editorStore;
     private Context context;
     private MoodStorage moodStorage;
-    private View mDaysAgo;
     private View view0;
     private View view1;
     private View view2;
@@ -55,6 +63,10 @@ public class HistoryActivity extends AppCompatActivity {
     private View view5;
     private View view6;
     private View textView;
+    private ImageView imageView;
+    private ArrayList<String> mCommentStorage;
+    private SharedPreferences mPrefsComment;
+    private Context mContext;
 
 
     @Override
@@ -63,7 +75,7 @@ public class HistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_history);
 
         //TextView
-        mTvpastDays1= findViewById(R.id.tvYesterday);
+        mTvpastDays1 = findViewById(R.id.tvYesterday);
         mTvpastDays2 = findViewById(R.id.tvDays2Ago);
         mTvpastDays3 = findViewById(R.id.tvDays3Ago);
         mTvpastDays4 = findViewById(R.id.tvDays4Ago);
@@ -72,6 +84,12 @@ public class HistoryActivity extends AppCompatActivity {
         mTvpastDays7 = findViewById(R.id.tvDays7Ago);
         //History button
         mHistorybtn1 = findViewById(R.id.history_btn_1);
+        mHistorybtn2 = findViewById(R.id.history_btn_2);
+        mHistorybtn3 = findViewById(R.id.history_btn_3);
+        mHistorybtn4 = findViewById(R.id.history_btn_4);
+        mHistorybtn5 = findViewById(R.id.history_btn_5);
+        mHistorybtn6 = findViewById(R.id.history_btn_6);
+        mHistorybtn7 = findViewById(R.id.history_btn_7);
         //View
         view0 = findViewById(R.id.yesterday);
         view1 = findViewById(R.id.days2_ago);
@@ -87,50 +105,35 @@ public class HistoryActivity extends AppCompatActivity {
         retrieveComment();
         retrieveBackground();
         retrieveDate();
+
+
     }
 
     private void retrieveComment() {
 
-        mPreferences = getSharedPreferences("saved", Context.MODE_PRIVATE);
-        ArrayList<String> commentStorage = moodStorage.getCommentStorage();
-       // olderComments(moodStorage);
-        if (mPreferences.getString("saved", "").isEmpty()) {
-            mHistorybtn1.setVisibility(INVISIBLE);
-        } else {
-            mHistorybtn1.setVisibility(VISIBLE);
+        moodStorage.getCommentStorage();
+        olderComments(moodStorage);
 
-            mHistorybtn1.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-                    Log.d("Testing", mPreferences.getString("saved", ""));
-
-                    Toast.makeText(HistoryActivity.this, mPreferences.getString("saved", ""), Toast.LENGTH_SHORT).show();
-                }
-
-            });
-        }
     }
+
 
     public void retrieveBackground() {
 
         moodStorage.getMoodStorage();
         colorBackground(moodStorage);
-        //Log.d("Test_bg", "color" + moodStorage.getMoodStorage().get(0));
+
     }
 
     public void retrieveDate() {
 
         myPrefs = getSharedPreferences("save_date", Context.MODE_PRIVATE);
         String date = myPrefs.getString("save_date", "");
-        //Log.d("Test_Date", "onCreate() called with" + date);
-        Calendar mCalendar = Calendar.getInstance();
-        SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String dayDate = jsonDateFormat.format(mCalendar.getTime());
+
         ArrayList<String> dateStorage = moodStorage.getDateStorage();
-       daysBetween(date, dayDate);
+
         olderDates(moodStorage);
-        Log.d("Test_Compare", "Yesterday was" + dayAgoResult);
+
 
     }
 
@@ -160,7 +163,7 @@ public class HistoryActivity extends AppCompatActivity {
     public long olderDays(String date, String dayDate, TextView textView) {
 
         dayAgoResult = daysBetween(date, dayDate);
-        dayAgoResult = 1;
+        // dayAgoResult = 1;
 
         switch ((int) dayAgoResult) {
             case 1:
@@ -171,7 +174,11 @@ public class HistoryActivity extends AppCompatActivity {
                 textView.setText("Avant-hier");
                 break;
 
-            case 3 : case 4 :case 5: case 6 : case 7:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+            case 7:
                 textView.setText("Il ya " + dayAgoResult + "jours");
                 break;
         }
@@ -180,49 +187,149 @@ public class HistoryActivity extends AppCompatActivity {
 
     public void colorBackground(MoodStorage moodStorage) {
 
-         if (moodStorage.getMoodStorage().size()>= 1) {
+        if (moodStorage.getMoodStorage().size() >= 1) {
             view6.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(0)]);
-         if(moodStorage.getMoodStorage().size()>=2)
-            view5.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(1)]);
-         if(moodStorage.getMoodStorage().size()>=3)
-            view4.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(2)]);
-         if(moodStorage.getMoodStorage().size()>=4)
-            view3.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(3)]);
-         if(moodStorage.getMoodStorage().size()>=5)
-            view2.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(4)]);
-         if(moodStorage.getMoodStorage().size()>=6)
-            view1.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(5)]);
-         if(moodStorage.getMoodStorage().size()>=7)
-            view0.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(6)]);
+            if (moodStorage.getMoodStorage().size() >= 2)
+                view5.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(1)]);
+            if (moodStorage.getMoodStorage().size() >= 3)
+                view4.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(2)]);
+            if (moodStorage.getMoodStorage().size() >= 4)
+                view3.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(3)]);
+            if (moodStorage.getMoodStorage().size() >= 5)
+                view2.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(4)]);
+            if (moodStorage.getMoodStorage().size() >= 6)
+                view1.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(5)]);
+            if (moodStorage.getMoodStorage().size() >= 7)
+                view0.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(6)]);
 
         }
-}
 
-    public void olderDates (MoodStorage moodStorage) {
+    }
 
-        if(moodStorage.getDateStorage().size()>=1) {
-          olderDays(date, moodStorage.getDateStorage().get(0), mTvpastDays7);
-        if(moodStorage.getDateStorage().size()>=2)
-            olderDays(date, moodStorage.getDateStorage().get(1), mTvpastDays6);
-        if(moodStorage.getDateStorage().size()>=3)
-            olderDays(date, moodStorage.getDateStorage().get(2), mTvpastDays5);
-        if(moodStorage.getDateStorage().size()>=4)
-            olderDays(date, moodStorage.getDateStorage().get(3), mTvpastDays4);
-        if(moodStorage.getDateStorage().size()>=5)
-            olderDays(date, moodStorage.getDateStorage().get(4), mTvpastDays3);
-        if(moodStorage.getDateStorage().size()>=6)
-            olderDays(date, moodStorage.getDateStorage().get(4), mTvpastDays2);
-        if(moodStorage.getDateStorage().size()>=7)
-            olderDays(date, moodStorage.getDateStorage().get(6), mTvpastDays1);
+    public void olderDates(MoodStorage moodStorage) {
+
+        Calendar mCalendar = Calendar.getInstance();
+        SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String dayDate = jsonDateFormat.format(mCalendar.getTime());
+
+        if (moodStorage.getDateStorage().size() >= 1) {
+            olderDays(dayDate, moodStorage.getDateStorage().get(0), mTvpastDays7);
+            if (moodStorage.getDateStorage().size() >= 2)
+                olderDays(dayDate, moodStorage.getDateStorage().get(1), mTvpastDays6);
+            if (moodStorage.getDateStorage().size() >= 3)
+                olderDays(dayDate, moodStorage.getDateStorage().get(2), mTvpastDays5);
+            if (moodStorage.getDateStorage().size() >= 4)
+                olderDays(dayDate, moodStorage.getDateStorage().get(3), mTvpastDays4);
+            if (moodStorage.getDateStorage().size() >= 5)
+                olderDays(dayDate, moodStorage.getDateStorage().get(4), mTvpastDays3);
+            if (moodStorage.getDateStorage().size() >= 6)
+                olderDays(dayDate, moodStorage.getDateStorage().get(4), mTvpastDays2);
+            if (moodStorage.getDateStorage().size() >= 7)
+                olderDays(dayDate, moodStorage.getDateStorage().get(6), mTvpastDays1);
         }
     }
 
-//    public void olderComments (MoodStorage moodStorage) {
-//        if(moodStorage.getCommentStorage().size()>=1) {
-//            mHistorybtn1.s
-//        }
-//    }
+    public void olderComments(final MoodStorage moodStorage) {
 
+        if (moodStorage.getCommentStorage().get(6) == null ||
+                moodStorage.getCommentStorage().get(6).trim().isEmpty()) {
+            mHistorybtn1.setVisibility(INVISIBLE);
+        } else {
+            mHistorybtn1.setVisibility(VISIBLE);
+            mHistorybtn1.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Toast.makeText(HistoryActivity.this, moodStorage.getCommentStorage().get(6), Toast.LENGTH_SHORT).show();
+                }
+
+            });
+        }
+        if (moodStorage.getCommentStorage().get(5) == null ||
+                moodStorage.getCommentStorage().get(5).trim().isEmpty()) {
+            mHistorybtn2.setVisibility(INVISIBLE);
+        } else {
+            mHistorybtn2.setVisibility(VISIBLE);
+            mHistorybtn2.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Toast.makeText(HistoryActivity.this, moodStorage.getCommentStorage().get(5), Toast.LENGTH_SHORT).show();
+                }
+
+            });
+        }
+        if (moodStorage.getCommentStorage().get(4) == null ||
+                moodStorage.getCommentStorage().get(4).trim().isEmpty()) {
+            mHistorybtn3.setVisibility(INVISIBLE);
+        } else {
+            mHistorybtn3.setVisibility(VISIBLE);
+            mHistorybtn3.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Toast.makeText(HistoryActivity.this, moodStorage.getCommentStorage().get(4), Toast.LENGTH_SHORT).show();
+                }
+
+            });
+        }
+        if (moodStorage.getCommentStorage().get(3) == null ||
+                moodStorage.getCommentStorage().get(3).trim().isEmpty()) {
+            mHistorybtn4.setVisibility(INVISIBLE);
+        } else {
+            mHistorybtn4.setVisibility(VISIBLE);
+            mHistorybtn4.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Toast.makeText(HistoryActivity.this, moodStorage.getCommentStorage().get(4), Toast.LENGTH_SHORT).show();
+                }
+
+            });
+        }
+        if (moodStorage.getCommentStorage().get(2) == null ||
+                moodStorage.getCommentStorage().get(2).trim().isEmpty()) {
+            mHistorybtn5.setVisibility(INVISIBLE);
+        } else {
+            mHistorybtn5.setVisibility(VISIBLE);
+            mHistorybtn5.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Toast.makeText(HistoryActivity.this, moodStorage.getCommentStorage().get(2), Toast.LENGTH_SHORT).show();
+                }
+
+            });
+        }
+        if (moodStorage.getCommentStorage().get(1) == null ||
+                moodStorage.getCommentStorage().get(1).trim().isEmpty()) {
+            mHistorybtn6.setVisibility(INVISIBLE);
+        } else {
+            mHistorybtn6.setVisibility(VISIBLE);
+            mHistorybtn6.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Toast.makeText(HistoryActivity.this, moodStorage.getCommentStorage().get(1), Toast.LENGTH_SHORT).show();
+                }
+
+            });
+        }
+        if (moodStorage.getCommentStorage().get(0) == null ||
+                moodStorage.getCommentStorage().get(0).trim().isEmpty()) {
+            mHistorybtn7.setVisibility(INVISIBLE);
+        } else {
+            mHistorybtn7.setVisibility(VISIBLE);
+            mHistorybtn7.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Toast.makeText(HistoryActivity.this, moodStorage.getCommentStorage().get(0), Toast.LENGTH_SHORT).show();
+                }
+
+            });
+        }
+    }
 }
 
 

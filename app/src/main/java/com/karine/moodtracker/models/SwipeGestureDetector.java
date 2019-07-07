@@ -43,6 +43,7 @@ public class SwipeGestureDetector extends GestureDetector {
 
                 context.saveDate();
 
+
                 switch (direction) {
                     case BOTTOM_TO_TOP:
 
@@ -79,6 +80,7 @@ public class SwipeGestureDetector extends GestureDetector {
                 }
                 mood.setSelectedMood(context.getCounter());
                 context.saveBackground();
+                context.saveComment();
             }
 
         });

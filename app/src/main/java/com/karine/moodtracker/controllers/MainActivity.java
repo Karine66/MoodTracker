@@ -1,7 +1,5 @@
 package com.karine.moodtracker.controllers;
 
-
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,7 +9,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import com.google.gson.Gson;
 import com.karine.moodtracker.R;
 import com.karine.moodtracker.models.AlertDialog;
 import com.karine.moodtracker.models.Mood;
@@ -21,7 +18,6 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -84,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 String comment = et.getText().toString();
         }
 
-        mNoteAdd.setOnClickListener(new AlertDialog(MainActivity.this, mPreferences, mEditor, mSaved));
+        mNoteAdd.setOnClickListener(new AlertDialog(MainActivity.this, mPreferences, mEditor, mSaved, mMoodStorage));
 
         //Connect History Button
         mHistory.setOnClickListener(new View.OnClickListener() {
@@ -104,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
 //        SharedPreferences.Editor mEdit = myPrefs.edit();
 //        mEdit.putString("save_date", dayDate);
 //        mEdit.apply();
-
         mMoodStorage.dateStoreAdd(dayDate);
         mMoodStorage.saveDateStore();
 
@@ -120,14 +115,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void saveComment() {
+    public void saveComment() {
 
-        mPreferences = getSharedPreferences("saved", Context.MODE_PRIVATE);
-        mEditor = mPreferences.edit();
-        mEditor.remove("saved");
-        mEditor.apply();
-        et = findViewById(R.id.mood_dialog);
-        mHistory = findViewById(R.id.history_black_button);
+//        mPreferences = getSharedPreferences("saved", Context.MODE_PRIVATE);
+//        mEditor = mPreferences.edit();
+//        mEditor.remove("saved");
+//        mEditor.apply();
+ //       et = findViewById(R.id.mood_dialog);
+//        mHistory = findViewById(R.id.history_black_button);
         mMoodStorage.commentStoreAdd(mComment);
         mMoodStorage.saveCommentStore();
 

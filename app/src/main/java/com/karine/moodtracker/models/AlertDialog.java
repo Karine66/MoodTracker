@@ -16,6 +16,8 @@ import org.json.JSONObject;
  */
 public class AlertDialog implements View.OnClickListener {
 
+
+    private final MoodStorage mMoodStorage;
     private Context mContext;
     private SharedPreferences mPreferences;
     private SharedPreferences.Editor mEditor;
@@ -23,12 +25,12 @@ public class AlertDialog implements View.OnClickListener {
 
     private String retrieveComment;
 
-    public AlertDialog(Context context, SharedPreferences preferences, SharedPreferences.Editor editor, JSONObject saved) {
+    public AlertDialog(Context context, SharedPreferences preferences, SharedPreferences.Editor editor, JSONObject saved, MoodStorage moodStorage) {
         mContext = context;
         mPreferences = preferences;
         mEditor = editor;
         mSaved = saved;
-
+        mMoodStorage = moodStorage;
     }
 
     //Box dialog open when click button
@@ -58,10 +60,13 @@ public class AlertDialog implements View.OnClickListener {
                 String comment = et.getText().toString();
                 Log.d("test_comment", comment + "");
 
-                    mEditor.putString("saved", comment);
-                    mEditor.apply();
+                    mMoodStorage.commentStoreAdd(comment);
+                    mMoodStorage.saveCommentStore();
 
-                    Toast.makeText(mContext.getApplicationContext(), comment, Toast.LENGTH_SHORT).show();
+//                   mEditor.putString("saved", comment);
+//                   mEditor.apply();
+
+                   Toast.makeText(mContext.getApplicationContext(), comment, Toast.LENGTH_SHORT).show();
             }
         });
 
