@@ -282,7 +282,7 @@ public class HistoryActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-                    Toast.makeText(HistoryActivity.this, moodStorage.getCommentStorage().get(4), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HistoryActivity.this, moodStorage.getCommentStorage().get(3), Toast.LENGTH_SHORT).show();
                 }
 
             });

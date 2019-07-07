@@ -80,7 +80,7 @@ public class SwipeGestureDetector extends GestureDetector {
                 }
                 mood.setSelectedMood(context.getCounter());
                 context.saveBackground();
-                context.saveComment();
+              
             }
 
         });
