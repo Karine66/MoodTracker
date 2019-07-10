@@ -63,6 +63,7 @@ public class AlertDialog implements View.OnClickListener {
                     mMoodStorage.commentStoreAdd(comment);
                     mMoodStorage.saveCommentStore();
 
+
 //                   mEditor.putString("saved", comment);
 //                   mEditor.apply();
 

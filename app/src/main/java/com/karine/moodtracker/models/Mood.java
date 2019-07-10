@@ -1,10 +1,16 @@
 package com.karine.moodtracker.models;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+
 import com.karine.moodtracker.R;
 
 /**
  * Created by <Karine> on <DATE-DU-JOUR>.
  */
 public class Mood {
+
+    public LinearLayout.LayoutParams color0;
+    public LinearLayout.LayoutParams color1;
 
     //Array moods
     public static final int[] ARRAY_MOODS = new int[]{
@@ -27,6 +33,26 @@ public class Mood {
     };
 
 
+   public void sizeColors () {
+       switch (selectedMood) {
+           case R.color.faded_red:
+               LinearLayout.LayoutParams color0 = new LinearLayout.LayoutParams(20, 1);
+               break;
+           case R.color.warm_grey:
+               LinearLayout.LayoutParams color1 = new LinearLayout.LayoutParams(30, 1);
+               break;
+           case R.color.cornflower_blue_65:
+               LinearLayout.LayoutParams color2 = new LinearLayout.LayoutParams(40, 1);
+               break;
+           case R.color.light_sage:
+               LinearLayout.LayoutParams color3 = new LinearLayout.LayoutParams(50, 1);
+               break;
+           case R.color.banana_yellow:
+               LinearLayout.LayoutParams color4 = new LinearLayout.LayoutParams(100, 1);
+               break;
+       }
+
+   }
         private int selectedMood;
 
         //constructor
