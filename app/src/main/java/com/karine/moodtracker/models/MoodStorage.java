@@ -49,12 +49,23 @@ public class MoodStorage {
         SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String dayDate = jsonDateFormat.format(mCalendar.getTime());
 
-        if(moodStorage.size()<=6)
+//        if (!moodStorage.contains(mood)) {
+//            if (moodStorage.size() >= 7) {
+//                moodStorage.remove(0);
+//
+//            } else if (moodStorage.indexOf(dayDate) == -1 && moodStorage.contains(mood)) {
+//                moodStorage.remove(mood);
+//            }
+//            moodStorage.add(mood.getSelectedMood());
+//            System.out.println(mood);
+//        }
+//    }
+
+
+            if (moodStorage.size() <= 6) {
             moodStorage.add(mood.getSelectedMood());
 
-        if (moodStorage.indexOf(dayDate) <=0 && moodStorage.size() <= 6) {
-            moodStorage.remove(mood.getSelectedMood());
-            moodStorage.add(mood.getSelectedMood());
+
         } else if (moodStorage.size() >= 7) {
             moodStorage.remove(0);
             moodStorage.add(mood.getSelectedMood());
@@ -78,20 +89,35 @@ public class MoodStorage {
         SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String dayDate = jsonDateFormat.format(mCalendar.getTime());
 
-        if(commentStorage.size()<= 6)
-            commentStorage.add(comment);
 
-        if (commentStorage.indexOf(dayDate) <=0 && commentStorage.size() <= 6) {
-            commentStorage.remove(comment);
-            commentStorage.add(comment);
-
-        } else if (commentStorage.size() >= 7) {
-
+        if (!commentStorage.contains(comment)) {
+            if (commentStorage.size() >= 7) {
                 commentStorage.remove(0);
-                commentStorage.add(comment);
-            }
-            System.out.println(commentStorage);
+
+            } else if (commentStorage.indexOf(dayDate) == -1 && commentStorage.contains(comment)){
+                commentStorage.remove(comment);
         }
+        commentStorage.add(comment);
+        System.out.println(commentStorage);
+
+    }
+
+
+//        if (commentStorage.indexOf(dayDate)==-1 && commentStorage.size() <= 6 ){
+//            commentStorage.add(comment);
+//    } else if (commentStorage.contains(comment))
+//            commentStorage.remove(comment);
+//            commentStorage.add(comment);
+//        if (commentStorage.size() >= 7) {
+//            commentStorage.remove(0);
+//            commentStorage.add(comment);
+//        }
+
+//        System.out.println(commentStorage);
+    }
+
+
+
 
     public List<Integer> getMoodStorage() {
         return moodStorage;

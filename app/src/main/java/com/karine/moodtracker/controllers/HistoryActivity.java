@@ -150,7 +150,7 @@ public class HistoryActivity extends AppCompatActivity {
     public long olderDays(String date, String dayDate, TextView textView) {
 
         dayAgoResult = daysBetween(date, dayDate);
-        //dayAgoResult = 1;
+       // dayAgoResult = 1;
         switch ((int) dayAgoResult) {
             case 0 :
                 textView.setText("Aujourd'hui");
@@ -160,11 +160,7 @@ public class HistoryActivity extends AppCompatActivity {
             case 2:
                 textView.setText("Avant-hier");
                 break;
-            case 3:
-            case 4:
-            case 5:
-            case 6:
-            case 7:
+            case 3: case 4: case 5: case 6: case 7:
                 textView.setText("Il ya " + dayAgoResult + "jours");
                 break;
         }
@@ -173,8 +169,8 @@ public class HistoryActivity extends AppCompatActivity {
 
     public void colorBackground(MoodStorage moodStorage) {
 
-        if (moodStorage.getMoodStorage().size() >= 1) {
-            view6.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(0)]);
+            if (moodStorage.getMoodStorage().size() >= 1) {
+               view6.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(0)]);
             if (moodStorage.getMoodStorage().size() >= 2)
                 view5.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(1)]);
             if (moodStorage.getMoodStorage().size() >= 3)
@@ -215,19 +211,17 @@ public class HistoryActivity extends AppCompatActivity {
 
     public void olderComments(final MoodStorage moodStorage) {
 
-            if(moodStorage.getCommentStorage().size() <=6)
-            if (moodStorage.getCommentStorage().get(5) == null ||moodStorage.getCommentStorage().get(6).trim().isEmpty()) {
-                mHistorybtn1.setVisibility(INVISIBLE);
-            } else {
-                mHistorybtn1.setVisibility(VISIBLE);
-                mHistorybtn1.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+        if (moodStorage.getCommentStorage().get(6) == null ||
+                moodStorage.getCommentStorage().get(6).trim().isEmpty()) {
+            mHistorybtn1.setVisibility(INVISIBLE);
+        } else {
+            mHistorybtn1.setVisibility(VISIBLE);
+            mHistorybtn1.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-                        Toast.makeText(HistoryActivity.this, moodStorage.getCommentStorage().get(6), Toast.LENGTH_SHORT).show();
-
-                    }
-
+                    Toast.makeText(HistoryActivity.this, moodStorage.getCommentStorage().get(6), Toast.LENGTH_SHORT).show();
+                }
                 });
             }
             if (moodStorage.getCommentStorage().get(5) == null ||
@@ -312,13 +306,6 @@ public class HistoryActivity extends AppCompatActivity {
                 });
             }
         }
-//    public void sizeColors (Mood mood) {
-//
-//        if(mood.getSelectedMood()==0){
-//            FrameLayout.LayoutParams color0 = new FrameLayout.LayoutParams(50, 50);
-//        }
-//    }
-
     }
 
 

@@ -11,6 +11,9 @@ public class Mood {
 
     public LinearLayout.LayoutParams color0;
     public LinearLayout.LayoutParams color1;
+    public LinearLayout.LayoutParams color2;
+    public LinearLayout.LayoutParams color3;
+    public LinearLayout.LayoutParams color4;
 
     //Array moods
     public static final int[] ARRAY_MOODS = new int[]{
@@ -33,7 +36,7 @@ public class Mood {
     };
 
 
-   public void sizeColors () {
+   public int  sizeColors () {
        switch (selectedMood) {
            case R.color.faded_red:
                LinearLayout.LayoutParams color0 = new LinearLayout.LayoutParams(20, 1);
@@ -51,7 +54,7 @@ public class Mood {
                LinearLayout.LayoutParams color4 = new LinearLayout.LayoutParams(100, 1);
                break;
        }
-
+        return selectedMood;
    }
         private int selectedMood;
 
