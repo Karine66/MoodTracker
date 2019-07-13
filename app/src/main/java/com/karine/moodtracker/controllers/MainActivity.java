@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
     private JSONObject mSaved = new JSONObject();
     private MoodStorage mMoodStorage;
     private ArrayList <Integer> moodStorage;
-    private Object mood;
     private String mdayDate;
     private String mComment;
 
@@ -110,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
         mMoodStorage.moodStoreAdd(mMood);
         mMoodStorage.saveMoodStore();
-//
+        mMood.sizeColors();
         Log.d("Test", "Mood" + mMoodStorage.getMoodStorage());
 
     }

@@ -36,25 +36,25 @@ public class Mood {
     };
 
 
-   public int  sizeColors () {
+   public void  sizeColors () {
        switch (selectedMood) {
-           case 0:
+           case R.color.faded_red :
                LinearLayout.LayoutParams color0 = new LinearLayout.LayoutParams(20, 1);
                break;
-           case 1:
+           case R.color.warm_grey:
                LinearLayout.LayoutParams color1 = new LinearLayout.LayoutParams(30, 1);
                break;
-           case 2:
+           case R.color.cornflower_blue_65:
                LinearLayout.LayoutParams color2 = new LinearLayout.LayoutParams(40, 1);
                break;
-           case 3:
+           case R.color.light_sage:
                LinearLayout.LayoutParams color3 = new LinearLayout.LayoutParams(50, 1);
                break;
-           case 4:
+           case R.color.banana_yellow:
                LinearLayout.LayoutParams color4 = new LinearLayout.LayoutParams(100, 1);
                break;
        }
-        return selectedMood;
+
    }
         private int selectedMood;
 
@@ -62,6 +62,7 @@ public class Mood {
     public Mood( int selectedMood){
 
             this.selectedMood = selectedMood;
+
         }
 
         // create getter et setter

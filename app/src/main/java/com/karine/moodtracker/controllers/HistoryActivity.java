@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -64,11 +63,6 @@ public class HistoryActivity extends AppCompatActivity {
     private SharedPreferences mPrefsComment;
     private Context mContext;
     private Mood mood;
-    public LinearLayout.LayoutParams color0;
-    public LinearLayout.LayoutParams color1;
-    public LinearLayout.LayoutParams color2;
-    public LinearLayout.LayoutParams color3;
-    public LinearLayout.LayoutParams color4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,11 +97,9 @@ public class HistoryActivity extends AppCompatActivity {
         //déclaration
         moodStorage = new MoodStorage(this);
 
-
         retrieveComment();
         retrieveBackground();
         retrieveDate();
-
     }
 
     private void retrieveComment() {
