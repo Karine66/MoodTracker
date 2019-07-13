@@ -63,9 +63,12 @@ public class HistoryActivity extends AppCompatActivity {
     private ArrayList<String> mCommentStorage;
     private SharedPreferences mPrefsComment;
     private Context mContext;
-    public LinearLayout.LayoutParams color0;
     private Mood mood;
-
+    public LinearLayout.LayoutParams color0;
+    public LinearLayout.LayoutParams color1;
+    public LinearLayout.LayoutParams color2;
+    public LinearLayout.LayoutParams color3;
+    public LinearLayout.LayoutParams color4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +100,6 @@ public class HistoryActivity extends AppCompatActivity {
         view5 = findViewById(R.id.days6_ago);
         view6 = findViewById(R.id.days7_ago);
 
-
         //déclaration
         moodStorage = new MoodStorage(this);
 
@@ -114,6 +116,7 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     public void retrieveBackground() {
+
         colorBackground(moodStorage);
 
     }
@@ -150,9 +153,9 @@ public class HistoryActivity extends AppCompatActivity {
     public long olderDays(String date, String dayDate, TextView textView) {
 
         dayAgoResult = daysBetween(date, dayDate);
-       // dayAgoResult = 1;
+        // dayAgoResult = 1;
         switch ((int) dayAgoResult) {
-            case 0 :
+            case 0:
                 textView.setText("Aujourd'hui");
             case 1:
                 textView.setText("Hier");
@@ -169,8 +172,8 @@ public class HistoryActivity extends AppCompatActivity {
 
     public void colorBackground(MoodStorage moodStorage) {
 
-            if (moodStorage.getMoodStorage().size() >= 1) {
-               view6.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(0)]);
+        if (moodStorage.getMoodStorage().size() >= 1) {
+            view6.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(0)]);
             if (moodStorage.getMoodStorage().size() >= 2)
                 view5.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(1)]);
             if (moodStorage.getMoodStorage().size() >= 3)
@@ -211,7 +214,7 @@ public class HistoryActivity extends AppCompatActivity {
 
     public void olderComments(final MoodStorage moodStorage) {
 
-        if (moodStorage.getCommentStorage().get(6) == null ||
+        if ( moodStorage.getCommentStorage().get(6) == null ||
                 moodStorage.getCommentStorage().get(6).trim().isEmpty()) {
             mHistorybtn1.setVisibility(INVISIBLE);
         } else {
@@ -222,91 +225,111 @@ public class HistoryActivity extends AppCompatActivity {
 
                     Toast.makeText(HistoryActivity.this, moodStorage.getCommentStorage().get(6), Toast.LENGTH_SHORT).show();
                 }
-                });
-            }
-            if (moodStorage.getCommentStorage().get(5) == null ||
-                    moodStorage.getCommentStorage().get(5).trim().isEmpty()) {
-                mHistorybtn2.setVisibility(INVISIBLE);
-            } else {
-                mHistorybtn2.setVisibility(VISIBLE);
-                mHistorybtn2.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        Toast.makeText(HistoryActivity.this, moodStorage.getCommentStorage().get(5), Toast.LENGTH_SHORT).show();
-
-                    }
-                });
-            }
-            if (moodStorage.getCommentStorage().get(4) == null ||
-                    moodStorage.getCommentStorage().get(4).trim().isEmpty()) {
-                mHistorybtn3.setVisibility(INVISIBLE);
-            } else {
-                mHistorybtn3.setVisibility(VISIBLE);
-                mHistorybtn3.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        Toast.makeText(HistoryActivity.this, moodStorage.getCommentStorage().get(4), Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-
-            if (moodStorage.getCommentStorage().get(3) == null ||
-                    moodStorage.getCommentStorage().get(3).trim().isEmpty()) {
-                mHistorybtn4.setVisibility(INVISIBLE);
-            } else {
-                mHistorybtn4.setVisibility(VISIBLE);
-                mHistorybtn4.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        Toast.makeText(HistoryActivity.this, moodStorage.getCommentStorage().get(3), Toast.LENGTH_SHORT).show();
-                    }
-                });
+            });
         }
-            if (moodStorage.getCommentStorage().get(2) == null ||
-                    moodStorage.getCommentStorage().get(2).trim().isEmpty()) {
-                mHistorybtn5.setVisibility(INVISIBLE);
-            } else {
-                mHistorybtn5.setVisibility(VISIBLE);
-                mHistorybtn5.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+        if (moodStorage.getCommentStorage().get(5) == null ||
+                moodStorage.getCommentStorage().get(5).trim().isEmpty()) {
+            mHistorybtn2.setVisibility(INVISIBLE);
+        } else {
+            mHistorybtn2.setVisibility(VISIBLE);
+            mHistorybtn2.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-                        Toast.makeText(HistoryActivity.this, moodStorage.getCommentStorage().get(2), Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-            if ( moodStorage.getCommentStorage().get(1) == null ||
-                    moodStorage.getCommentStorage().get(1).trim().isEmpty()) {
-                mHistorybtn6.setVisibility(INVISIBLE);
-            } else {
-                mHistorybtn6.setVisibility(VISIBLE);
-                mHistorybtn6.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+                    Toast.makeText(HistoryActivity.this, moodStorage.getCommentStorage().get(5), Toast.LENGTH_SHORT).show();
 
-                        Toast.makeText(HistoryActivity.this, moodStorage.getCommentStorage().get(1), Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-            if (moodStorage.getCommentStorage().get(0) == null ||
-                    moodStorage.getCommentStorage().get(0).trim().isEmpty()) {
-                mHistorybtn7.setVisibility(INVISIBLE);
-            } else {
-                mHistorybtn7.setVisibility(VISIBLE);
-                mHistorybtn7.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+                }
+            });
+        }
+        if (moodStorage.getCommentStorage().get(4) == null ||
+                moodStorage.getCommentStorage().get(4).trim().isEmpty()) {
+            mHistorybtn3.setVisibility(INVISIBLE);
+        } else {
+            mHistorybtn3.setVisibility(VISIBLE);
+            mHistorybtn3.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-                        Toast.makeText(HistoryActivity.this, moodStorage.getCommentStorage().get(0), Toast.LENGTH_SHORT).show();
-                    }
+                    Toast.makeText(HistoryActivity.this, moodStorage.getCommentStorage().get(4), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
 
-                });
-            }
+        if (moodStorage.getCommentStorage().get(3) == null ||
+                moodStorage.getCommentStorage().get(3).trim().isEmpty()) {
+            mHistorybtn4.setVisibility(INVISIBLE);
+        } else {
+            mHistorybtn4.setVisibility(VISIBLE);
+            mHistorybtn4.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Toast.makeText(HistoryActivity.this, moodStorage.getCommentStorage().get(3), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+        if (moodStorage.getCommentStorage().get(2) == null ||
+                moodStorage.getCommentStorage().get(2).trim().isEmpty()) {
+            mHistorybtn5.setVisibility(INVISIBLE);
+        } else {
+            mHistorybtn5.setVisibility(VISIBLE);
+            mHistorybtn5.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Toast.makeText(HistoryActivity.this, moodStorage.getCommentStorage().get(2), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+        if (moodStorage.getCommentStorage().get(1) == null ||
+                moodStorage.getCommentStorage().get(1).trim().isEmpty()) {
+            mHistorybtn6.setVisibility(INVISIBLE);
+        } else {
+            mHistorybtn6.setVisibility(VISIBLE);
+            mHistorybtn6.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Toast.makeText(HistoryActivity.this, moodStorage.getCommentStorage().get(1), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+        if (moodStorage.getCommentStorage().get(0) == null ||
+                moodStorage.getCommentStorage().get(0).trim().isEmpty()) {
+            mHistorybtn7.setVisibility(INVISIBLE);
+        } else {
+            mHistorybtn7.setVisibility(VISIBLE);
+            mHistorybtn7.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Toast.makeText(HistoryActivity.this, moodStorage.getCommentStorage().get(0), Toast.LENGTH_SHORT).show();
+                }
+
+            });
         }
     }
+
+//    public void sizeColors(Mood mood) {
+//        switch (Mood.ARRAY_BACKGROUND_COLOR) {
+//            case 1 :
+//                LinearLayout.LayoutParams color0 = new LinearLayout.LayoutParams(20, 1);
+//                break;
+//            case 2:
+//                LinearLayout.LayoutParams color1 = new LinearLayout.LayoutParams(30, 1);
+//                break;
+//            case 2:
+//                LinearLayout.LayoutParams color2 = new LinearLayout.LayoutParams(40, 1);
+//                break;
+//            case 3:
+//                LinearLayout.LayoutParams color3 = new LinearLayout.LayoutParams(50, 1);
+//                break;
+//            case 4:
+//                LinearLayout.LayoutParams color4 = new LinearLayout.LayoutParams(100, 1);
+//                break;
+//        }
+//    }
+}
 
 
 

@@ -49,28 +49,15 @@ public class MoodStorage {
         SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String dayDate = jsonDateFormat.format(mCalendar.getTime());
 
-//        if (!moodStorage.contains(mood)) {
-//            if (moodStorage.size() >= 7) {
-//                moodStorage.remove(0);
-//
-//            } else if (moodStorage.indexOf(dayDate) == -1 && moodStorage.contains(mood)) {
-//                moodStorage.remove(mood);
-//            }
-//            moodStorage.add(mood.getSelectedMood());
-//            System.out.println(mood);
-//        }
-//    }
-
-
-            if (moodStorage.size() <= 6) {
+        if (moodStorage.indexOf(dayDate) == -1 && moodStorage.size() <= 6) {
             moodStorage.add(mood.getSelectedMood());
 
-
-        } else if (moodStorage.size() >= 7) {
+        } else if (moodStorage.indexOf(dayDate) == 0 && moodStorage.size() >= 7) {
             moodStorage.remove(0);
             moodStorage.add(mood.getSelectedMood());
         }
-        System.out.println(moodStorage);
+
+       System.out.println(moodStorage);
     }
 
 
@@ -90,36 +77,52 @@ public class MoodStorage {
         String dayDate = jsonDateFormat.format(mCalendar.getTime());
 
 
-        if (!commentStorage.contains(comment)) {
-            if (commentStorage.size() >= 7) {
-                commentStorage.remove(0);
-
-            } else if (commentStorage.indexOf(dayDate) == -1 && commentStorage.contains(comment)){
-                commentStorage.remove(comment);
+        if(commentStorage.indexOf(dayDate)== -1 && commentStorage.size() <=6) {
+            commentStorage.add(comment);
+        }else if (commentStorage.indexOf(dayDate)== 0 && commentStorage.size()>=7) {
+            commentStorage.remove(0);
+            commentStorage.add(comment);
         }
-        commentStorage.add(comment);
+
+//        if (!commentStorage.contains(comment)) {
+//            if (commentStorage.size() >= 7) {
+//                commentStorage.remove(0);
+//
+//                if (commentStorage.indexOf(dayDate)== -1 && commentStorage.contains(comment)) {
+//                commentStorage.add(comment);
+//            }
+//                else if(commentStorage.indexOf(dayDate)== 1 && commentStorage.contains(comment)) {
+//                    commentStorage.remove(comment);
+//                    commentStorage.add(comment);
+//                }
+//                commentStorage.add(comment);
+//        }
+
         System.out.println(commentStorage);
 
     }
 
 
-//        if (commentStorage.indexOf(dayDate)==-1 && commentStorage.size() <= 6 ){
-//            commentStorage.add(comment);
-//    } else if (commentStorage.contains(comment))
+//        if(dateStorage.indexOf(dayDate)==-1&&commentStorage.size()<=6){
+//
+//
+//        commentStorage.remove(comment);
+//    } else if(commentStorage.contains(comment))
 //            commentStorage.remove(comment);
 //            commentStorage.add(comment);
-//        if (commentStorage.size() >= 7) {
-//            commentStorage.remove(0);
-//            commentStorage.add(comment);
-//        }
-
-//        System.out.println(commentStorage);
-    }
-
+//        if(commentStorage.size()>=7)
+//
+//    {
+//        commentStorage.remove(0);
+//        commentStorage.add(comment);
+//    }
 
 
 
-    public List<Integer> getMoodStorage() {
+
+
+
+    public ArrayList<Integer> getMoodStorage() {
         return moodStorage;
     }
 

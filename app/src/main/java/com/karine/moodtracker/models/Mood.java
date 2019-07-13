@@ -38,19 +38,19 @@ public class Mood {
 
    public int  sizeColors () {
        switch (selectedMood) {
-           case R.color.faded_red:
+           case 0:
                LinearLayout.LayoutParams color0 = new LinearLayout.LayoutParams(20, 1);
                break;
-           case R.color.warm_grey:
+           case 1:
                LinearLayout.LayoutParams color1 = new LinearLayout.LayoutParams(30, 1);
                break;
-           case R.color.cornflower_blue_65:
+           case 2:
                LinearLayout.LayoutParams color2 = new LinearLayout.LayoutParams(40, 1);
                break;
-           case R.color.light_sage:
+           case 3:
                LinearLayout.LayoutParams color3 = new LinearLayout.LayoutParams(50, 1);
                break;
-           case R.color.banana_yellow:
+           case 4:
                LinearLayout.LayoutParams color4 = new LinearLayout.LayoutParams(100, 1);
                break;
        }
