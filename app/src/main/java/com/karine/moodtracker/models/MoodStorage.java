@@ -33,7 +33,6 @@ public class MoodStorage {
     private SharedPreferences sharePrefsDate;
     private SharedPreferences mPrefsComment;
     private SharedPreferences.Editor mEditComment;
-    private EditText et;
 
     //constructor
     public MoodStorage(Context context) {
@@ -49,17 +48,17 @@ public class MoodStorage {
         SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String dayDate = jsonDateFormat.format(mCalendar.getTime());
 
-        if (moodStorage.indexOf(dayDate) == -1 && moodStorage.size() <= 6) {
+        if (dateStorage.indexOf(dayDate) == -1 && moodStorage.size() <= 6) {
+          moodStorage.add(mood.getSelectedMood());
+        } else if (dateStorage.indexOf(dayDate) == -1 && moodStorage.size() >= 7){
+           moodStorage.remove(0);
             moodStorage.add(mood.getSelectedMood());
-
-        } else if (moodStorage.indexOf(dayDate) == 0 && moodStorage.size() >= 7) {
-            moodStorage.remove(0);
+        } else if (dateStorage.indexOf(dayDate) != -1){
+          moodStorage.remove(dateStorage.indexOf(dayDate));
             moodStorage.add(mood.getSelectedMood());
         }
-
-       System.out.println(moodStorage);
+        System.out.println(moodStorage);
     }
-
 
     public void dateStoreAdd(String dayDate) {
 
@@ -76,47 +75,21 @@ public class MoodStorage {
         SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String dayDate = jsonDateFormat.format(mCalendar.getTime());
 
+//        if (dateStorage.indexOf(dayDate) == -1 && commentStorage.size() <= 6) {
+//            commentStorage.add(comment);
+        if (dateStorage.indexOf(dayDate) == -1 && commentStorage.size() >= 7){
+          commentStorage.remove(0);
+//             commentStorage.add(comment);
+//        } else if (dateStorage.indexOf(dayDate) != -1 && commentStorage.size() <= 6){
+//            commentStorage.add(comment);
+        }else if (dateStorage.indexOf(dayDate) != -1 && (commentStorage.size() >= 7)) {
+            commentStorage.remove(dateStorage.indexOf(dayDate));
 
-        if(commentStorage.indexOf(dayDate)== -1 && commentStorage.size() <=6) {
-            commentStorage.add(comment);
-        }else if (commentStorage.indexOf(dayDate)== 0 && commentStorage.size()>=7) {
-            commentStorage.remove(0);
-            commentStorage.add(comment);
         }
 
-//        if (!commentStorage.contains(comment)) {
-//            if (commentStorage.size() >= 7) {
-//                commentStorage.remove(0);
-//
-//                if (commentStorage.indexOf(dayDate)== -1 && commentStorage.contains(comment)) {
-//                commentStorage.add(comment);
-//            }
-//                else if(commentStorage.indexOf(dayDate)== 1 && commentStorage.contains(comment)) {
-//                    commentStorage.remove(comment);
-//                    commentStorage.add(comment);
-//                }
-//                commentStorage.add(comment);
-//        }
-
+        commentStorage.add(comment);
         System.out.println(commentStorage);
-
-    }
-
-
-//        if(dateStorage.indexOf(dayDate)==-1&&commentStorage.size()<=6){
-//
-//
-//        commentStorage.remove(comment);
-//    } else if(commentStorage.contains(comment))
-//            commentStorage.remove(comment);
-//            commentStorage.add(comment);
-//        if(commentStorage.size()>=7)
-//
-//    {
-//        commentStorage.remove(0);
-//        commentStorage.add(comment);
-//    }
-
+        }
 
 
 

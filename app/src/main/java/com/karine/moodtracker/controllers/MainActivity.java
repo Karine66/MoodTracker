@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
         mMoodStorage.moodStoreAdd(mMood);
         mMoodStorage.saveMoodStore();
-        mMood.sizeColors();
+
         Log.d("Test", "Mood" + mMoodStorage.getMoodStorage());
 
     }
@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
 //        mEditor.remove("saved");
 //        mEditor.apply();
  //       et = findViewById(R.id.mood_dialog);
-//        mHistory = findViewById(R.id.history_black_button);
+    //   mHistory = findViewById(R.id.history_black_button);
         mMoodStorage.commentStoreAdd(mComment);
         mMoodStorage.saveCommentStore();
 

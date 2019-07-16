@@ -206,8 +206,8 @@ public class HistoryActivity extends AppCompatActivity {
 
     public void olderComments(final MoodStorage moodStorage) {
 
-        if ( moodStorage.getCommentStorage().get(6) == null ||
-                moodStorage.getCommentStorage().get(6).trim().isEmpty()) {
+        if (moodStorage.getMoodStorage().size() >=7 &&(moodStorage.getCommentStorage().get(6) == null ||
+                moodStorage.getCommentStorage().get(6).trim().isEmpty())) {
             mHistorybtn1.setVisibility(INVISIBLE);
         } else {
             mHistorybtn1.setVisibility(VISIBLE);
@@ -219,8 +219,8 @@ public class HistoryActivity extends AppCompatActivity {
                 }
             });
         }
-        if (moodStorage.getCommentStorage().get(5) == null ||
-                moodStorage.getCommentStorage().get(5).trim().isEmpty()) {
+        if (moodStorage.getMoodStorage().size() >= 6 && (moodStorage.getCommentStorage().get(5) == null ||
+                moodStorage.getCommentStorage().get(5).trim().isEmpty())) {
             mHistorybtn2.setVisibility(INVISIBLE);
         } else {
             mHistorybtn2.setVisibility(VISIBLE);
@@ -233,8 +233,8 @@ public class HistoryActivity extends AppCompatActivity {
                 }
             });
         }
-        if (moodStorage.getCommentStorage().get(4) == null ||
-                moodStorage.getCommentStorage().get(4).trim().isEmpty()) {
+        if (moodStorage.getMoodStorage().size() >= 5 && (moodStorage.getCommentStorage().get(4) == null ||
+                moodStorage.getCommentStorage().get(4).trim().isEmpty())) {
             mHistorybtn3.setVisibility(INVISIBLE);
         } else {
             mHistorybtn3.setVisibility(VISIBLE);
@@ -247,8 +247,8 @@ public class HistoryActivity extends AppCompatActivity {
             });
         }
 
-        if (moodStorage.getCommentStorage().get(3) == null ||
-                moodStorage.getCommentStorage().get(3).trim().isEmpty()) {
+        if (moodStorage.getMoodStorage().size() >= 4 && (moodStorage.getCommentStorage().get(3) == null ||
+                moodStorage.getCommentStorage().get(3).trim().isEmpty())) {
             mHistorybtn4.setVisibility(INVISIBLE);
         } else {
             mHistorybtn4.setVisibility(VISIBLE);
@@ -260,8 +260,8 @@ public class HistoryActivity extends AppCompatActivity {
                 }
             });
         }
-        if (moodStorage.getCommentStorage().get(2) == null ||
-                moodStorage.getCommentStorage().get(2).trim().isEmpty()) {
+        if (moodStorage.getMoodStorage().size() >= 3 && (moodStorage.getCommentStorage().get(2) == null ||
+                moodStorage.getCommentStorage().get(2).trim().isEmpty())) {
             mHistorybtn5.setVisibility(INVISIBLE);
         } else {
             mHistorybtn5.setVisibility(VISIBLE);
@@ -273,8 +273,8 @@ public class HistoryActivity extends AppCompatActivity {
                 }
             });
         }
-        if (moodStorage.getCommentStorage().get(1) == null ||
-                moodStorage.getCommentStorage().get(1).trim().isEmpty()) {
+        if (moodStorage.getMoodStorage().size() >= 2 && (moodStorage.getCommentStorage().get(1) == null ||
+                moodStorage.getCommentStorage().get(1).trim().isEmpty())) {
             mHistorybtn6.setVisibility(INVISIBLE);
         } else {
             mHistorybtn6.setVisibility(VISIBLE);
@@ -286,8 +286,8 @@ public class HistoryActivity extends AppCompatActivity {
                 }
             });
         }
-        if (moodStorage.getCommentStorage().get(0) == null ||
-                moodStorage.getCommentStorage().get(0).trim().isEmpty()) {
+        if (moodStorage.getMoodStorage().size() >=1  && (moodStorage.getCommentStorage().get(0) == null ||
+                moodStorage.getCommentStorage().get(0).trim().isEmpty())) {
             mHistorybtn7.setVisibility(INVISIBLE);
         } else {
             mHistorybtn7.setVisibility(VISIBLE);
@@ -302,7 +302,8 @@ public class HistoryActivity extends AppCompatActivity {
         }
     }
 
-//    public void sizeColors(Mood mood) {
+//    public void sizeColors(Mood mood, LinearLayout linearLayout) {
+//
 //        switch (Mood.ARRAY_BACKGROUND_COLOR) {
 //            case 1 :
 //                LinearLayout.LayoutParams color0 = new LinearLayout.LayoutParams(20, 1);
