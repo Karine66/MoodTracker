@@ -63,6 +63,13 @@ public class HistoryActivity extends AppCompatActivity {
     private SharedPreferences mPrefsComment;
     private Context mContext;
     private Mood mood;
+    private int newSizeColor;
+    public LinearLayout.LayoutParams color0;
+    public LinearLayout.LayoutParams color1;
+    public LinearLayout.LayoutParams color2;
+    public LinearLayout.LayoutParams color3;
+    public LinearLayout.LayoutParams color4;
+    private LinearLayout linearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,23 +100,26 @@ public class HistoryActivity extends AppCompatActivity {
         view4 = findViewById(R.id.days5_ago);
         view5 = findViewById(R.id.days6_ago);
         view6 = findViewById(R.id.days7_ago);
+        //backgrounds
 
         //déclaration
         moodStorage = new MoodStorage(this);
 
-        retrieveComment();
         retrieveBackground();
+        retrieveComment();
         retrieveDate();
+
     }
 
     private void retrieveComment() {
 
-        olderComments(moodStorage);
+        olderComments(moodStorage, imageView);
     }
 
     public void retrieveBackground() {
 
         colorBackground(moodStorage);
+       // colors(mood, linearLayout);
 
     }
 
@@ -144,11 +154,12 @@ public class HistoryActivity extends AppCompatActivity {
 
     public long olderDays(String date, String dayDate, TextView textView) {
 
-        dayAgoResult = daysBetween(date, dayDate);
+        dayAgoResult = daysBetween(dayDate, date);
         // dayAgoResult = 1;
         switch ((int) dayAgoResult) {
             case 0:
-                textView.setText("Aujourd'hui");
+                //aujourd'hui
+                break;
             case 1:
                 textView.setText("Hier");
                 break;
@@ -204,9 +215,9 @@ public class HistoryActivity extends AppCompatActivity {
         }
     }
 
-    public void olderComments(final MoodStorage moodStorage) {
+    public void olderComments(final MoodStorage moodStorage, ImageView imageView) {
 
-        if (moodStorage.getMoodStorage().size() >=7 &&(moodStorage.getCommentStorage().get(6) == null ||
+        if (moodStorage.getCommentStorage().size() >= 7 && (moodStorage.getCommentStorage().get(6) == null ||
                 moodStorage.getCommentStorage().get(6).trim().isEmpty())) {
             mHistorybtn1.setVisibility(INVISIBLE);
         } else {
@@ -219,7 +230,7 @@ public class HistoryActivity extends AppCompatActivity {
                 }
             });
         }
-        if (moodStorage.getMoodStorage().size() >= 6 && (moodStorage.getCommentStorage().get(5) == null ||
+        if (moodStorage.getCommentStorage().size() >= 6 && (moodStorage.getCommentStorage().get(5) == null ||
                 moodStorage.getCommentStorage().get(5).trim().isEmpty())) {
             mHistorybtn2.setVisibility(INVISIBLE);
         } else {
@@ -233,7 +244,7 @@ public class HistoryActivity extends AppCompatActivity {
                 }
             });
         }
-        if (moodStorage.getMoodStorage().size() >= 5 && (moodStorage.getCommentStorage().get(4) == null ||
+        if (moodStorage.getCommentStorage().size() >= 5 && (moodStorage.getCommentStorage().get(4) == null ||
                 moodStorage.getCommentStorage().get(4).trim().isEmpty())) {
             mHistorybtn3.setVisibility(INVISIBLE);
         } else {
@@ -247,7 +258,7 @@ public class HistoryActivity extends AppCompatActivity {
             });
         }
 
-        if (moodStorage.getMoodStorage().size() >= 4 && (moodStorage.getCommentStorage().get(3) == null ||
+        if (moodStorage.getCommentStorage().size() >= 4 && (moodStorage.getCommentStorage().get(3) == null ||
                 moodStorage.getCommentStorage().get(3).trim().isEmpty())) {
             mHistorybtn4.setVisibility(INVISIBLE);
         } else {
@@ -260,7 +271,7 @@ public class HistoryActivity extends AppCompatActivity {
                 }
             });
         }
-        if (moodStorage.getMoodStorage().size() >= 3 && (moodStorage.getCommentStorage().get(2) == null ||
+        if (moodStorage.getCommentStorage().size() >= 3 && (moodStorage.getCommentStorage().get(2) == null ||
                 moodStorage.getCommentStorage().get(2).trim().isEmpty())) {
             mHistorybtn5.setVisibility(INVISIBLE);
         } else {
@@ -273,7 +284,7 @@ public class HistoryActivity extends AppCompatActivity {
                 }
             });
         }
-        if (moodStorage.getMoodStorage().size() >= 2 && (moodStorage.getCommentStorage().get(1) == null ||
+        if (moodStorage.getCommentStorage().size() >= 2 && (moodStorage.getCommentStorage().get(1) == null ||
                 moodStorage.getCommentStorage().get(1).trim().isEmpty())) {
             mHistorybtn6.setVisibility(INVISIBLE);
         } else {
@@ -286,7 +297,7 @@ public class HistoryActivity extends AppCompatActivity {
                 }
             });
         }
-        if (moodStorage.getMoodStorage().size() >=1  && (moodStorage.getCommentStorage().get(0) == null ||
+        if (moodStorage.getCommentStorage().size() >= 1 && (moodStorage.getCommentStorage().get(0) == null ||
                 moodStorage.getCommentStorage().get(0).trim().isEmpty())) {
             mHistorybtn7.setVisibility(INVISIBLE);
         } else {
@@ -300,28 +311,65 @@ public class HistoryActivity extends AppCompatActivity {
 
             });
         }
+//        if(moodStorage.getCommentStorage().) {
+//            imageView.setVisibility(INVISIBLE);
+//        }
     }
 
-//    public void sizeColors(Mood mood, LinearLayout linearLayout) {
-//
-//        switch (Mood.ARRAY_BACKGROUND_COLOR) {
-//            case 1 :
-//                LinearLayout.LayoutParams color0 = new LinearLayout.LayoutParams(20, 1);
-//                break;
-//            case 2:
-//                LinearLayout.LayoutParams color1 = new LinearLayout.LayoutParams(30, 1);
-//                break;
-//            case 2:
-//                LinearLayout.LayoutParams color2 = new LinearLayout.LayoutParams(40, 1);
-//                break;
-//            case 3:
-//                LinearLayout.LayoutParams color3 = new LinearLayout.LayoutParams(50, 1);
-//                break;
-//            case 4:
-//                LinearLayout.LayoutParams color4 = new LinearLayout.LayoutParams(100, 1);
-//                break;
-//        }
-//    }
+
+    public int colors (Mood mood, LinearLayout linearLayout) {
+
+        newSizeColor = colorsSize();
+
+        switch (newSizeColor) {
+
+            case 0:
+                linearLayout.setBackgroundColor(newSizeColor);
+                break;
+            case 1:
+                linearLayout.setBackgroundColor(newSizeColor);
+                break;
+            case 2:
+                linearLayout.setBackgroundColor(newSizeColor);
+                break;
+            case 3:
+                linearLayout.setBackgroundColor(newSizeColor);
+                break;
+            case 4:
+                linearLayout.setBackgroundColor(newSizeColor);
+                break;
+            case 5:
+                linearLayout.setBackgroundColor(newSizeColor);
+                break;
+            case 6:
+                linearLayout.setBackgroundColor(newSizeColor);
+                break;
+        }
+        return newSizeColor;
+    }
+
+
+
+    public int colorsSize() {
+
+        if (mood.getSelectedMood() == R.color.faded_red) {
+            LinearLayout.LayoutParams color0 = new LinearLayout.LayoutParams(20, 1);
+            if (mood.getSelectedMood() == R.color.warm_grey) {
+                LinearLayout.LayoutParams color1 = new LinearLayout.LayoutParams(30, 1);
+                if (mood.getSelectedMood() == R.color.cornflower_blue_65) {
+                    LinearLayout.LayoutParams color2 = new LinearLayout.LayoutParams(40, 1);
+                    if (mood.getSelectedMood() == R.color.light_sage) {
+                        LinearLayout.LayoutParams color3 = new LinearLayout.LayoutParams(60, 1);
+                        if (mood.getSelectedMood() == R.color.banana_yellow) {
+                            LinearLayout.LayoutParams color4 = new LinearLayout.LayoutParams(100, 1);
+                        }
+
+                    }
+                }
+            }
+        }
+        return newSizeColor;
+    }
 }
 
 

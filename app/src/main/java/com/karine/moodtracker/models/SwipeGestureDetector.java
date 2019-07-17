@@ -41,9 +41,6 @@ public class SwipeGestureDetector extends GestureDetector {
             public void onSwipe(SwipeGestureDetector.SwipeDirection direction) {
                 ImageView imagePic = (ImageView) context.findViewById(R.id.view);
 
-                context.saveDate();
-
-
                 switch (direction) {
                     case BOTTOM_TO_TOP:
 
@@ -82,6 +79,7 @@ public class SwipeGestureDetector extends GestureDetector {
                 mood.setSelectedMood(context.getCounter());
                 context.saveBackground();
                 context.saveComment();
+                context.saveDate();
             }
 
         });

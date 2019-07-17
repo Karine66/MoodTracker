@@ -39,8 +39,9 @@ public class MoodStorage {
 
         mContext = context;
         retrieveMoodStore();
-        retrieveDateStore();
         retrieveCommentStore();
+        retrieveDateStore();
+
     }
 
     public void moodStoreAdd(Mood mood) {
@@ -53,7 +54,7 @@ public class MoodStorage {
         } else if (dateStorage.indexOf(dayDate) == -1 && moodStorage.size() >= 7){
            moodStorage.remove(0);
             moodStorage.add(mood.getSelectedMood());
-        } else if (dateStorage.indexOf(dayDate) != -1){
+        } else if (dateStorage.indexOf(dayDate) != -1 && (moodStorage.size() > 0)) {
           moodStorage.remove(dateStorage.indexOf(dayDate));
             moodStorage.add(mood.getSelectedMood());
         }
@@ -74,7 +75,7 @@ public class MoodStorage {
         Calendar mCalendar = Calendar.getInstance();
         SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String dayDate = jsonDateFormat.format(mCalendar.getTime());
-
+//
 //        if (dateStorage.indexOf(dayDate) == -1 && commentStorage.size() <= 6) {
 //            commentStorage.add(comment);
         if (dateStorage.indexOf(dayDate) == -1 && commentStorage.size() >= 7){
@@ -82,13 +83,13 @@ public class MoodStorage {
 //             commentStorage.add(comment);
 //        } else if (dateStorage.indexOf(dayDate) != -1 && commentStorage.size() <= 6){
 //            commentStorage.add(comment);
-        }else if (dateStorage.indexOf(dayDate) != -1 && (commentStorage.size() >= 7)) {
+        }else if (dateStorage.indexOf(dayDate) != -1 && (commentStorage.size() > 0)) {
             commentStorage.remove(dateStorage.indexOf(dayDate));
 
         }
 
         commentStorage.add(comment);
-        System.out.println(commentStorage);
+            System.out.println(commentStorage);
         }
 
 

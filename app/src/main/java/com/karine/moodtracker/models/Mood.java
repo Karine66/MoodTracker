@@ -7,11 +7,7 @@ import com.karine.moodtracker.R;
  */
 public class Mood {
 
-//    public LinearLayout.LayoutParams color0;
-//    public LinearLayout.LayoutParams color1;
-//    public LinearLayout.LayoutParams color2;
-//    public LinearLayout.LayoutParams color3;
-//    public LinearLayout.LayoutParams color4;
+
 
     //Array moods
     public static final int[] ARRAY_MOODS = new int[]{

@@ -70,9 +70,9 @@ public class MainActivity extends AppCompatActivity {
         mGestureDetector = new SwipeGestureDetector(this, mMood, mView);
 
         saveBackground();
+        saveComment();
         saveDate();
 
-        saveComment();
         Intent intent = getIntent();
         if (intent.getIntExtra("position", -1) != -1) {
 
