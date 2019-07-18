@@ -26,7 +26,6 @@ public class MoodStorage {
     public ArrayList<String> dateStorage;
     public ArrayList<String> commentStorage;
     private Context mContext;
-    private Date mDaydate;
     private SharedPreferences.Editor editorStore;
     private SharedPreferences myPrefs;
     private String dayDate;
@@ -41,7 +40,6 @@ public class MoodStorage {
         retrieveMoodStore();
         retrieveCommentStore();
         retrieveDateStore();
-
     }
 
     public void moodStoreAdd(Mood mood) {
@@ -75,26 +73,17 @@ public class MoodStorage {
         Calendar mCalendar = Calendar.getInstance();
         SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String dayDate = jsonDateFormat.format(mCalendar.getTime());
-//
-//        if (dateStorage.indexOf(dayDate) == -1 && commentStorage.size() <= 6) {
-//            commentStorage.add(comment);
+
         if (dateStorage.indexOf(dayDate) == -1 && commentStorage.size() >= 7){
           commentStorage.remove(0);
-//             commentStorage.add(comment);
-//        } else if (dateStorage.indexOf(dayDate) != -1 && commentStorage.size() <= 6){
-//            commentStorage.add(comment);
+
         }else if (dateStorage.indexOf(dayDate) != -1 && (commentStorage.size() > 0)) {
             commentStorage.remove(dateStorage.indexOf(dayDate));
-
         }
 
         commentStorage.add(comment);
             System.out.println(commentStorage);
         }
-
-
-
-
 
     public ArrayList<Integer> getMoodStorage() {
         return moodStorage;
@@ -124,7 +113,6 @@ public class MoodStorage {
         SharedPreferences.Editor mEdit = sharePrefsDate.edit();
         mEdit.putString("save_dateStorage", gson.toJson(dateStorage));
         mEdit.apply();
-
     }
 
     public void saveCommentStore() {

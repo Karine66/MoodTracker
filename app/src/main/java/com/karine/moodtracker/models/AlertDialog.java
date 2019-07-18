@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 import com.karine.moodtracker.R;
 import org.json.JSONObject;
 
@@ -62,12 +61,6 @@ public class AlertDialog implements View.OnClickListener {
 
                     mMoodStorage.commentStoreAdd(comment);
                     mMoodStorage.saveCommentStore();
-
-
-//                   mEditor.putString("saved", comment);
-//                   mEditor.apply();
-
-                   Toast.makeText(mContext.getApplicationContext(), comment, Toast.LENGTH_SHORT).show();
             }
         });
 

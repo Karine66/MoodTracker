@@ -57,15 +57,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getWindow().getDecorView().setBackgroundResource(R.color.light_sage);
-
         //Declaration
-
         mMoodStorage = new MoodStorage(this);
         mMood = new Mood(counter);
         mView = this.getWindow().getDecorView();
         mNoteAdd = findViewById(R.id.note_add_btn);
         mHistory = findViewById(R.id.history_black_button);
-
         //Instatiation SwipeGestureDetector
         mGestureDetector = new SwipeGestureDetector(this, mMood, mView);
 
@@ -78,9 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
                 String comment = et.getText().toString();
         }
-
         mNoteAdd.setOnClickListener(new AlertDialog(MainActivity.this, mPreferences, mEditor, mSaved, mMoodStorage));
-
         //Connect History Button
         mHistory.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,10 +90,6 @@ public class MainActivity extends AppCompatActivity {
        Calendar mCalendar = Calendar.getInstance();
        SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/yyyy");
        String dayDate = jsonDateFormat.format(mCalendar.getTime());
-//        SharedPreferences myPrefs = getSharedPreferences("save_date", MODE_PRIVATE);
-//        SharedPreferences.Editor mEdit = myPrefs.edit();
-//        mEdit.putString("save_date", dayDate);
-//        mEdit.apply();
         mMoodStorage.dateStoreAdd(dayDate);
         mMoodStorage.saveDateStore();
 
@@ -106,27 +97,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void saveBackground() {
-
         mMoodStorage.moodStoreAdd(mMood);
         mMoodStorage.saveMoodStore();
 
         Log.d("Test", "Mood" + mMoodStorage.getMoodStorage());
-
     }
 
     public void saveComment() {
-
-//        mPreferences = getSharedPreferences("saved", Context.MODE_PRIVATE);
-//        mEditor = mPreferences.edit();
-//        mEditor.remove("saved");
-//        mEditor.apply();
- //       et = findViewById(R.id.mood_dialog);
-    //   mHistory = findViewById(R.id.history_black_button);
         mMoodStorage.commentStoreAdd(mComment);
         mMoodStorage.saveCommentStore();
-
     }
-
     //interceps all event relative to touch and give to GestureDetector
     @Override
     public boolean onTouchEvent(MotionEvent event) {
