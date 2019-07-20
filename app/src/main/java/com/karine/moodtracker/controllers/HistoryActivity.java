@@ -2,12 +2,15 @@ package com.karine.moodtracker.controllers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.karine.moodtracker.R;
@@ -64,11 +67,7 @@ public class HistoryActivity extends AppCompatActivity {
     private Context mContext;
     private Mood mood;
     private int newSizeColor;
-    public LinearLayout.LayoutParams color0;
-    public LinearLayout.LayoutParams color1;
-    public LinearLayout.LayoutParams color2;
-    public LinearLayout.LayoutParams color3;
-    public LinearLayout.LayoutParams color4;
+   private LinearLayout.LayoutParams params;
     private LinearLayout linearLayout;
 
 
@@ -102,6 +101,7 @@ public class HistoryActivity extends AppCompatActivity {
         view5 = findViewById(R.id.days6_ago);
         view6 = findViewById(R.id.days7_ago);
 
+
         //déclaration
         moodStorage = new MoodStorage(this);
 
@@ -118,8 +118,9 @@ public class HistoryActivity extends AppCompatActivity {
 
     public void retrieveBackground() {
 
+
         colorBackground(moodStorage);
-        // colors(mood, linearLayout);
+        colors(linearLayout);
 
     }
 
@@ -271,7 +272,7 @@ public class HistoryActivity extends AppCompatActivity {
             });
         }
         if (moodStorage.getCommentStorage().size() < 3 || moodStorage.getCommentStorage().size() >= 3 && (moodStorage.getCommentStorage().get(2) == null ||
-                moodStorage.getCommentStorage().get(2).trim().isEmpty())){
+                moodStorage.getCommentStorage().get(2).trim().isEmpty())) {
             mHistorybtn5.setVisibility(INVISIBLE);
         } else {
             mHistorybtn5.setVisibility(VISIBLE);
@@ -296,7 +297,7 @@ public class HistoryActivity extends AppCompatActivity {
                 }
             });
         }
-        if (moodStorage.getCommentStorage().size() <1 ||moodStorage.getCommentStorage().size() >= 1 && (moodStorage.getCommentStorage().get(0) == null ||
+        if (moodStorage.getCommentStorage().size() < 1 || moodStorage.getCommentStorage().size() >= 1 && (moodStorage.getCommentStorage().get(0) == null ||
                 moodStorage.getCommentStorage().get(0).trim().isEmpty())) {
             mHistorybtn7.setVisibility(INVISIBLE);
         } else {
@@ -312,51 +313,52 @@ public class HistoryActivity extends AppCompatActivity {
         }
     }
 
-    public int colors (Mood mood, LinearLayout linearLayout) {
+    public void colors(LinearLayout linearLayout) {
 
-        newSizeColor = colorsSize();
+        newSizeColor = colorsSize(mood);
 
         switch (newSizeColor) {
 
             case 0:
-                linearLayout.setBackgroundColor(newSizeColor);
+                linearLayout.setLayoutParams(params);
                 break;
             case 1:
-                linearLayout.setBackgroundColor(newSizeColor);
+                linearLayout.setLayoutParams(params);
                 break;
             case 2:
-                linearLayout.setBackgroundColor(newSizeColor);
+                linearLayout.setLayoutParams(params);
                 break;
             case 3:
-                linearLayout.setBackgroundColor(newSizeColor);
+                linearLayout.setLayoutParams(params);
                 break;
             case 4:
-                linearLayout.setBackgroundColor(newSizeColor);
+                linearLayout.setLayoutParams(params);
                 break;
             case 5:
-                linearLayout.setBackgroundColor(newSizeColor);
+                linearLayout.setLayoutParams(params);
                 break;
             case 6:
-                linearLayout.setBackgroundColor(newSizeColor);
+                linearLayout.setLayoutParams(params);
+                break;
+            case 7:
+                linearLayout.setLayoutParams(params);
                 break;
         }
-        return newSizeColor;
     }
 
-    public int colorsSize() {
+    public int colorsSize(Mood mood) {
 
-        if (mood.getSelectedMood() == R.color.faded_red) {
-            LinearLayout.LayoutParams color0 = new LinearLayout.LayoutParams(20, 1);
-            if (mood.getSelectedMood() == R.color.warm_grey) {
-                LinearLayout.LayoutParams color1 = new LinearLayout.LayoutParams(30, 1);
-                if (mood.getSelectedMood() == R.color.cornflower_blue_65) {
-                    LinearLayout.LayoutParams color2 = new LinearLayout.LayoutParams(40, 1);
-                    if (mood.getSelectedMood() == R.color.light_sage) {
-                        LinearLayout.LayoutParams color3 = new LinearLayout.LayoutParams(60, 1);
-                        if (mood.getSelectedMood() == R.color.banana_yellow) {
-                            LinearLayout.LayoutParams color4 = new LinearLayout.LayoutParams(100, 1);
+        if (ARRAY_BACKGROUND_COLOR[mood.getSelectedMood()] == 0) {
+          new LinearLayout.LayoutParams(20,20);
+            if (ARRAY_BACKGROUND_COLOR[mood.getSelectedMood()] == 1) {
+                new LinearLayout.LayoutParams(30,20);
+                if (ARRAY_BACKGROUND_COLOR[mood.getSelectedMood()] == 2) {
+                    new LinearLayout.LayoutParams(40,20);
+                    if (ARRAY_BACKGROUND_COLOR[mood.getSelectedMood()] == 3) {
+                       new LinearLayout.LayoutParams(60,20);
+                        if (ARRAY_BACKGROUND_COLOR[mood.getSelectedMood()] == 4) {
+                           new LinearLayout.LayoutParams(100,20);
                         }
-
                     }
                 }
             }
