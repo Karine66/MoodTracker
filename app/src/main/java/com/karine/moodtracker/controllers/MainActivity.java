@@ -15,6 +15,8 @@ import com.karine.moodtracker.models.Mood;
 import com.karine.moodtracker.models.MoodStorage;
 import com.karine.moodtracker.models.SwipeGestureDetector;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList <Integer> moodStorage;
     private String mdayDate;
     private String mComment;
+    private ImageView mShare;
 
     public int getCounter() {
         return counter;
@@ -63,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         mView = this.getWindow().getDecorView();
         mNoteAdd = findViewById(R.id.note_add_btn);
         mHistory = findViewById(R.id.history_black_button);
+        mShare = findViewById(R.id.share_button);
         //Instatiation SwipeGestureDetector
         mGestureDetector = new SwipeGestureDetector(this, mMood, mView);
 
@@ -70,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         saveComment();
         saveDate();
 
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         if (intent.getIntExtra("position", -1) != -1) {
 
                 String comment = et.getText().toString();
@@ -82,6 +86,17 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent myIntent = new Intent(MainActivity.this, HistoryActivity.class);
                 startActivity(myIntent);
+            }
+        });
+        mShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(Intent.ACTION_SEND);
+                intent1.setType("message/rfc822");
+               // intent1.putExtra(Intent.EXTRA_TEXT, mMoodStorage.getCommentStorage().get(5));
+                intent1.putExtra(Intent.EXTRA_SUBJECT, "Mon Humeur du jour !");
+                intent1.putExtra(Intent.EXTRA_EMAIL, new String[] {"kada1973@gmail.com"});
+                startActivity(Intent.createChooser(intent1, "Envoyer un mail"));
             }
         });
     }

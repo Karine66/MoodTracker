@@ -7,8 +7,6 @@
     tools:context="controllers.MainActivity"
     >
 
-
-
     <ImageView
         android:id="@+id/view"
         android:layout_width="wrap_content"
@@ -20,27 +18,37 @@
        android:src="@drawable/smiley_happy"
        />
 
-    <ImageView
+   <ImageView
         android:id="@+id/note_add_btn"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="100dp"
-        android:layout_marginLeft="50dp"
-        android:contentDescription="TODO"
+        android:layout_marginStart="50dp"
+        android:contentDescription="@+String/MoodTracker_NoteAdd"
         android:src="@drawable/ic_note_add_black" />
 
     <ImageView
         android:id="@+id/history_black_button"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="100dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginEnd="50dp"
+        android:contentDescription="@+String/MoodTracker_History_Button"
         android:src="@drawable/ic_history_black" />
 
-
-
+    <ImageView
+        android:id="@+id/share_button"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="170dp"
+        android:layout_marginBottom="100dp"
+        android:contentDescription="@+String/MoodTracker_Share_Button"
+        android:src="@drawable/ic_share_black_48" />
 
 </RelativeLayout>

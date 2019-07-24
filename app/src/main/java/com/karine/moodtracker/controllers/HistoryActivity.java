@@ -124,12 +124,12 @@ public class HistoryActivity extends AppCompatActivity {
 
 
         colorBackground(moodStorage);
-        colors(moodStorage,linearLayout);
-
-        ViewGroup.LayoutParams params = view6.getLayoutParams();
-       // params.width =40;
-        params.width =convertDpToPixel(360, getApplicationContext());
-        view6.setLayoutParams(params);
+//        colors(moodStorage,linearLayout);
+//
+//        ViewGroup.LayoutParams params = view6.getLayoutParams();
+//       // params.width =40;
+//        params.width =convertDpToPixel(360, getApplicationContext());
+//        view6.setLayoutParams(params);
     }
 
     public void retrieveDate() {
@@ -325,71 +325,71 @@ public class HistoryActivity extends AppCompatActivity {
         return (int) (dp * (((float) context.getResources().getDisplayMetrics().densityDpi) / 160.0f));
     }
 
-    public void colors(MoodStorage moodStorage,LinearLayout linearLayout) {
-
-       newColorSize = colorsSize(moodStorage, linearLayout);
-       ViewGroup.LayoutParams params =  linearLayout.getLayoutParams();
-
-        switch (newColorSize) {
-
-            case 0:
-                linearLayout.setLayoutParams(params);
-                break;
-            case 1:
-                linearLayout.setLayoutParams(params);
-                break;
-            case 2:
-                linearLayout.setLayoutParams(params);
-                break;
-            case 3:
-                linearLayout.setLayoutParams(params);
-                break;
-            case 4:
-                linearLayout.setLayoutParams(params);
-                break;
-            case 5:
-                linearLayout.setLayoutParams(params);
-                break;
-            case 6:
-                linearLayout.setLayoutParams(params);
-                break;
-
-
-        }
-    }
-    public int colorsSize(MoodStorage moodStorage, LinearLayout linearLayout) {
-
-        ArrayList <Integer> newSizeColor = new ArrayList<>(moodStorage.getMoodStorage());
-
-
-        if (newSizeColor.contains(R.color.faded_red)) {
-            //  linearLayout.setBackgroundColor(getResources().getColor(R.color.faded_red));
-            params.width = convertDpToPixel(50, getApplicationContext());
-
-            if (newSizeColor.contains(R.color.warm_grey)) {
-                // linearLayout.setBackgroundColor(getResources().getColor(R.color.warm_grey));
-                params.width = convertDpToPixel(80,getApplicationContext());
-
-                if (newSizeColor.contains(R.color.cornflower_blue_65)) {
-                    // linearLayout.setBackgroundColor(getResources().getColor(R.color.cornflower_blue_65));
-                    params.width = convertDpToPixel(160, getApplicationContext());
-
-                    if (newSizeColor.contains(R.color.light_sage)) {
-                        // linearLayout.setBackgroundColor(getResources().getColor(R.color.light_sage));
-                        params.width = convertDpToPixel(260, getApplicationContext());
-
-                        if (newSizeColor.contains(R.color.banana_yellow)) {
-                            // linearLayout.setBackgroundColor(getResources().getColor(R.color.banana_yellow));
-                            params.width = convertDpToPixel(360, getApplicationContext());
-
-                        }
-                    }
-                }
-            }
-        }
-        return newColorSize;
-
-    }
+//    public void colors(MoodStorage moodStorage,LinearLayout linearLayout) {
+//
+//       newColorSize = colorsSize(moodStorage, linearLayout);
+//       ViewGroup.LayoutParams params =  linearLayout.getLayoutParams();
+//
+//        switch (newColorSize) {
+//
+//            case 0:
+//                linearLayout.setLayoutParams(params);
+//                break;
+//            case 1:
+//                linearLayout.setLayoutParams(params);
+//                break;
+//            case 2:
+//                linearLayout.setLayoutParams(params);
+//                break;
+//            case 3:
+//                linearLayout.setLayoutParams(params);
+//                break;
+//            case 4:
+//                linearLayout.setLayoutParams(params);
+//                break;
+//            case 5:
+//                linearLayout.setLayoutParams(params);
+//                break;
+//            case 6:
+//                linearLayout.setLayoutParams(params);
+//                break;
+//
+//
+//        }
+//    }
+//    public int colorsSize(MoodStorage moodStorage, LinearLayout linearLayout) {
+//
+//        ArrayList <Integer> newSizeColor = new ArrayList<>(moodStorage.getMoodStorage());
+//
+//
+//        if (newSizeColor.contains(R.color.faded_red)) {
+//            //  linearLayout.setBackgroundColor(getResources().getColor(R.color.faded_red));
+//            params.width = convertDpToPixel(50, getApplicationContext());
+//
+//            if (newSizeColor.contains(R.color.warm_grey)) {
+//                // linearLayout.setBackgroundColor(getResources().getColor(R.color.warm_grey));
+//                params.width = convertDpToPixel(80,getApplicationContext());
+//
+//                if (newSizeColor.contains(R.color.cornflower_blue_65)) {
+//                    // linearLayout.setBackgroundColor(getResources().getColor(R.color.cornflower_blue_65));
+//                    params.width = convertDpToPixel(160, getApplicationContext());
+//
+//                    if (newSizeColor.contains(R.color.light_sage)) {
+//                        // linearLayout.setBackgroundColor(getResources().getColor(R.color.light_sage));
+//                        params.width = convertDpToPixel(260, getApplicationContext());
+//
+//                        if (newSizeColor.contains(R.color.banana_yellow)) {
+//                            // linearLayout.setBackgroundColor(getResources().getColor(R.color.banana_yellow));
+//                            params.width = convertDpToPixel(360, getApplicationContext());
+//
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        return newColorSize;
+//
+//    }
 
 }
 
