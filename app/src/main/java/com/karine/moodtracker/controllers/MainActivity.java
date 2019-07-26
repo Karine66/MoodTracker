@@ -1,5 +1,6 @@
 package com.karine.moodtracker.controllers;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,6 +10,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import com.karine.moodtracker.R;
 import com.karine.moodtracker.models.AlertDialog;
 import com.karine.moodtracker.models.Mood;
@@ -93,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent1 = new Intent(Intent.ACTION_SEND);
                 intent1.setType("message/rfc822");
+                intent1.putExtra("storage", "");
                // intent1.putExtra(Intent.EXTRA_TEXT, mMoodStorage.getCommentStorage().get(5));
                 intent1.putExtra(Intent.EXTRA_SUBJECT, "Mon Humeur du jour !");
                 intent1.putExtra(Intent.EXTRA_EMAIL, new String[] {"kada1973@gmail.com"});
