@@ -98,12 +98,10 @@ public class MainActivity extends AppCompatActivity {
 
                 if (mMoodStorage.getCommentStorage() == null || mMoodStorage.getCommentStorage().isEmpty() || mMoodStorage.getCommentStorage().get(mMoodStorage.getCommentStorage().size() - 1) == null) {
                      intent1.putExtra(Intent.EXTRA_TEXT, convertStringMood(mMoodStorage.getMoodStorage().get(mMoodStorage.getMoodStorage().size() -1)));
-
                 } else {
                     intent1.putExtra(Intent.EXTRA_TEXT, mMoodStorage.getCommentStorage().get(mMoodStorage.getCommentStorage().size() - 1));
                 }
                 intent1.putExtra(Intent.EXTRA_SUBJECT, "Mon Humeur du jour !");
-                intent1.putExtra(Intent.EXTRA_EMAIL, new String[]{"kada1973@gmail.com"});
                 startActivity(Intent.createChooser(intent1, "Envoyer un mail"));
             }
         });
