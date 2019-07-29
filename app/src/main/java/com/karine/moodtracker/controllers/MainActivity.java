@@ -25,6 +25,7 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
+
     private SwipeGestureDetector mGestureDetector;
     private SharedPreferences mPreferences;
     private SharedPreferences.Editor mEditor;
@@ -40,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Integer> moodStorage;
     private String mdayDate;
     private String mComment;
+    private String convertMood;
+    private int ARRAY_BACKGROUND_COLOR;
 
 
     public int getCounter() {
@@ -98,8 +101,8 @@ public class MainActivity extends AppCompatActivity {
                 intent1.setType("message/rfc822");
 
                 if (mMoodStorage.getCommentStorage() == null || mMoodStorage.getCommentStorage().isEmpty() || mMoodStorage.getCommentStorage().get(mMoodStorage.getCommentStorage().size() - 1) == null) {
+                     intent1.putExtra(Intent.EXTRA_TEXT, convertStringMood(mMoodStorage.getMoodStorage().get(mMoodStorage.getMoodStorage().size() -1)));
 
-                    Toast.makeText(getApplicationContext(), "Pas de commentaire à envoyer", Toast.LENGTH_SHORT).show();
                 } else {
                     intent1.putExtra(Intent.EXTRA_TEXT, mMoodStorage.getCommentStorage().get(mMoodStorage.getCommentStorage().size() - 1));
                 }
@@ -138,7 +141,35 @@ public class MainActivity extends AppCompatActivity {
         this.mGestureDetector.onTouchEvent(event);
         return super.onTouchEvent(event);
     }
-}
+
+    public String convertStringMood(int index) {
+
+        String convertMood = "";
+
+        switch (index) {
+            case 0:
+                convertMood = "Je suis de très mauvaise humeur !!!";
+                break;
+            case 1:
+                convertMood = "Je suis de mauvaise humeur !!";
+                break;
+            case 2:
+                convertMood = "Je suis d'une humeur normale";
+                break;
+            case 3:
+                convertMood = "Je suis de bonne humeur !";
+                break;
+            case 4:
+                convertMood = "Je suis de très bonne humeur !!";
+                break;
+        }
+        return convertMood;
+    }
+    }
+
+
+
+
 
 
 

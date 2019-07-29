@@ -116,6 +116,7 @@ public class HistoryActivity extends AppCompatActivity {
 
     public void retrieveBackground() {
         colorBackground(moodStorage);
+
     }
 
     public void retrieveDate() {
@@ -348,6 +349,8 @@ public class HistoryActivity extends AppCompatActivity {
         width *= index + 2;
         return width;
     }
+
+
 
 }
 
