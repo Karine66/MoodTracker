@@ -27,23 +27,24 @@ public class Mood {
             R.color.banana_yellow,
     };
 
-        private int selectedMood;
+    private int selectedMood;
 
-        //constructor
-    public Mood( int selectedMood){
+    //constructor
+    public Mood(int selectedMood) {
 
-            this.selectedMood = selectedMood;
-        }
-        // create getter et setter
-        public int getSelectedMood () {
-
-            return selectedMood;
-        }
-
-        public void setSelectedMood ( int selectedMood){
-
-            this.selectedMood = selectedMood;
-        }
+        this.selectedMood = selectedMood;
     }
+
+    // create getter et setter
+    public int getSelectedMood() {
+
+        return selectedMood;
+    }
+
+    public void setSelectedMood(int selectedMood) {
+
+        this.selectedMood = selectedMood;
+    }
+}
 
 

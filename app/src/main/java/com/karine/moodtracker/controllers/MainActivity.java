@@ -1,6 +1,5 @@
 package com.karine.moodtracker.controllers;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -17,8 +16,8 @@ import com.karine.moodtracker.models.AlertDialog;
 import com.karine.moodtracker.models.Mood;
 import com.karine.moodtracker.models.MoodStorage;
 import com.karine.moodtracker.models.SwipeGestureDetector;
+
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,13 +33,14 @@ public class MainActivity extends AppCompatActivity {
     private int counter = 3;
     private ImageView mNoteAdd;
     private ImageView mHistory;
+    private ImageView mShare;
     private EditText et;
     private JSONObject mSaved = new JSONObject();
     private MoodStorage mMoodStorage;
-    private ArrayList <Integer> moodStorage;
+    private ArrayList<Integer> moodStorage;
     private String mdayDate;
     private String mComment;
-    private ImageView mShare;
+
 
     public int getCounter() {
         return counter;
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         final Intent intent = getIntent();
         if (intent.getIntExtra("position", -1) != -1) {
 
-                String comment = et.getText().toString();
+            String comment = et.getText().toString();
         }
         mNoteAdd.setOnClickListener(new AlertDialog(MainActivity.this, mPreferences, mEditor, mSaved, mMoodStorage));
         //Connect History Button
@@ -96,23 +96,28 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent1 = new Intent(Intent.ACTION_SEND);
                 intent1.setType("message/rfc822");
-                intent1.putExtra("storage", "");
-               // intent1.putExtra(Intent.EXTRA_TEXT, mMoodStorage.getCommentStorage().get(5));
+
+                if (mMoodStorage.getCommentStorage() == null || mMoodStorage.getCommentStorage().isEmpty() || mMoodStorage.getCommentStorage().get(mMoodStorage.getCommentStorage().size() - 1) == null) {
+
+                    Toast.makeText(getApplicationContext(), "Pas de commentaire à envoyer", Toast.LENGTH_SHORT).show();
+                } else {
+                    intent1.putExtra(Intent.EXTRA_TEXT, mMoodStorage.getCommentStorage().get(mMoodStorage.getCommentStorage().size() - 1));
+                }
                 intent1.putExtra(Intent.EXTRA_SUBJECT, "Mon Humeur du jour !");
-                intent1.putExtra(Intent.EXTRA_EMAIL, new String[] {"kada1973@gmail.com"});
+                intent1.putExtra(Intent.EXTRA_EMAIL, new String[]{"kada1973@gmail.com"});
                 startActivity(Intent.createChooser(intent1, "Envoyer un mail"));
             }
         });
     }
 
     public void saveDate() {
-       Calendar mCalendar = Calendar.getInstance();
-       SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-       String dayDate = jsonDateFormat.format(mCalendar.getTime());
+        Calendar mCalendar = Calendar.getInstance();
+        SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String dayDate = jsonDateFormat.format(mCalendar.getTime());
         mMoodStorage.dateStoreAdd(dayDate);
         mMoodStorage.saveDateStore();
 
-        Log.d("Test_DateStorage", "DateStorage"+ mMoodStorage.getDateStorage());
+        Log.d("Test_DateStorage", "DateStorage" + mMoodStorage.getDateStorage());
     }
 
     public void saveBackground() {
@@ -126,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
         mMoodStorage.commentStoreAdd(mComment);
         mMoodStorage.saveCommentStore();
     }
+
     //interceps all event relative to touch and give to GestureDetector
     @Override
     public boolean onTouchEvent(MotionEvent event) {

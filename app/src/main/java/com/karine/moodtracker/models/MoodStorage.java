@@ -3,18 +3,12 @@ package com.karine.moodtracker.models;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
-import android.widget.EditText;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-
 import static android.content.Context.MODE_PRIVATE;
 
 /**

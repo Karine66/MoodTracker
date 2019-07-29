@@ -4,25 +4,26 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.karine.moodtracker.R;
 import com.karine.moodtracker.models.Mood;
 import com.karine.moodtracker.models.MoodStorage;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+
 import static android.view.View.INVISIBLE;
 import static android.view.View.OnClickListener;
 import static android.view.View.VISIBLE;
@@ -54,7 +55,6 @@ public class HistoryActivity extends AppCompatActivity {
     private long daysBetween;
     private SharedPreferences.Editor editorStore;
     private MoodStorage moodStorage;
-    private View view;
     private View view0;
     private View view1;
     private View view2;
@@ -68,18 +68,9 @@ public class HistoryActivity extends AppCompatActivity {
     private SharedPreferences mPrefsComment;
     private Context mContext;
     private Mood mood;
-    private int newSizeColor;
     private ViewGroup.LayoutParams params;
-    private ViewGroup.LayoutParams params1;
-    private ViewGroup.LayoutParams params2;
-    private ViewGroup.LayoutParams params3;
-    private ViewGroup.LayoutParams params4;
-    private ViewGroup.LayoutParams params5;
-    private ViewGroup.LayoutParams params6;
     private LinearLayout linearLayout;
-    private int newColorSize;
-
-
+    private int widthScreen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,12 +101,8 @@ public class HistoryActivity extends AppCompatActivity {
         view4 = findViewById(R.id.days5_ago);
         view5 = findViewById(R.id.days6_ago);
         view6 = findViewById(R.id.days7_ago);
-
-
-
         //déclaration
         moodStorage = new MoodStorage(this);
-        linearLayout = new LinearLayout(this);
 
         retrieveBackground();
         retrieveComment();
@@ -124,20 +111,11 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     private void retrieveComment() {
-
         olderComments(moodStorage);
     }
 
     public void retrieveBackground() {
-
-
-        colorBackground(moodStorage, linearLayout);
-      // colorsSize(moodStorage);
-//
-//        ViewGroup.LayoutParams params = view6.getLayoutParams();
-//       // params.width =40;
-//        params.width =convertDpToPixel(360, getApplicationContext());
-//        view6.setLayoutParams(params);
+        colorBackground(moodStorage);
     }
 
     public void retrieveDate() {
@@ -184,7 +162,7 @@ public class HistoryActivity extends AppCompatActivity {
                 textView.setText("Avant-hier");
                 break;
             case 3: case 4: case 5: case 6:
-                textView.setText("Il y a " + dayAgoResult +" "+"jours");
+                textView.setText("Il y a " + dayAgoResult + " " + "jours");
                 break;
             case 7:
                 textView.setText("Il y a une semaine");
@@ -193,47 +171,51 @@ public class HistoryActivity extends AppCompatActivity {
         return dayAgoResult;
     }
 
-    public void colorBackground(MoodStorage moodStorage, LinearLayout linearLayout) {
+    public void colorBackground(MoodStorage moodStorage) {
 
-    colorsSize(moodStorage);
-        //ViewGroup.LayoutParams params =  linearLayout.getLayoutParams();
-
+        ViewGroup.LayoutParams params;
 
         if (moodStorage.getMoodStorage().size() >= 1) {
             view6.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(0)]);
-          ViewGroup.LayoutParams params = view6.getLayoutParams();
-          // params.width = convertDpToPixel(150, getApplicationContext());
-           view6.setLayoutParams(params);
-            if (moodStorage.getMoodStorage().size() >= 2)
-              view5.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(1)]);
-             //  ViewGroup.LayoutParams params1 = view5.getLayoutParams();
-//                params1.width = convertDpToPixel(180, getApplicationContext());
-                //view5.setLayoutParams(params1);
-            if (moodStorage.getMoodStorage().size() >= 3)
-                view4.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(2)]);
-              // ViewGroup.LayoutParams params2 = view4.getLayoutParams();
-              //  params2.width = convertDpToPixel(180, getApplicationContext());
-               // view4.setLayoutParams(params2);
-            if (moodStorage.getMoodStorage().size() >= 4)
-                view3.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(3)]);
-              //  ViewGroup.LayoutParams params3 = view3.getLayoutParams();
-                //params3.width = convertDpToPixel(180, getApplicationContext());
-               // view3.setLayoutParams(params3);
-            if (moodStorage.getMoodStorage().size() >= 5)
-                view2.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(4)]);
-             //   ViewGroup.LayoutParams params4 = view2.getLayoutParams();
-                //params4.width = convertDpToPixel(180, getApplicationContext());
-               // view2.setLayoutParams(params4);
-            if (moodStorage.getMoodStorage().size() >= 6)
-                view1.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(5)]);
-               // ViewGroup.LayoutParams params5 = view1.getLayoutParams();
-                //params5.width = convertDpToPixel(180, getApplicationContext());
-               // view1.setLayoutParams(params5);
-            if (moodStorage.getMoodStorage().size() >= 7)
-                view0.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(6)]);
-             //   ViewGroup.LayoutParams params6 = view0.getLayoutParams();
-                //params6.width = convertDpToPixel(180, getApplicationContext());
-               // view0.setLayoutParams(params6);
+            params = view6.getLayoutParams();
+            params.width = widthScreen(moodStorage.getMoodStorage().get(0));
+            view6.setLayoutParams(params);
+            if (moodStorage.getMoodStorage().size() >= 2) {
+                view5.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(1)]);
+                params = view5.getLayoutParams();
+                params.width = widthScreen(moodStorage.getMoodStorage().get(1));
+                view5.setLayoutParams(params);
+                if (moodStorage.getMoodStorage().size() >= 3) {
+                    view4.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(2)]);
+                    params = view4.getLayoutParams();
+                    params.width = widthScreen(moodStorage.getMoodStorage().get(2));
+                    view4.setLayoutParams(params);
+                    if (moodStorage.getMoodStorage().size() >= 4) {
+                        view3.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(3)]);
+                        params = view3.getLayoutParams();
+                        params.width = widthScreen(moodStorage.getMoodStorage().get(3));
+                        view3.setLayoutParams(params);
+                        if (moodStorage.getMoodStorage().size() >= 5) {
+                            view2.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(4)]);
+                            params = view2.getLayoutParams();
+                            params.width = widthScreen(moodStorage.getMoodStorage().get(4));
+                            view2.setLayoutParams(params);
+                            if (moodStorage.getMoodStorage().size() >= 6) {
+                                view1.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(5)]);
+                                params = view1.getLayoutParams();
+                                params.width = widthScreen(moodStorage.getMoodStorage().get(5));
+                                view1.setLayoutParams(params);
+                                if (moodStorage.getMoodStorage().size() >= 7) {
+                                    view0.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(6)]);
+                                    params = view0.getLayoutParams();
+                                    params.width = widthScreen(moodStorage.getMoodStorage().get(6));
+                                    view0.setLayoutParams(params);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -254,7 +236,7 @@ public class HistoryActivity extends AppCompatActivity {
             if (moodStorage.getDateStorage().size() >= 5)
                 olderDays(dayDate, moodStorage.getDateStorage().get(4), mTvpastDays3);
             if (moodStorage.getDateStorage().size() >= 6)
-                olderDays(dayDate, moodStorage.getDateStorage().get(4), mTvpastDays2);
+                olderDays(dayDate, moodStorage.getDateStorage().get(5), mTvpastDays2);
             if (moodStorage.getDateStorage().size() >= 7)
                 olderDays(dayDate, moodStorage.getDateStorage().get(6), mTvpastDays1);
         }
@@ -357,41 +339,14 @@ public class HistoryActivity extends AppCompatActivity {
         }
     }
 
-    public int convertDpToPixel(float dp, Context context) {
-        return (int) (dp * (((float) context.getResources().getDisplayMetrics().densityDpi) / 160.0f));
-    }
+    public int widthScreen(int index) {
 
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int width = displayMetrics.widthPixels / 6;
 
-    public void colorsSize(MoodStorage moodStorage) {
-
-
-
-        if (moodStorage.getMoodStorage().contains(R.color.faded_red)) {
-
-            params.width = convertDpToPixel(120, getApplicationContext());
-
-            if (moodStorage.getMoodStorage().contains(R.color.warm_grey)) {
-                params.width = convertDpToPixel(150, getApplicationContext());
-
-                if (moodStorage.getMoodStorage().contains(R.color.cornflower_blue_65)) {
-
-                    params.width = convertDpToPixel(200, getApplicationContext());
-
-                    if (moodStorage.getMoodStorage().contains(R.color.light_sage)) {
-
-                        params.width = convertDpToPixel(260, getApplicationContext());
-
-                        if (moodStorage.getMoodStorage().contains(R.color.banana_yellow)) {
-
-                            params.width = convertDpToPixel(360, getApplicationContext());
-
-                        }
-                    }
-                }
-            }
-        }
-
-
+        width *= index + 2;
+        return width;
     }
 
 }

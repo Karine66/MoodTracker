@@ -7,7 +7,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+
 import com.karine.moodtracker.R;
+
 import org.json.JSONObject;
 
 /**
@@ -21,7 +23,6 @@ public class AlertDialog implements View.OnClickListener {
     private SharedPreferences mPreferences;
     private SharedPreferences.Editor mEditor;
     private JSONObject mSaved;
-
     private String retrieveComment;
 
     public AlertDialog(Context context, SharedPreferences preferences, SharedPreferences.Editor editor, JSONObject saved, MoodStorage moodStorage) {
@@ -59,8 +60,8 @@ public class AlertDialog implements View.OnClickListener {
                 String comment = et.getText().toString();
                 Log.d("test_comment", comment + "");
 
-                    mMoodStorage.commentStoreAdd(comment);
-                    mMoodStorage.saveCommentStore();
+                mMoodStorage.commentStoreAdd(comment);
+                mMoodStorage.saveCommentStore();
             }
         });
 
