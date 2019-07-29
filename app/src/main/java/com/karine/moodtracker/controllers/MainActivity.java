@@ -9,16 +9,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
-
 import com.karine.moodtracker.R;
 import com.karine.moodtracker.models.AlertDialog;
 import com.karine.moodtracker.models.Mood;
 import com.karine.moodtracker.models.MoodStorage;
 import com.karine.moodtracker.models.SwipeGestureDetector;
-
 import org.json.JSONObject;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -42,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private String mdayDate;
     private String mComment;
     private String convertMood;
-    private int ARRAY_BACKGROUND_COLOR;
+
 
 
     public int getCounter() {
