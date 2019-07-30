@@ -8,9 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import com.karine.moodtracker.R;
 import com.karine.moodtracker.controllers.MainActivity;
-/**
- * Created by <Karine> on <DATE-DU-JOUR>.
- */
+
 public class SwipeGestureDetector extends GestureDetector {
 
     private final static int DELTA_MIN = 50;
@@ -29,7 +27,6 @@ public class SwipeGestureDetector extends GestureDetector {
                     if (deltaY < 0) {
                         onSwipe(SwipeDirection.BOTTOM_TO_TOP);
                         return true;
-
                     } else {
                         onSwipe(SwipeDirection.TOP_TO_BOTTOM);
                         return true;
@@ -60,7 +57,7 @@ public class SwipeGestureDetector extends GestureDetector {
                     case TOP_TO_BOTTOM:
 
                         if (context.getCounter() < 4) {
-                            context.increaseCOunter();
+                            context.increaseCounter();
                             imagePic.setImageResource(Mood.ARRAY_MOODS[context.getCounter()]);
                             view.setBackgroundResource(Mood.ARRAY_BACKGROUND_COLOR[context.getCounter()]);
 

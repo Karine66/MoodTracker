@@ -9,21 +9,15 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.karine.moodtracker.R;
-import com.karine.moodtracker.models.Mood;
 import com.karine.moodtracker.models.MoodStorage;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
-
 import static android.view.View.INVISIBLE;
 import static android.view.View.OnClickListener;
 import static android.view.View.VISIBLE;
@@ -31,7 +25,6 @@ import static com.karine.moodtracker.models.Mood.ARRAY_BACKGROUND_COLOR;
 
 public class HistoryActivity extends AppCompatActivity {
 
-    private SharedPreferences mPreferences;
     private ImageView mHistorybtn1;
     private ImageView mHistorybtn2;
     private ImageView mHistorybtn3;
@@ -46,14 +39,12 @@ public class HistoryActivity extends AppCompatActivity {
     private TextView mTvpastDays5;
     private TextView mTvpastDays6;
     private TextView mTvpastDays7;
-    private ArrayList<String> dateStorage;
     private long dayAgoResult;
     private SharedPreferences myPrefs;
     private String date;
     private String dayDate;
     private long diff;
     private long daysBetween;
-    private SharedPreferences.Editor editorStore;
     private MoodStorage moodStorage;
     private View view0;
     private View view1;
@@ -63,13 +54,7 @@ public class HistoryActivity extends AppCompatActivity {
     private View view5;
     private View view6;
     private View textView;
-    private ImageView imageView;
-    private ArrayList<String> mCommentStorage;
-    private SharedPreferences mPrefsComment;
-    private Context mContext;
-    private Mood mood;
     private ViewGroup.LayoutParams params;
-    private LinearLayout linearLayout;
     private int widthScreen;
 
     @Override
@@ -349,7 +334,6 @@ public class HistoryActivity extends AppCompatActivity {
         width *= index + 2;
         return width;
     }
-
 
 
 }

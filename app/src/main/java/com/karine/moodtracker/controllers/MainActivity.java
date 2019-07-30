@@ -21,7 +21,6 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
-
     private SwipeGestureDetector mGestureDetector;
     private SharedPreferences mPreferences;
     private SharedPreferences.Editor mEditor;
@@ -39,8 +38,6 @@ public class MainActivity extends AppCompatActivity {
     private String mComment;
     private String convertMood;
 
-
-
     public int getCounter() {
         return counter;
     }
@@ -53,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         counter--;
     }
 
-    public void increaseCOunter() {
+    public void increaseCounter() {
         counter++;
     }
 
@@ -81,8 +78,9 @@ public class MainActivity extends AppCompatActivity {
 
             String comment = et.getText().toString();
         }
+        //Connect buttons
         mNoteAdd.setOnClickListener(new AlertDialog(MainActivity.this, mPreferences, mEditor, mSaved, mMoodStorage));
-        //Connect History Button
+
         mHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
                 intent1.setType("message/rfc822");
 
                 if (mMoodStorage.getCommentStorage() == null || mMoodStorage.getCommentStorage().isEmpty() || mMoodStorage.getCommentStorage().get(mMoodStorage.getCommentStorage().size() - 1) == null) {
-                     intent1.putExtra(Intent.EXTRA_TEXT, convertStringMood(mMoodStorage.getMoodStorage().get(mMoodStorage.getMoodStorage().size() -1)));
+                    intent1.putExtra(Intent.EXTRA_TEXT, convertStringMood(mMoodStorage.getMoodStorage().get(mMoodStorage.getMoodStorage().size() - 1)));
                 } else {
                     intent1.putExtra(Intent.EXTRA_TEXT, mMoodStorage.getCommentStorage().get(mMoodStorage.getCommentStorage().size() - 1));
                 }
@@ -159,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return convertMood;
     }
-    }
+}
 
 
 

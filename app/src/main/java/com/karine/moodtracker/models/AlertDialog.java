@@ -7,23 +7,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-
 import com.karine.moodtracker.R;
-
 import org.json.JSONObject;
 
-/**
- * Created by <Karine> on <DATE-DU-JOUR>.
- */
 public class AlertDialog implements View.OnClickListener {
-
 
     private final MoodStorage mMoodStorage;
     private Context mContext;
     private SharedPreferences mPreferences;
     private SharedPreferences.Editor mEditor;
     private JSONObject mSaved;
-    private String retrieveComment;
 
     public AlertDialog(Context context, SharedPreferences preferences, SharedPreferences.Editor editor, JSONObject saved, MoodStorage moodStorage) {
         mContext = context;
@@ -32,8 +25,6 @@ public class AlertDialog implements View.OnClickListener {
         mSaved = saved;
         mMoodStorage = moodStorage;
     }
-
-    //Box dialog open when click button
 
     @Override
     public void onClick(View v) {

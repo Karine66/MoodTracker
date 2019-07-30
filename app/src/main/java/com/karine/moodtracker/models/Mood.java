@@ -2,9 +2,7 @@ package com.karine.moodtracker.models;
 
 import com.karine.moodtracker.R;
 
-/**
- * Created by <Karine> on <DATE-DU-JOUR>.
- */
+
 public class Mood {
 
     //Array moods

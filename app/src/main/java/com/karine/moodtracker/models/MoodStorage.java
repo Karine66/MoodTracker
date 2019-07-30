@@ -11,9 +11,6 @@ import java.util.Calendar;
 import java.util.List;
 import static android.content.Context.MODE_PRIVATE;
 
-/**
- * Created by <Karine> on <DATE-DU-JOUR>.
- */
 public class MoodStorage {
 
     public ArrayList<Integer> moodStorage;
