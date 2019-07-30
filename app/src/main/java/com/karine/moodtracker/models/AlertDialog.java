@@ -7,7 +7,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+
 import com.karine.moodtracker.R;
+
 import org.json.JSONObject;
 
 public class AlertDialog implements View.OnClickListener {

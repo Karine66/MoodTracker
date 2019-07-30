@@ -6,6 +6,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+
 import com.karine.moodtracker.R;
 import com.karine.moodtracker.controllers.MainActivity;
 
@@ -45,12 +46,11 @@ public class SwipeGestureDetector extends GestureDetector {
                             context.decreaseCounter();
                             imagePic.setImageResource(Mood.ARRAY_MOODS[context.getCounter()]);
                             view.setBackgroundResource(Mood.ARRAY_BACKGROUND_COLOR[context.getCounter()]);
-
                             break;
                         } else {
-                           context.setCounter(4);
-                           imagePic.setImageResource(Mood.ARRAY_MOODS[context.getCounter()]);
-                           view.setBackgroundResource(Mood.ARRAY_BACKGROUND_COLOR[context.getCounter()]);
+                            context.setCounter(4);
+                            imagePic.setImageResource(Mood.ARRAY_MOODS[context.getCounter()]);
+                            view.setBackgroundResource(Mood.ARRAY_BACKGROUND_COLOR[context.getCounter()]);
                         }
                         break;
 
@@ -60,25 +60,19 @@ public class SwipeGestureDetector extends GestureDetector {
                             context.increaseCounter();
                             imagePic.setImageResource(Mood.ARRAY_MOODS[context.getCounter()]);
                             view.setBackgroundResource(Mood.ARRAY_BACKGROUND_COLOR[context.getCounter()]);
-
                             break;
-                        }
-                      else {
+                        } else {
                             context.setCounter(0);
                             imagePic.setImageResource(Mood.ARRAY_MOODS[context.getCounter()]);
                             view.setBackgroundResource(Mood.ARRAY_BACKGROUND_COLOR[context.getCounter()]);
-
-                       }
+                        }
                         break;
-
                 }
-
                 mood.setSelectedMood(context.getCounter());
                 context.saveBackground();
                 context.saveComment();
                 context.saveDate();
             }
-
         });
     }
 

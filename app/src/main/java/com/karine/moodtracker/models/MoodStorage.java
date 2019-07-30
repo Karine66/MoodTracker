@@ -1,6 +1,5 @@
 package com.karine.moodtracker.models;
 
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import com.google.gson.Gson;
@@ -9,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
 import static android.content.Context.MODE_PRIVATE;
 
 public class MoodStorage {
@@ -39,12 +39,12 @@ public class MoodStorage {
         String dayDate = jsonDateFormat.format(mCalendar.getTime());
 
         if (dateStorage.indexOf(dayDate) == -1 && moodStorage.size() <= 6) {
-          moodStorage.add(mood.getSelectedMood());
-        } else if (dateStorage.indexOf(dayDate) == -1 && moodStorage.size() >= 7){
-           moodStorage.remove(0);
+            moodStorage.add(mood.getSelectedMood());
+        } else if (dateStorage.indexOf(dayDate) == -1 && moodStorage.size() >= 7) {
+            moodStorage.remove(0);
             moodStorage.add(mood.getSelectedMood());
         } else if (dateStorage.indexOf(dayDate) != -1 && (moodStorage.size() > 0)) {
-          moodStorage.remove(dateStorage.indexOf(dayDate));
+            moodStorage.remove(dateStorage.indexOf(dayDate));
             moodStorage.add(mood.getSelectedMood());
         }
         System.out.println(moodStorage);
@@ -65,16 +65,16 @@ public class MoodStorage {
         SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String dayDate = jsonDateFormat.format(mCalendar.getTime());
 
-        if (dateStorage.indexOf(dayDate) == -1 && commentStorage.size() >= 7){
-          commentStorage.remove(0);
+        if (dateStorage.indexOf(dayDate) == -1 && commentStorage.size() >= 7) {
+            commentStorage.remove(0);
 
-        }else if (dateStorage.indexOf(dayDate) != -1 && (commentStorage.size() > 0)) {
+        } else if (dateStorage.indexOf(dayDate) != -1 && (commentStorage.size() > 0)) {
             commentStorage.remove(dateStorage.indexOf(dayDate));
         }
 
         commentStorage.add(comment);
-            System.out.println(commentStorage);
-        }
+        System.out.println(commentStorage);
+    }
 
     public ArrayList<Integer> getMoodStorage() {
         return moodStorage;
