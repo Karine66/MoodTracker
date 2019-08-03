@@ -203,8 +203,6 @@
 
     </LinearLayout>
 
-
-
     <LinearLayout
 
         android:id="@+id/yesterday"

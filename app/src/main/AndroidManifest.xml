@@ -3,6 +3,7 @@
     package="com.karine.moodtracker">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-sdk android:minSdkVersion="19"/>
 
     <application
         android:allowBackup="true"
