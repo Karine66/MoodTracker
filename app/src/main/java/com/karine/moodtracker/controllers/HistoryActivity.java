@@ -28,7 +28,7 @@ import static com.karine.moodtracker.models.Mood.ARRAY_BACKGROUND_COLOR;
 
 public class HistoryActivity extends AppCompatActivity {
 
-    private ImageView mHistorybtn0;
+
     private ImageView mHistorybtn1;
     private ImageView mHistorybtn2;
     private ImageView mHistorybtn3;
