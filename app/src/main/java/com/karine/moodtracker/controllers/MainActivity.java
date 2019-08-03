@@ -33,10 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText et;
     private JSONObject mSaved = new JSONObject();
     private MoodStorage mMoodStorage;
-    private ArrayList<Integer> moodStorage;
-    private String mdayDate;
     private String mComment;
-    private String convertMood;
+
 
     public int getCounter() {
         return counter;

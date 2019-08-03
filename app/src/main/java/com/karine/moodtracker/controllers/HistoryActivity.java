@@ -1,7 +1,5 @@
 package com.karine.moodtracker.controllers;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
@@ -11,16 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.karine.moodtracker.R;
 import com.karine.moodtracker.models.MoodStorage;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
-
 import static android.view.View.INVISIBLE;
 import static android.view.View.OnClickListener;
 import static android.view.View.VISIBLE;
@@ -44,11 +39,6 @@ public class HistoryActivity extends AppCompatActivity {
     private TextView mTvpastDays6;
     private TextView mTvpastDays7;
     private long dayAgoResult;
-    private SharedPreferences myPrefs;
-    private String date;
-    private String dayDate;
-    private long diff;
-    private long daysBetween;
     private MoodStorage moodStorage;
     private View view0;
     private View view1;
@@ -57,8 +47,6 @@ public class HistoryActivity extends AppCompatActivity {
     private View view4;
     private View view5;
     private View view6;
-    private ViewGroup.LayoutParams params;
-    private int widthScreen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,14 +92,12 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     public void retrieveBackground() {
+
         colorBackground(moodStorage);
 
     }
 
     public void retrieveDate() {
-
-        myPrefs = getSharedPreferences("save_date", Context.MODE_PRIVATE);
-        String date = myPrefs.getString("save_date", "");
 
         olderDates(moodStorage);
     }
@@ -164,7 +150,6 @@ public class HistoryActivity extends AppCompatActivity {
     public void colorBackground(MoodStorage moodStorage) {
 
         ViewGroup.LayoutParams params;
-
 
             if (moodStorage.getMoodStorage().size() >= 1) {
                 view6.setBackgroundResource(ARRAY_BACKGROUND_COLOR[moodStorage.getMoodStorage().get(0)]);
@@ -232,8 +217,6 @@ public class HistoryActivity extends AppCompatActivity {
                 if (moodStorage.getDateStorage().size() >= 7)
                     olderDays(dayDate, moodStorage.getDateStorage().get(6), mTvpastDays1);
             }
-
-
         }
 
         public void olderComments ( final MoodStorage moodStorage){
@@ -342,8 +325,6 @@ public class HistoryActivity extends AppCompatActivity {
         width *= index + 2;
         return width;
     }
-
-
 }
 
 

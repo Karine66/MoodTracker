@@ -17,12 +17,8 @@ public class MoodStorage {
     public ArrayList<String> dateStorage;
     public ArrayList<String> commentStorage;
     private Context mContext;
-    private SharedPreferences.Editor editorStore;
-    private SharedPreferences myPrefs;
-    private String dayDate;
     private SharedPreferences sharePrefsDate;
     private SharedPreferences mPrefsComment;
-    private SharedPreferences.Editor mEditComment;
 
     //constructor
     public MoodStorage(Context context) {
@@ -126,7 +122,7 @@ public class MoodStorage {
             moodStorage = gson.fromJson(json, new TypeToken<List<Integer>>() {
             }.getType());
         } else {
-            moodStorage = new ArrayList<Integer>();
+            moodStorage = new ArrayList<>();
         }
     }
 
@@ -140,7 +136,7 @@ public class MoodStorage {
             dateStorage = gson.fromJson(dateStore, new TypeToken<List<String>>() {
             }.getType());
         } else {
-            dateStorage = new ArrayList<String>();
+            dateStorage = new ArrayList<>();
         }
     }
 
@@ -154,7 +150,7 @@ public class MoodStorage {
             commentStorage = gson.fromJson(commentStore, new TypeToken<List<String>>() {
             }.getType());
         } else {
-            commentStorage = new ArrayList<String>();
+            commentStorage = new ArrayList<>();
         }
     }
 }
