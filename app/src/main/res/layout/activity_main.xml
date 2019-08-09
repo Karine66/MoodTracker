@@ -43,11 +43,9 @@
         android:id="@+id/share_button"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginEnd="170dp"
-        android:layout_marginBottom="100dp"
+        android:layout_toStartOf="@id/history_black_button"
+        android:layout_toEndOf="@id/note_add_btn"
+        android:layout_alignTop="@id/history_black_button"
         android:contentDescription="@+String/MoodTracker_Share_Button"
         android:src="@drawable/ic_share_black_48" />
 
