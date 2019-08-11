@@ -112,7 +112,7 @@ public class MoodStorage {
         mEditComment.apply();
     }
 
-    public void retrieveMoodStore() {
+    private void retrieveMoodStore() {
 
         SharedPreferences sharedPref = mContext.getSharedPreferences("Storage", MODE_PRIVATE);
         Gson gson = new Gson();
@@ -126,7 +126,7 @@ public class MoodStorage {
         }
     }
 
-    public void retrieveDateStore() {
+    private void retrieveDateStore() {
 
         sharePrefsDate = mContext.getSharedPreferences("save_dateStorage", MODE_PRIVATE);
         Gson gson = new Gson();
@@ -140,7 +140,7 @@ public class MoodStorage {
         }
     }
 
-    public void retrieveCommentStore() {
+    private void retrieveCommentStore() {
 
         mPrefsComment = mContext.getSharedPreferences("save_commentStorage", MODE_PRIVATE);
         Gson gson = new Gson();

@@ -2,7 +2,6 @@ package com.karine.moodtracker.models;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,21 +9,15 @@ import android.widget.EditText;
 
 import com.karine.moodtracker.R;
 
-import org.json.JSONObject;
+
 
 public class AlertDialog implements View.OnClickListener {
 
     private final MoodStorage mMoodStorage;
     private Context mContext;
-    private SharedPreferences mPreferences;
-    private SharedPreferences.Editor mEditor;
-    private JSONObject mSaved;
 
-    public AlertDialog(Context context, SharedPreferences preferences, SharedPreferences.Editor editor, JSONObject saved, MoodStorage moodStorage) {
+    public AlertDialog(Context context, MoodStorage moodStorage) {
         mContext = context;
-        mPreferences = preferences;
-        mEditor = editor;
-        mSaved = saved;
         mMoodStorage = moodStorage;
     }
 

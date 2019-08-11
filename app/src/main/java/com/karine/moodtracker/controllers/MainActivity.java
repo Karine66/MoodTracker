@@ -1,36 +1,29 @@
 package com.karine.moodtracker.controllers;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import com.karine.moodtracker.R;
 import com.karine.moodtracker.models.AlertDialog;
 import com.karine.moodtracker.models.Mood;
 import com.karine.moodtracker.models.MoodStorage;
 import com.karine.moodtracker.models.SwipeGestureDetector;
-import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
     private SwipeGestureDetector mGestureDetector;
-    private SharedPreferences mPreferences;
-    private SharedPreferences.Editor mEditor;
     private Mood mMood;
     private View mView;
     private int counter = 3;
     private ImageView mNoteAdd;
     private ImageView mHistory;
     private ImageView mShare;
-    private EditText et;
-    private JSONObject mSaved = new JSONObject();
     private MoodStorage mMoodStorage;
     private String mComment;
 
@@ -70,13 +63,8 @@ public class MainActivity extends AppCompatActivity {
         saveComment();
         saveDate();
 
-        final Intent intent = getIntent();
-        if (intent.getIntExtra("position", -1) != -1) {
-
-            String comment = et.getText().toString();
-        }
         //Connect buttons
-        mNoteAdd.setOnClickListener(new AlertDialog(MainActivity.this, mPreferences, mEditor, mSaved, mMoodStorage));
+        mNoteAdd.setOnClickListener(new AlertDialog(MainActivity.this, mMoodStorage));
 
         mHistory.setOnClickListener(new View.OnClickListener() {
             @Override
