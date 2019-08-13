@@ -143,6 +143,9 @@ public class HistoryActivity extends AppCompatActivity {
             case 7:
                 textView.setText("Il y a une semaine");
                 break;
+            case 8 :
+                textView.setText("Il y a plus d'une semaine");
+                break;
         }
         return dayAgoResult;
     }
