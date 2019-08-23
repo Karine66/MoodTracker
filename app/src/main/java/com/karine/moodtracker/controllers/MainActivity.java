@@ -1,19 +1,29 @@
 package com.karine.moodtracker.controllers;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+
+import com.google.gson.Gson;
 import com.karine.moodtracker.R;
 import com.karine.moodtracker.models.AlertDialog;
 import com.karine.moodtracker.models.Mood;
 import com.karine.moodtracker.models.MoodStorage;
 import com.karine.moodtracker.models.SwipeGestureDetector;
+
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView mShare;
     private MoodStorage mMoodStorage;
     private String mComment;
+    private ImageView mImagePic;
 
 
     public int getCounter() {
@@ -44,13 +55,26 @@ public class MainActivity extends AppCompatActivity {
         counter++;
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getWindow().getDecorView().setBackgroundResource(R.color.light_sage);
+
         //Declaration
         mMoodStorage = new MoodStorage(this);
+        //Catch Last Mood
+        Calendar mCalendar = Calendar.getInstance();
+        SimpleDateFormat jsonDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String dayDate = jsonDateFormat.format(mCalendar.getTime());
+
+        if (mMoodStorage.getMoodStorage().size() > 0 && daysBetween(dayDate, mMoodStorage.getDateStorage().get(mMoodStorage.getDateStorage().size() - 1)) == 0)
+            counter = mMoodStorage.getMoodStorage().get(mMoodStorage.getMoodStorage().size() - 1);
+        getWindow().getDecorView().setBackgroundResource(Mood.ARRAY_BACKGROUND_COLOR[counter]);
+        mImagePic = findViewById(R.id.view);
+        mImagePic.setImageResource(Mood.ARRAY_MOODS[counter]);
+
+        //Declaration
         mMood = new Mood(counter);
         mView = this.getWindow().getDecorView();
         mNoteAdd = findViewById(R.id.note_add_btn);
@@ -62,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
         saveBackground();
         saveComment();
         saveDate();
+
 
         //Connect buttons
         mNoteAdd.setOnClickListener(new AlertDialog(MainActivity.this, mMoodStorage));
@@ -89,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
     public void saveDate() {
         Calendar mCalendar = Calendar.getInstance();
@@ -141,6 +167,27 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         return convertMood;
+    }
+
+    public long daysBetween(String day1, String day2) {
+
+        long daysBetween = 1;
+        SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+        try {
+            Date date1 = myFormat.parse(day1);
+            Date date2 = myFormat.parse(day2);
+
+            long diff = date2.getTime() - date1.getTime();
+
+            daysBetween = (TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+
+            Log.d("Test_Between", "diff" + diff);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return daysBetween;
     }
 }
 

@@ -20,7 +20,6 @@ public class SwipeGestureDetector extends GestureDetector {
             //Swipe intercepting : e1 start movement and e2 end on movement
             @Override
             public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-                Log.i("Debug", e1 + "-" + e2);
 
                 //calculation end point and start point
                 float deltaY = e2.getY() - e1.getY();

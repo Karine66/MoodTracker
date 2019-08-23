@@ -15,8 +15,8 @@
         android:layout_marginTop="130dp"
         android:layout_gravity="center_horizontal"
         android:contentDescription="@string/app_name"
-       android:src="@drawable/smiley_happy"
-       />
+      android:src="@drawable/smiley_happy"/>
+
 
    <ImageView
         android:id="@+id/note_add_btn"
