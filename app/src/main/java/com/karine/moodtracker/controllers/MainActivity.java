@@ -1,17 +1,13 @@
 package com.karine.moodtracker.controllers;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 
-import com.google.gson.Gson;
 import com.karine.moodtracker.R;
 import com.karine.moodtracker.models.AlertDialog;
 import com.karine.moodtracker.models.Mood;
@@ -70,9 +66,10 @@ public class MainActivity extends AppCompatActivity {
 
         if (mMoodStorage.getMoodStorage().size() > 0 && daysBetween(dayDate, mMoodStorage.getDateStorage().get(mMoodStorage.getDateStorage().size() - 1)) == 0)
             counter = mMoodStorage.getMoodStorage().get(mMoodStorage.getMoodStorage().size() - 1);
-        getWindow().getDecorView().setBackgroundResource(Mood.ARRAY_BACKGROUND_COLOR[counter]);
-        mImagePic = findViewById(R.id.view);
-        mImagePic.setImageResource(Mood.ARRAY_MOODS[counter]);
+
+            getWindow().getDecorView().setBackgroundResource(Mood.ARRAY_BACKGROUND_COLOR[counter]);
+            mImagePic = findViewById(R.id.view);
+            mImagePic.setImageResource(Mood.ARRAY_MOODS[counter]);
 
         //Declaration
         mMood = new Mood(counter);
@@ -86,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
         saveBackground();
         saveComment();
         saveDate();
-
 
         //Connect buttons
         mNoteAdd.setOnClickListener(new AlertDialog(MainActivity.this, mMoodStorage));
